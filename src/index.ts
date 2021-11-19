@@ -14,6 +14,7 @@ import ChatSession from "./components/Session/ChatSession";
 import UserList from "./components/User/UserList";
 import UserListItem from "./components/User/UserListItem";
 import ChatWindow from "./components/ChatWindow";
+import Spinner from "./components/utility/Spinner";
 
 export {
   ChannelList,
@@ -31,6 +32,7 @@ export {
   UserList,
   UserListItem,
   ChatWindow,
+  Spinner,
 };
 
 import { ChannelListProps } from "./components/Channel/ChannelList";

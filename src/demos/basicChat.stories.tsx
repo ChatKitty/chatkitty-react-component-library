@@ -8,7 +8,7 @@ import ChatKitty, {
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
 import { ChatWindowProps } from "../components/ChatWindow";
-import { ChatKittyProvider, ChatWindow } from "..";
+import { ChatKittyProvider, ChatWindow, Spinner } from "..";
 
 const client = new ChatKitty({
   host: "api.staging.chatkitty.com",
@@ -44,7 +44,7 @@ const Template: Story<ChatWindowProps> = () => {
   }, []);
 
   if (!channel) {
-    return <p>Loading...</p>;
+    return <Spinner />;
   }
 
   return (

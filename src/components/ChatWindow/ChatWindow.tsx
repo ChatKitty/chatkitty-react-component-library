@@ -6,6 +6,7 @@ import {
   useMessages,
   ChatSession,
 } from "../..";
+import Spinner from "../utility/Spinner";
 
 export interface ChatWindowProps {}
 
@@ -18,7 +19,7 @@ const ChatWindow = ({}: ChatWindowProps) => {
   );
 
   if (!messages) {
-    return <p>Loading</p>;
+    return <Spinner />;
   }
 
   return (
