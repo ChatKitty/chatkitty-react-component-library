@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import ChatKittyProvider, { ChatKittyProviderProps } from "./ChatKittyProvider";
 
 export default {
-  title: "Presentational Components/Provider/ChatKittyProvider",
+  title: "Components/Provider/ChatKittyProvider",
   component: ChatKittyProvider,
 } as Meta;
 

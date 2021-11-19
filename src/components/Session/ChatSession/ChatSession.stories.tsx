@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import ChatSession, { ChatSessionProps } from "./ChatSession";
 
 export default {
-  title: "Presentational Components/Session/ChatSession",
+  title: "Components/ChatSession",
   component: ChatSession,
 } as Meta;
 

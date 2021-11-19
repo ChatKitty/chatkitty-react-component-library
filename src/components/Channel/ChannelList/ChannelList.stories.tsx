@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import ChannelList, { ChannelListProps } from "./ChannelList";
 
 export default {
-  title: "Presentational Components/Channel/ChannelList",
+  title: "Components/Channel/ChannelList",
   component: ChannelList,
 } as Meta;
 

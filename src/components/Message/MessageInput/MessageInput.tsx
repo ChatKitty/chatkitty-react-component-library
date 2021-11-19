@@ -1,44 +1,52 @@
 import React from "react";
 import TextArea from "react-autosize-textarea";
+import {
+  useChatContext,
+  useUpdateMessageDraft,
+  useSendMessageDraft,
+} from "../../..";
 
-export interface MessageInputProps {
-  /**
-   * optional controlled value for input
-   */
-  value?: string;
+export interface MessageInputProps {}
 
-  /**
-   * keypress event handler
-   */
-  onKeyPress?: React.KeyboardEventHandler<HTMLTextAreaElement>;
+const MessageInput = ({}: MessageInputProps) => {
+  const { client, channel } = useChatContext();
 
-  /**
-   * change event handler
-   */
-  onChange?: React.FormEventHandler<HTMLTextAreaElement>;
+  const { makeRequest: updateMessage } = useUpdateMessageDraft(client);
+  const { makeRequest: sendMessage } = useSendMessageDraft(client);
 
-  /**
-   * submit action handler
-   */
-  submit?: () => void;
-}
+  const [input, setInput] = React.useState("");
 
-const MessageInput = ({
-  value,
-  onKeyPress,
-  onChange,
-  submit,
-}: MessageInputProps) => {
+  const submit = (input: string) => {
+    const trimmed = input.trim();
+    if (trimmed) {
+      sendMessage(channel, trimmed);
+      setInput("");
+    }
+  };
+
   return (
     <div className="ck-messageInput">
       <TextArea
-        value={value}
-        onKeyPress={onKeyPress}
-        onChange={onChange}
+        value={input}
+        onKeyPress={(evt) => {
+          if (evt.code === "Enter") {
+            if (
+              !(evt.shiftKey || window.matchMedia("(max-width: 640px)").matches)
+            ) {
+              submit(input);
+              evt.preventDefault();
+            }
+          }
+        }}
+        onChange={(evt) => {
+          const { value } = evt.currentTarget;
+          updateMessage(channel, value);
+          setInput(value);
+        }}
         placeholder="Send a message..."
         className="ck-messageInput-text"
       />
-      <button onClick={submit} className="ck-messageInput-button">
+      <button onClick={() => submit(input)} className="ck-messageInput-button">
         +
       </button>
     </div>

@@ -1,77 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
+import ChatKitty, {
+  succeeded,
+  GetChannelSucceededResult,
+  Channel,
+  StartSessionResult,
+} from "chatkitty";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
-import MessageList, {
-  MessageListProps,
-} from "../components/Message/MessageList";
-import TextMessage from "../components/Message/TextMessage";
-import MessageInput from "../components/Message/MessageInput";
-import { MockMessages } from "../mocks";
+import { ChatWindowProps } from "../components/ChatWindow";
+import { ChatKittyProvider, ChatWindow } from "..";
+
+const client = new ChatKitty({
+  host: "api.staging.chatkitty.com",
+  apiKey: "afaac908-1db3-4b5c-a7ae-c040b9684403",
+});
 
 export default {
   title: "Demos/BasicChat",
-  component: MessageList,
 } as Meta;
 
-const Template: Story<MessageListProps> = () => {
-  const scrollRef = React.useRef<HTMLDivElement>(null);
-  const [message, setMessage] = React.useState("");
-  const [messages, setMessages] = React.useState(MockMessages);
+const Template: Story<ChatWindowProps> = () => {
+  const [channel, setChannel] = React.useState<Channel | undefined>();
 
-  React.useEffect(() => {
-    scrollRef?.current?.scrollIntoView();
-  }, [messages]);
+  useEffect(() => {
+    const init = async () => {
+      let sessionRes = await client.startSession({
+        username: "b2a6da08-88bf-4778-b993-7234e6d8a3ff",
+      });
 
-  const updateMessages = () => {
-    const trimmed = message.trim();
+      if (succeeded<StartSessionResult>(sessionRes)) {
+        console.log("session started!");
+      }
 
-    if (trimmed) {
-      setMessages((messages) => [
-        ...messages,
-        {
-          ...MockMessages[0],
-          body: trimmed,
-        },
-      ]);
-      setMessage("");
-    }
-  };
+      let channelRes = await client.getChannel(55003);
+
+      if (succeeded<GetChannelSucceededResult>(channelRes)) {
+        console.log("channel fetched!");
+        setChannel(channelRes.channel);
+      }
+    };
+
+    init();
+  }, []);
+
+  if (!channel) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div
-      style={{
-        border: "1px solid lightgray",
-        borderRadius: 5,
-        padding: 8,
-        height: 600,
-        width: 450,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        overflow: "hidden",
-      }}
-    >
-      <MessageList>
-        {messages.map((message) => (
-          <TextMessage {...message} />
-        ))}
-        <div ref={scrollRef}></div>
-      </MessageList>
-      <MessageInput
-        value={message}
-        onChange={(evt) => setMessage(evt.currentTarget.value)}
-        onKeyPress={(evt) => {
-          if (evt.code === "Enter") {
-            if (
-              !(evt.shiftKey || window.matchMedia("(max-width: 640px)").matches)
-            ) {
-              updateMessages();
-              evt.preventDefault();
-            }
-          }
-        }}
-        submit={updateMessages}
-      />
+    <div style={{ height: 600, width: 450 }}>
+      <ChatKittyProvider client={client} channel={channel}>
+        <ChatWindow />
+      </ChatKittyProvider>
     </div>
   );
 };

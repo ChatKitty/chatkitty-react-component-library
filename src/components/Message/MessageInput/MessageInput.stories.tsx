@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import MessageInput, { MessageInputProps } from "./MessageInput";
 
 export default {
-  title: "Presentational Components/Message/MessageInput",
+  title: "Components/Message/MessageInput",
   component: MessageInput,
 } as Meta;
 
