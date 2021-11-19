@@ -20,7 +20,7 @@ export interface MessageInputProps {
   /**
    * submit action handler
    */
-  submit: () => void;
+  submit?: () => void;
 }
 
 const MessageInput = ({
