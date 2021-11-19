@@ -22,3 +22,5 @@ deploy:
   skip_cleanup: true
   local_dir: "lib"
   upload-dir: "dist/react-component-library/$TAG"
+  on:
+    branch: main
