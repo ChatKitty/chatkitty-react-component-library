@@ -1,9 +1,15 @@
 import React from "react";
 
-export interface ChatKittyProviderProps {}
+export interface ChatKittyProviderProps {
+  children?: React.ReactNode;
+}
 
-const ChatKittyProvider = ({}: ChatKittyProviderProps) => {
-  return <p>Stub</p>;
+export const ChatKittyContext = React.createContext({});
+
+const ChatKittyProvider = ({ children }: ChatKittyProviderProps) => {
+  return (
+    <ChatKittyContext.Provider value={{}}>{children}</ChatKittyContext.Provider>
+  );
 };
 
 export default ChatKittyProvider;

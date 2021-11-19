@@ -1,0 +1,33 @@
+/* TextMessage */
+
+.ck-textMessage {
+  display: flex;
+  align-items: flex-start;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 8px;
+  width: 100%;
+}
+
+.ck-textMessage-image {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  padding: 0 20px;
+}
+
+.ck-textMessage-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.ck-textMessage-time {
+  padding-left: 1rem;
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+
+.ck-textMessage-body {
+  margin-top: 8px;
+}
