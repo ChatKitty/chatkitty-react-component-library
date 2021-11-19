@@ -5,6 +5,7 @@ import {
   useChatContext,
   useMessages,
   ChatSession,
+  ChannelHeader,
 } from "../..";
 import Spinner from "../utility/Spinner";
 
@@ -28,6 +29,7 @@ const ChatWindow = ({}: ChatWindowProps) => {
         setMessages((prev) => [message, ...(prev || [])]);
       }}
     >
+      <ChannelHeader />
       <MessageList messages={messages} />
       <MessageInput />
     </ChatSession>

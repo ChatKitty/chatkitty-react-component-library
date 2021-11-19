@@ -1,20 +1,39 @@
+/* Scroll bar */
+
 .ck-scroll {
   scrollbar-width: thin;
   scrollbar-color: transparent;
 }
-
 .ck-scroll::-webkit-scrollbar {
   width: 5px;
 }
-
 .ck-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
-
 .ck-scroll::-webkit-scrollbar-thumb {
   background-color: lightgray;
   border-radius: 15px;
   border: 3px solid rgba(0, 0, 0, 0);
+}
+
+/* ChannelHeader */
+
+.ck-channelHeader {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 8px 20px;
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+.ck-channelHeader-title {
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+.ck-channelHeader-description {
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* MessageList */
@@ -35,7 +54,6 @@
   display: flex;
   width: 100%;
 }
-
 .ck-messageInput-text {
   flex: 1;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -43,11 +61,10 @@
   padding: 16px;
   padding-right: 40px;
   border: none;
-  border-top: 1px solid lightgray;
+  border-top: 3px solid #f2f2f2;
   resize: none;
   font-size: 1em;
 }
-
 .ck-messageInput-button {
   cursor: pointer;
   position: absolute;
@@ -70,7 +87,6 @@
   padding: 8px;
   max-width: 100%;
 }
-
 .ck-textMessage-image {
   height: 3rem;
   width: 3rem;
@@ -78,23 +94,19 @@
   margin-right: 20px;
   margin-top: 14px;
 }
-
 .ck-textMessage-name {
   font-size: 1.2rem;
   font-weight: 600;
   margin: 0;
 }
-
 .ck-textMessage-body {
   flex: 1;
 }
-
 .ck-textMessage-time {
   padding-left: 1rem;
   font-size: 0.8rem;
   font-weight: 100;
 }
-
 .ck-textMessage-body {
   margin-top: 12px;
   word-break: break-all;
@@ -123,14 +135,12 @@
   align-items: center;
   justify-content: center;
 }
-
 .ck-spinner {
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
 }
-
 .ck-spinner div {
   position: absolute;
   border: 4px solid black;
@@ -138,11 +148,9 @@
   border-radius: 50%;
   animation: ck-spinner 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
-
 .ck-spinner div:nth-child(2) {
   animation-delay: -0.5s;
 }
-
 @keyframes ck-spinner {
   0% {
     top: 36px;

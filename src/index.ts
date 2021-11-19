@@ -1,3 +1,4 @@
+import ChannelHeader from "./components/Channel/ChannelHeader";
 import ChannelList from "./components/Channel/ChannelList";
 import ChannelListItem from "./components/Channel/ChannelListItem";
 import FileMessage from "./components/Message/FileMessage";
@@ -17,6 +18,7 @@ import ChatWindow from "./components/ChatWindow";
 import Spinner from "./components/utility/Spinner";
 
 export {
+  ChannelHeader,
   ChannelList,
   ChannelListItem,
   FileMessage,
@@ -35,6 +37,7 @@ export {
   Spinner,
 };
 
+import { ChannelHeaderProps } from "./components/Channel/ChannelHeader";
 import { ChannelListProps } from "./components/Channel/ChannelList";
 import { ChannelListItemProps } from "./components/Channel/ChannelListItem";
 import { FileMessageProps } from "./components/Message/FileMessage";
@@ -50,6 +53,7 @@ import { UserListItemProps } from "./components/User/UserListItem";
 import { ChatWindowProps } from "./components/ChatWindow";
 
 export type {
+  ChannelHeaderProps,
   ChannelListProps,
   ChannelListItemProps,
   FileMessageProps,
