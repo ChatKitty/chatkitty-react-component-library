@@ -1,10 +1,7 @@
 import React from "react";
 import TextArea from "react-autosize-textarea";
-import {
-  useChatContext,
-  useUpdateMessageDraft,
-  useSendMessageDraft,
-} from "../../..";
+import { useChatContext } from "../../Provider/ChatKittyProvider";
+import { useUpdateMessageDraft, useSendMessageDraft } from "../../../hooks";
 
 export interface MessageInputProps {}
 

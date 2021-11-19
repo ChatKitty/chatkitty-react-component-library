@@ -1,6 +1,7 @@
 import React from "react";
 import { Message } from "chatkitty";
-import { useChatSession, useChatContext } from "../../..";
+import { useChatSession } from "../../../hooks";
+import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface ChatSessionProps {
   /**

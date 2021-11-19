@@ -1,5 +1,5 @@
 import React from "react";
-import { useChatContext } from "../../..";
+import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface ChannelHeaderProps {}
 

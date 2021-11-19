@@ -21,22 +21,16 @@ export default {
       format: "esm",
       sourcemap: true,
     },
-    {
-      file: packageJson.umd,
-      format: "umd",
-      name: "ChatKitty",
-      sourcemap: true,
-    },
   ],
   plugins: [
-    json(),
     peerDepsExternal(),
-    resolve(),
+    resolve({ preferBuiltins: true }),
     commonjs(),
     typescript({ useTsconfigDeclarationDir: true }),
     postcss({
       extensions: [".css"],
     }),
     terser(),
+    json(),
   ],
 };

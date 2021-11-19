@@ -1,12 +1,10 @@
 import React from "react";
-import {
-  MessageList,
-  MessageInput,
-  useChatContext,
-  useMessages,
-  ChatSession,
-  ChannelHeader,
-} from "../..";
+import ChannelHeader from "../Channel/ChannelHeader";
+import MessageList from "../Message/MessageList";
+import MessageInput from "../Message/MessageInput";
+import { useChatContext } from "../Provider/ChatKittyProvider";
+import { useMessages } from "../../hooks";
+import ChatSession from "../Session/ChatSession";
 import Spinner from "../utility/Spinner";
 
 export interface ChatWindowProps {}
