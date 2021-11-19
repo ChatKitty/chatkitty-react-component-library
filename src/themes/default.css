@@ -4,6 +4,37 @@
   padding: 8px;
 }
 
+/* MessageInput */
+
+.ck-messageInput {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.ck-messageInput-text {
+  flex: 1;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 12px 16px;
+  padding-right: 40px;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  resize: none;
+}
+
+.ck-messageInput-button {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 40px;
+  background-color: transparent;
+  font-size: 2rem;
+  color: lightgray;
+  border: none;
+}
+
 /* TextMessage */
 
 .ck-textMessage {
