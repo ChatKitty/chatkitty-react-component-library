@@ -1,9 +1,11 @@
 import React from "react";
 
-export interface MessageListProps {}
+export interface MessageListProps {
+  children: React.ReactNode;
+}
 
-const MessageList = ({}: MessageListProps) => {
-  return <p>Stub</p>;
+const MessageList = ({ children }: MessageListProps) => {
+  return <ul className="ck-messageList">{children}</ul>;
 };
 
 export default MessageList;
