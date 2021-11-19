@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import TypingIndicator, { TypingIndicatorProps } from "./TypingIndicator";
 
 export default {
-  title: "Components/Message/TypingIndicator",
+  title: "Presentational Components/Message/TypingIndicator",
   component: TypingIndicator,
 } as Meta;
 

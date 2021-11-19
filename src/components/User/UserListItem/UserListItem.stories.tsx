@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import UserListItem, { UserListItemProps } from "./UserListItem";
 
 export default {
-  title: "Components/User/UserListItem",
+  title: "Presentational Components/User/UserListItem",
   component: UserListItem,
 } as Meta;
 

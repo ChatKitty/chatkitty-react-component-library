@@ -5,7 +5,7 @@ import TextMessage, { TextMessageProps } from "./TextMessage";
 import { MockMessages } from "../../../mocks";
 
 export default {
-  title: "Components/Message/TextMessage",
+  title: "Presentational Components/Message/TextMessage",
   component: TextMessage,
 } as Meta;
 

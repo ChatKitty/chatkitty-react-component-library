@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import FileMessage, { FileMessageProps } from "./FileMessage";
 
 export default {
-  title: "Components/Message/FileMessage",
+  title: "Presentational Components/Message/FileMessage",
   component: FileMessage,
 } as Meta;
 
