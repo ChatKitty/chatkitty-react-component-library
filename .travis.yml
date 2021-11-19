@@ -1,6 +1,19 @@
 language: node_js
 node_js: 16
 cache: npm
+
+install:
+  - yarn install
+
+script:
+  - yarn run build
+  - if [[ "$TRAVIS_BRANCH" == "main" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+    TAG="latest";
+    fi
+  - if [[ -n $TRAVIS_TAG && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+    TAG="$(git describe --tags)";
+    fi
+
 deploy:
   provider: s3
   access_key_id: "$AWS_ACCESS_KEY_ID"
@@ -8,4 +21,4 @@ deploy:
   bucket: "chatkitty"
   skip_cleanup: true
   local_dir: "lib"
-  upload-dir: "dist/react-component-library"
+  upload-dir: "dist/react-component-library/$TAG"
