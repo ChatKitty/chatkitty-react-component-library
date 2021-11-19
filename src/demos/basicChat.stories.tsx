@@ -24,15 +24,15 @@ const Template: Story<ChatWindowProps> = () => {
 
   useEffect(() => {
     const init = async () => {
-      let sessionRes = await client.startSession({
+      const session = await client.startSession({
         username: "b2a6da08-88bf-4778-b993-7234e6d8a3ff",
       });
 
-      if (succeeded<StartSessionResult>(sessionRes)) {
+      if (succeeded<StartSessionResult>(session)) {
         console.log("session started!");
       }
 
-      let channelRes = await client.getChannel(55003);
+      const channelRes = await client.getChannel(55003);
 
       if (succeeded<GetChannelSucceededResult>(channelRes)) {
         console.log("channel fetched!");

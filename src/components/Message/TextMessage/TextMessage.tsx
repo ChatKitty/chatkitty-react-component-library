@@ -31,7 +31,7 @@ const TextMessage = ({
   return (
     <li className="ck-textMessage">
       <img className="ck-textMessage-image" src={displayPictureUrl} />
-      <div>
+      <div className="ck-textMessage-body">
         <h2 className="ck-textMessage-name">
           {displayName}
           <span className="ck-textMessage-time">{createdTime}</span>
