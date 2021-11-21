@@ -7,10 +7,11 @@ import { useChatContext } from "../Provider/ChatKittyProvider";
 import { useMessages, useCurrentUser } from "../../hooks";
 import ChatSession from "../Session/ChatSession";
 import Spinner from "../utility/Spinner";
+import "./styles.css";
 
-export interface ChatWindowProps {}
+export interface CKCommentChatProps {}
 
-const ChatWindow = ({}: ChatWindowProps) => {
+const CKCommentChat = ({}: CKCommentChatProps) => {
   const { client, channel } = useChatContext();
 
   // Current User
@@ -64,4 +65,4 @@ const ChatWindow = ({}: ChatWindowProps) => {
   );
 };
 
-export default ChatWindow;
+export default CKCommentChat;

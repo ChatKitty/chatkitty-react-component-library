@@ -7,8 +7,8 @@ import ChatKitty, {
 } from "chatkitty";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
-import { CKChatProps } from "../components/CKChat";
-import { ChatKittyProvider, CKChat, Spinner } from "..";
+import { CKCommentChatProps } from "../components/CKCommentChat";
+import { ChatKittyProvider, CKCommentChat, Spinner } from "..";
 
 const client = new ChatKitty({
   host: "api.staging.chatkitty.com",
@@ -16,10 +16,10 @@ const client = new ChatKitty({
 });
 
 export default {
-  title: "Demos/BasicChat",
+  title: "Demos/CommentChat",
 } as Meta;
 
-const Template: Story<CKChatProps> = () => {
+const Template: Story<CKCommentChatProps> = () => {
   const [channel, setChannel] = React.useState<Channel | undefined>();
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Template: Story<CKChatProps> = () => {
   return (
     <div style={{ height: 600, width: 450 }}>
       <ChatKittyProvider client={client} channel={channel}>
-        <CKChat />
+        <CKCommentChat />
       </ChatKittyProvider>
     </div>
   );

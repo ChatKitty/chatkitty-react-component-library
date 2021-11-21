@@ -6,6 +6,7 @@ import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
 import replace from "@rollup/plugin-replace";
 import analyze from "rollup-plugin-analyzer";
+import cssbundle from "rollup-plugin-css-bundle";
 
 const packageJson = require("./package.json");
 
@@ -24,6 +25,7 @@ const plugins = [
   }),
   terser(),
   analyze(),
+  cssbundle(),
 ];
 
 export default [

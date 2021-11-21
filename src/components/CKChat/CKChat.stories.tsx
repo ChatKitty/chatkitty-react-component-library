@@ -1,14 +1,14 @@
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
-import ChatWindow, { ChatWindowProps } from "./ChatWindow";
+import CKChat, { CKChatProps } from "./CKChat";
 
 export default {
-  title: "Components/ChatWindow",
-  component: ChatWindow,
+  title: "Components/CKChat",
+  component: CKChat,
 } as Meta;
 
-const Template: Story<ChatWindowProps> = (args) => <ChatWindow {...args} />;
+const Template: Story<CKChatProps> = (args) => <CKChat {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
