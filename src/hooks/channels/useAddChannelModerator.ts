@@ -1,12 +1,11 @@
-import ChatKitty, {
+import type {
   AddedChannelModeratorResult,
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
-  succeeded,
   User,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useAddChannelModerator = (
@@ -25,12 +24,12 @@ const useAddChannelModerator = (
 
     const result = await client.addChannelModerator({ channel, user });
 
-    if (succeeded<AddedChannelModeratorResult>(result)) {
-      setResource(result.channel);
+    if (result.succeeded) {
+      setResource((result as AddedChannelModeratorResult).channel);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

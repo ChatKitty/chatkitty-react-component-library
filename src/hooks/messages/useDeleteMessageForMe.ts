@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
   DeleteMessageForMeSucceededResult,
-  failed,
   Message,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useDeleteMessageForMe = (
@@ -24,12 +23,12 @@ const useDeleteMessageForMe = (
 
     const result = await client.deleteMessageForMe({ message });
 
-    if (succeeded<DeleteMessageForMeSucceededResult>(result)) {
-      setResource(result.message);
+    if (result.succeeded) {
+      setResource((result as DeleteMessageForMeSucceededResult).message);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
   CurrentUser,
-  failed,
-  succeeded,
   UpdateCurrentUserResult,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useUpdateCurrentUser = (
@@ -20,14 +19,16 @@ const useUpdateCurrentUser = (
   const makeRequest = async (update: (user: CurrentUser) => CurrentUser) => {
     setIsLoading(true);
 
-    const result = await client.updateCurrentUser(update);
+    const result: UpdateCurrentUserResult = await client.updateCurrentUser(
+      update
+    );
 
-    if (succeeded<UpdateCurrentUserResult>(result)) {
+    if (result.succeeded) {
       // empty response
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

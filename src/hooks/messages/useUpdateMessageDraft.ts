@@ -1,4 +1,5 @@
-import ChatKitty, { Channel } from "chatkitty";
+import type { Channel } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useUpdateMessageDraft = (

@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   JoinedChannelResult,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useJoinChannel = (
@@ -24,12 +23,12 @@ const useJoinChannel = (
 
     const result = await client.joinChannel({ channel });
 
-    if (succeeded<JoinedChannelResult>(result)) {
-      setResource(result.channel);
+    if (result.succeeded) {
+      setResource((result as JoinedChannelResult).channel);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

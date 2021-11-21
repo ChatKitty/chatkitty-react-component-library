@@ -1,12 +1,11 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   InviteUserResult,
-  succeeded,
   User,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useInviteUser = (
@@ -21,17 +20,17 @@ const useInviteUser = (
   const makeRequest = async (channel: Channel, user: User) => {
     setIsLoading(true);
 
-    const result = await client.inviteUser({
+    const result: InviteUserResult = await client.inviteUser({
       channel,
       user,
     });
 
-    if (succeeded<InviteUserResult>(result)) {
+    if (result.succeeded) {
       // empty response
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

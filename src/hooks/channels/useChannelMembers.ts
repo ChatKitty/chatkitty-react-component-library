@@ -1,13 +1,12 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   GetChannelMembersFilter,
   GetUsersSucceededResult,
-  succeeded,
   User,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import { useEffect } from "react";
 import useResourceState from "../useResourceState";
 
@@ -34,12 +33,12 @@ const useChannelMembers = (
 
       const result = await client.getChannelMembers({ channel, filter });
 
-      if (succeeded<GetUsersSucceededResult>(result)) {
-        setResource(result.paginator.items);
+      if (result.succeeded) {
+        setResource((result as GetUsersSucceededResult).paginator.items);
       }
 
-      if (failed<ChatKittyFailedResult>(result)) {
-        setError(result.error);
+      if (result.failed) {
+        setError((result as ChatKittyFailedResult).error);
       }
 
       setIsLoading(false);

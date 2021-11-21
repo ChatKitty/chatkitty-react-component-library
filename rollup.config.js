@@ -9,7 +9,8 @@ import { terser } from "rollup-plugin-terser";
 const packageJson = require("./package.json");
 
 export default {
-  input: "src/index.ts",
+  input: "src/hooks/channels/useChannel.ts",
+  // input: "src/index.ts",
   output: [
     {
       file: packageJson.main,

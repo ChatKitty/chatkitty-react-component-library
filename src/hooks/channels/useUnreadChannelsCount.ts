@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   GetCountSucceedResult,
   GetUnreadChannelsFilter,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import { useEffect } from "react";
 import useResourceState from "../useResourceState";
 
@@ -26,12 +25,12 @@ const useUnreadChannelsCount = (
 
       const result = await client.getUnreadChannelsCount({ filter });
 
-      if (succeeded<GetCountSucceedResult>(result)) {
-        setResource(result.count);
+      if (result.succeeded) {
+        setResource((result as GetCountSucceedResult).count);
       }
 
-      if (failed<ChatKittyFailedResult>(result)) {
-        setError(result.error);
+      if (result.failed) {
+        setError((result as ChatKittyFailedResult).error);
       }
 
       setIsLoading(false);

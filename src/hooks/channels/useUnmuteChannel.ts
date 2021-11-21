@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
-  succeeded,
   UnmutedChannelResult,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useUnmuteChannel = (
@@ -24,12 +23,12 @@ const useUnmuteChannel = (
 
     const result = await client.unmuteChannel({ channel });
 
-    if (succeeded<UnmutedChannelResult>(result)) {
-      setResource(result.channel);
+    if (result.succeeded) {
+      setResource((result as UnmutedChannelResult).channel);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

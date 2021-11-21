@@ -1,12 +1,11 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   GetLastReadMessageResult,
   Message,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useLastReadMessage = (
@@ -25,12 +24,12 @@ const useLastReadMessage = (
 
     const result = await client.getLastReadMessage({ channel, username });
 
-    if (succeeded<GetLastReadMessageResult>(result)) {
-      setResource(result.message);
+    if (result.succeeded) {
+      setResource((result as GetLastReadMessageResult).message);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

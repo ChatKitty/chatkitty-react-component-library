@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   GetCountSucceedResult,
   Message,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useMessageRepliesCount = (
@@ -24,12 +23,12 @@ const useMessageRepliesCount = (
 
     const result = await client.getMessageRepliesCount({ message });
 
-    if (succeeded<GetCountSucceedResult>(result)) {
-      setResource(result.count);
+    if (result.succeeded) {
+      setResource((result as GetCountSucceedResult).count);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

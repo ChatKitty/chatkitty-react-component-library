@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   GetCountSucceedResult,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import { useEffect } from "react";
 import useResourceState from "../useResourceState";
 
@@ -28,12 +27,12 @@ const useChannelUnreadMessageCount = (
         channel,
       });
 
-      if (succeeded<GetCountSucceedResult>(result)) {
-        setResource(result.count);
+      if (result.succeeded) {
+        setResource((result as GetCountSucceedResult).count);
       }
 
-      if (failed<ChatKittyFailedResult>(result)) {
-        setError(result.error);
+      if (result.failed) {
+        setError((result as ChatKittyFailedResult).error);
       }
 
       setIsLoading(false);

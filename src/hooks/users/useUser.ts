@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   GetUserSucceededResult,
-  succeeded,
   User,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import { useEffect } from "react";
 import useResourceState from "../useResourceState";
 
@@ -26,12 +25,12 @@ const useUser = (
 
       const result = await client.getUser(param);
 
-      if (succeeded<GetUserSucceededResult>(result)) {
-        setResource(result.user);
+      if (result.succeeded) {
+        setResource((result as GetUserSucceededResult).user);
       }
 
-      if (failed<ChatKittyFailedResult>(result)) {
-        setError(result.error);
+      if (result.failed) {
+        setError((result as ChatKittyFailedResult).error);
       }
 
       setIsLoading(false);

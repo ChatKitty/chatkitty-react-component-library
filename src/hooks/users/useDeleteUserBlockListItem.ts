@@ -1,12 +1,11 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
   DeleteUserBlockListItemSucceededResult,
-  failed,
-  succeeded,
   User,
   UserBlockListItem,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useDeleteUserBlockListItem = (
@@ -25,12 +24,12 @@ const useDeleteUserBlockListItem = (
 
     const result = await client.deleteUserBlockListItem({ item });
 
-    if (succeeded<DeleteUserBlockListItemSucceededResult>(result)) {
-      setResource(result.user);
+    if (result.succeeded) {
+      setResource((result as DeleteUserBlockListItemSucceededResult).user);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

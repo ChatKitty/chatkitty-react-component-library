@@ -1,4 +1,4 @@
-import ChatKitty from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useEndSession = (

@@ -1,13 +1,12 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
   ChatKittyUploadProgressListener,
   CreateChatKittyFileProperties,
   CurrentUser,
-  failed,
-  succeeded,
   UpdatedCurrentUserResult,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useUpdateCurrentUserDisplayPicture = (
@@ -35,12 +34,12 @@ const useUpdateCurrentUserDisplayPicture = (
       progressListener,
     });
 
-    if (succeeded<UpdatedCurrentUserResult>(result)) {
-      setResource(result.user);
+    if (result.succeeded) {
+      setResource((result as UpdatedCurrentUserResult).user);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

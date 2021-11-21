@@ -1,5 +1,6 @@
 import React from "react";
-import ChatKitty, { Channel } from "chatkitty";
+import type { Channel } from "chatkitty";
+import type ChatKitty from "chatkitty";
 
 export interface ChatKittyProviderProps {
   client: ChatKitty;
@@ -8,14 +9,9 @@ export interface ChatKittyProviderProps {
 }
 
 export const ChatKittyContext = React.createContext<{
-  client: ChatKitty;
+  client?: ChatKitty;
   channel?: Channel;
-}>({
-  client: new ChatKitty({
-    host: "api.staging.chatkitty.com",
-    apiKey: "",
-  }),
-});
+}>({});
 
 export const useChatContext = (): { client: ChatKitty; channel: Channel } => {
   const contextValue = React.useContext(ChatKittyContext);
@@ -24,6 +20,10 @@ export const useChatContext = (): { client: ChatKitty; channel: Channel } => {
     console.warn(
       `The useChatContext hook was called outside of the ChatKittyContext provider.`
     );
+  }
+
+  if (!contextValue.client) {
+    throw new Error("missing client");
   }
 
   if (!contextValue.channel) {

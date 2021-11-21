@@ -1,5 +1,5 @@
 import React from "react";
-import { Message, TextUserMessage } from "chatkitty";
+import type { Message, TextUserMessage } from "chatkitty";
 import moment from "moment";
 import TextMessage from "../TextMessage";
 

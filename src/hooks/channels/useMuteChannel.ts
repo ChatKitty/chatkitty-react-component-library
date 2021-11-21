@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   MutedChannelResult,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useMuteChannel = (
@@ -24,12 +23,12 @@ const useMuteChannel = (
 
     const result = await client.muteChannel({ channel });
 
-    if (succeeded<MutedChannelResult>(result)) {
-      setResource(result.channel);
+    if (result.succeeded) {
+      setResource((result as MutedChannelResult).channel);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

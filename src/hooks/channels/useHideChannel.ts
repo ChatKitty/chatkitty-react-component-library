@@ -1,12 +1,11 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
   DirectChannel,
-  failed,
   HideChannelSucceededResult,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useHideChannel = (
@@ -25,12 +24,12 @@ const useHideChannel = (
 
     const result = await client.hideChannel({ channel });
 
-    if (succeeded<HideChannelSucceededResult>(result)) {
-      setResource(result.channel);
+    if (result.succeeded) {
+      setResource((result as HideChannelSucceededResult).channel);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

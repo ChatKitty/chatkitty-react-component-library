@@ -1,12 +1,11 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
   ChatKittyUserReference,
   CreatedChannelResult,
-  failed,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useCreateChannel = (
@@ -43,13 +42,13 @@ const useCreateChannel = (
 
     setIsLoading(false);
 
-    if (succeeded<CreatedChannelResult>(result)) {
-      setResource(result.channel);
-      return result.channel;
+    if (result.succeeded) {
+      setResource((result as CreatedChannelResult).channel);
+      return (result as CreatedChannelResult).channel;
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
   };
 

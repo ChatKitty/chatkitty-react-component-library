@@ -1,12 +1,11 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   Message,
   ReactedToMessageResult,
   Reaction,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useReactToMessage = (
@@ -25,12 +24,12 @@ const useReactToMessage = (
 
     const result = await client.reactToMessage({ message, emoji });
 
-    if (succeeded<ReactedToMessageResult>(result)) {
-      setResource(result.reaction);
+    if (result.succeeded) {
+      setResource((result as ReactedToMessageResult).reaction);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

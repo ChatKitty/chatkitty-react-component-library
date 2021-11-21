@@ -1,4 +1,4 @@
-import { ChatKittyError } from "chatkitty";
+import type { ChatKittyError } from "chatkitty";
 import { useState } from "react";
 
 const useResourceState = <T>({

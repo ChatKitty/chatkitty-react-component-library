@@ -1,5 +1,5 @@
 import React from "react";
-import { Message } from "chatkitty";
+import type { Message } from "chatkitty";
 import { useChatSession } from "../../../hooks";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 

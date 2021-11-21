@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   LeftChannelResult,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useLeaveChannel = (
@@ -24,12 +23,12 @@ const useLeaveChannel = (
 
     const result = await client.leaveChannel({ channel });
 
-    if (succeeded<LeftChannelResult>(result)) {
-      setResource(result.channel);
+    if (result.succeeded) {
+      setResource((result as LeftChannelResult).channel);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

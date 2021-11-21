@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   GetUserBlockListSucceededResult,
-  succeeded,
   UserBlockListItem,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import { useEffect } from "react";
 import useResourceState from "../useResourceState";
 
@@ -25,12 +24,14 @@ const useCurrentUserBlockList = (
 
       const result = await client.getUserBlockList();
 
-      if (succeeded<GetUserBlockListSucceededResult>(result)) {
-        setResource(result.paginator.items);
+      if (result.succeeded) {
+        setResource(
+          (result as GetUserBlockListSucceededResult).paginator.items
+        );
       }
 
-      if (failed<ChatKittyFailedResult>(result)) {
-        setError(result.error);
+      if (result.failed) {
+        setError((result as ChatKittyFailedResult).error);
       }
 
       setIsLoading(false);

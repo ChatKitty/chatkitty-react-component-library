@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   GetChannelsSucceededResult,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import { useEffect } from "react";
 import useResourceState from "../useResourceState";
 
@@ -28,14 +27,14 @@ const useJoinedChannels = (
       filter: { joined: true },
     });
 
-    if (succeeded<GetChannelsSucceededResult>(result)) {
-      const channels = result.paginator.items;
+    if (result.succeeded) {
+      const channels = (result as GetChannelsSucceededResult).paginator.items;
       channels.sort();
       setResource(channels);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

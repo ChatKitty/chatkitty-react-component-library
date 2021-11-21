@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
   ClearChannelHistorySucceededResult,
-  failed,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useClearChannelHistory = (
@@ -24,12 +23,12 @@ const useClearChannelHistory = (
 
     const result = await client.clearChannelHistory({ channel });
 
-    if (succeeded<ClearChannelHistorySucceededResult>(result)) {
-      setResource(result.channel);
+    if (result.succeeded) {
+      setResource((result as ClearChannelHistorySucceededResult).channel);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

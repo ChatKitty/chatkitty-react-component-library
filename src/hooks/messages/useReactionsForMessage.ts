@@ -1,12 +1,11 @@
-import ChatKitty, {
+import type {
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
   GetReactionsSucceededResult,
   Message,
   Reaction,
-  succeeded,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useReactionsForMessage = (
@@ -25,12 +24,12 @@ const useReactionsForMessage = (
 
     const result = await client.getReactions({ message });
 
-    if (succeeded<GetReactionsSucceededResult>(result)) {
-      setResource(result.paginator.items);
+    if (result.succeeded) {
+      setResource((result as GetReactionsSucceededResult).paginator.items);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);

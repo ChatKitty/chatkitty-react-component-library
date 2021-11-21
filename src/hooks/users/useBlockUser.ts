@@ -1,11 +1,10 @@
-import ChatKitty, {
+import type {
   BlockUserSucceededResult,
   ChatKittyError,
   ChatKittyFailedResult,
-  failed,
-  succeeded,
   User,
 } from "chatkitty";
+import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
 
 const useBlockUser = (
@@ -26,12 +25,12 @@ const useBlockUser = (
       user,
     });
 
-    if (succeeded<BlockUserSucceededResult>(result)) {
-      setResource(result.user);
+    if (result.succeeded) {
+      setResource((result as BlockUserSucceededResult).user);
     }
 
-    if (failed<ChatKittyFailedResult>(result)) {
-      setError(result.error);
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
     }
 
     setIsLoading(false);
