@@ -1,5 +1,5 @@
 import React from "react";
-import type { Message } from "chatkitty";
+import type { Message, User } from "chatkitty";
 import { useChatSession } from "../../../hooks";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 
@@ -7,13 +7,25 @@ export interface ChatSessionProps {
   /**
    * handle messages received in the chat session
    */
-  onMessageReceived?: (message: Message) => void;
+  onReceivedMessage?: (message: Message) => void;
+
+  /**
+   * typing started event
+   */
+  onTypingStarted?: (user: User) => void;
+
+  /**
+   * typing stopped event
+   */
+  onTypingStopped?: (user: User) => void;
 
   children: React.ReactNode;
 }
 
 const ChatSession = ({
-  onMessageReceived = () => {},
+  onReceivedMessage,
+  onTypingStarted,
+  onTypingStopped,
   children,
 }: ChatSessionProps) => {
   const { client, channel } = useChatContext();
@@ -21,7 +33,12 @@ const ChatSession = ({
   const { makeRequest: startChatSession } = useChatSession(client);
 
   React.useEffect(() => {
-    const session = startChatSession(channel, onMessageReceived);
+    const session = startChatSession(
+      channel,
+      onReceivedMessage,
+      onTypingStarted,
+      onTypingStopped
+    );
 
     return session.end;
   }, [channel]);

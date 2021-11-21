@@ -49,7 +49,7 @@ export default [
       {
         file: packageJson.umd,
         format: "umd",
-        name: "ChatKittyWidget",
+        name: "CKChatWidget",
         sourcemap: true,
         globals: {
           react: "React",

@@ -29,13 +29,13 @@ const Template: Story<ChatWindowProps> = () => {
       });
 
       if (succeeded<StartSessionResult>(session)) {
-        console.log("session started!");
+        console.log("I started a session!");
       }
 
       const channelRes = await client.getChannel(55003);
 
       if (succeeded<GetChannelSucceededResult>(channelRes)) {
-        console.log("channel fetched!");
+        console.log("I fetched a channel!");
         setChannel(channelRes.channel);
       }
     };

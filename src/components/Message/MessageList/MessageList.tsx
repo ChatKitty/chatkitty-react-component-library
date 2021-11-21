@@ -16,7 +16,7 @@ const MessageList = ({ messages }: MessageListProps) => {
 
   return (
     <ul className="ck-messageList ck-scroll">
-      <div ref={scrollRef}></div>
+      <div ref={scrollRef} />
       {messages.map((message) => {
         const casted = message as TextUserMessage;
         return (

@@ -5,6 +5,7 @@ import type {
   ChatSession,
   Message,
   StartedChatSessionResult,
+  User,
 } from "chatkitty";
 import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
@@ -17,7 +18,9 @@ const useChatSession = (
   resource?: ChatSession;
   makeRequest: (
     channel: Channel,
-    onReceivedMessage: (message: Message) => void
+    onReceivedMessage?: (message: Message) => void,
+    onTypingStarted?: (user: User) => void,
+    onTypingStopped?: (user: User) => void
   ) => ChatSession;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
@@ -25,11 +28,18 @@ const useChatSession = (
 
   const makeRequest = (
     channel: Channel,
-    onReceivedMessage: (message: Message) => void
+    onReceivedMessage?: (message: Message) => void,
+    onTypingStarted?: (user: User) => void,
+    onTypingStopped?: (user: User) => void
   ) => {
     setIsLoading(true);
 
-    const result = client.startChatSession({ channel, onReceivedMessage });
+    const result = client.startChatSession({
+      channel,
+      onReceivedMessage,
+      onTypingStarted,
+      onTypingStopped,
+    });
 
     setIsLoading(false);
 

@@ -47,6 +47,16 @@
   margin: 0;
 }
 
+/* TypingIndicator */
+
+.ck-typingIndicator {
+  margin: 0;
+  padding: 8px 12px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
 /* MessageInput */
 
 .ck-messageInput {
