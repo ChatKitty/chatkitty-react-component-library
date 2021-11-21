@@ -5,6 +5,7 @@ import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
 import replace from "@rollup/plugin-replace";
+import analyze from "rollup-plugin-analyzer";
 
 const packageJson = require("./package.json");
 
@@ -22,6 +23,7 @@ const plugins = [
     extensions: [".css"],
   }),
   terser(),
+  analyze(),
 ];
 
 export default [
@@ -49,6 +51,10 @@ export default [
         format: "umd",
         name: "ChatKittyWidget",
         sourcemap: true,
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
       },
     ],
     plugins,
