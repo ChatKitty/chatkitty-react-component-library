@@ -1395,15 +1395,6 @@
     "magic-string" "^0.25.7"
     "resolve" "^1.17.0"
 
-"@rollup/plugin-inject@^4.0.0":
-  "integrity" "sha512-lzMXmj0LZjd67MI+M8H9dk/oCxR0TYqYAdZ6ZOejWQLSUtud+FUPu4NCMAO8KyWWAalFo8ean7yFHCMvCNsCZw=="
-  "resolved" "https://registry.npmjs.org/@rollup/plugin-inject/-/plugin-inject-4.0.3.tgz"
-  "version" "4.0.3"
-  dependencies:
-    "@rollup/pluginutils" "^3.1.0"
-    "estree-walker" "^2.0.1"
-    "magic-string" "^0.25.7"
-
 "@rollup/plugin-json@^4.1.0":
   "integrity" "sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw=="
   "resolved" "https://registry.npmjs.org/@rollup/plugin-json/-/plugin-json-4.1.0.tgz"
@@ -1422,6 +1413,14 @@
     "deepmerge" "^4.2.2"
     "is-module" "^1.0.0"
     "resolve" "^1.19.0"
+
+"@rollup/plugin-replace@^3.0.0":
+  "integrity" "sha512-3c7JCbMuYXM4PbPWT4+m/4Y6U60SgsnDT/cCyAyUKwFHg7pTSfsSQzIpETha3a3ig6OdOKzZz87D9ZXIK3qsDg=="
+  "resolved" "https://registry.npmjs.org/@rollup/plugin-replace/-/plugin-replace-3.0.0.tgz"
+  "version" "3.0.0"
+  dependencies:
+    "@rollup/pluginutils" "^3.1.0"
+    "magic-string" "^0.25.7"
 
 "@rollup/pluginutils@^3.0.8", "@rollup/pluginutils@^3.1.0":
   "integrity" "sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg=="
@@ -9005,13 +9004,6 @@
   "integrity" "sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g=="
   "resolved" "https://registry.npmjs.org/rollup-plugin-peer-deps-external/-/rollup-plugin-peer-deps-external-2.2.4.tgz"
   "version" "2.2.4"
-
-"rollup-plugin-polyfill-node@^0.7.0":
-  "integrity" "sha512-iJLZDfvxcQh3SpC0OiYlZG9ik26aRM29hiC2sARbAPXYunB8rzW8GtVaWuJgiCtX1hNAo/OaYvVXfPp15fMs7g=="
-  "resolved" "https://registry.npmjs.org/rollup-plugin-polyfill-node/-/rollup-plugin-polyfill-node-0.7.0.tgz"
-  "version" "0.7.0"
-  dependencies:
-    "@rollup/plugin-inject" "^4.0.0"
 
 "rollup-plugin-postcss@^4.0.1":
   "integrity" "sha512-kUJHlpDGl9+kDfdUUbnerW0Mx1R0PL/6dgciUE/w19swYDBjug7RQfxIRvRGtO/cvCkynYyU8e/YFMI544vskA=="

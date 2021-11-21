@@ -1,16 +1,15 @@
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
-import json from "@rollup/plugin-json";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
+import replace from "@rollup/plugin-replace";
 
 const packageJson = require("./package.json");
 
 export default {
-  input: "src/hooks/channels/useChannel.ts",
-  // input: "src/index.ts",
+  input: "src/index.ts",
   output: [
     {
       file: packageJson.main,
@@ -22,8 +21,21 @@ export default {
       format: "esm",
       sourcemap: true,
     },
+    {
+      file: packageJson.umd,
+      format: "umd",
+      name: "ChatKitty",
+      sourcemap: true,
+    },
   ],
   plugins: [
+    replace(
+      {
+        "process.env.NODE_ENV": JSON.stringify("production"),
+        __buildDate__: () => JSON.stringify(new Date()),
+      },
+      { preventAssignment: true }
+    ),
     peerDepsExternal(),
     resolve({ preferBuiltins: true }),
     commonjs(),
@@ -32,6 +44,5 @@ export default {
       extensions: [".css"],
     }),
     terser(),
-    json(),
   ],
 };
