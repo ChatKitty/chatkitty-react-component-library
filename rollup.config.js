@@ -8,41 +8,49 @@ import replace from "@rollup/plugin-replace";
 
 const packageJson = require("./package.json");
 
-export default {
-  input: "src/index.ts",
-  output: [
-    {
-      file: packageJson.main,
-      format: "cjs",
-      sourcemap: true,
-    },
-    {
-      file: packageJson.module,
-      format: "esm",
-      sourcemap: true,
-    },
-    {
-      file: packageJson.umd,
-      format: "umd",
-      name: "ChatKitty",
-      sourcemap: true,
-    },
-  ],
-  plugins: [
-    replace(
+const plugins = [
+  replace({
+    preventAssignment: true,
+    "process.env.NODE_ENV": JSON.stringify("production"),
+    __buildDate__: () => JSON.stringify(new Date()),
+  }),
+  peerDepsExternal(),
+  resolve({ preferBuiltins: true }),
+  commonjs(),
+  typescript({ useTsconfigDeclarationDir: true }),
+  postcss({
+    extensions: [".css"],
+  }),
+  terser(),
+];
+
+export default [
+  {
+    input: "src/index.ts",
+    output: [
       {
-        "process.env.NODE_ENV": JSON.stringify("production"),
-        __buildDate__: () => JSON.stringify(new Date()),
+        file: packageJson.main,
+        format: "cjs",
+        sourcemap: true,
       },
-      { preventAssignment: true }
-    ),
-    peerDepsExternal(),
-    resolve({ preferBuiltins: true }),
-    commonjs(),
-    typescript({ useTsconfigDeclarationDir: true }),
-    postcss({
-      extensions: [".css"],
-    }),
-    terser(),
-  ],
-};
+      {
+        file: packageJson.module,
+        format: "esm",
+        sourcemap: true,
+      },
+    ],
+    plugins,
+  },
+  {
+    input: "src/widget.tsx",
+    output: [
+      {
+        file: packageJson.umd,
+        format: "umd",
+        name: "ChatKittyWidget",
+        sourcemap: true,
+      },
+    ],
+    plugins,
+  },
+];

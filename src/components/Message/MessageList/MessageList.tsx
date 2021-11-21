@@ -1,7 +1,7 @@
 import React from "react";
 import type { Message, TextUserMessage } from "chatkitty";
-import moment from "moment";
 import TextMessage from "../TextMessage";
+import fromNow from "./fromNow";
 
 export interface MessageListProps {
   messages: Message[];
@@ -24,7 +24,7 @@ const MessageList = ({ messages }: MessageListProps) => {
             key={casted.id}
             displayPictureUrl={casted.user.displayPictureUrl}
             displayName={casted.user.displayName}
-            createdTime={moment(casted.createdTime).fromNow()}
+            createdTime={fromNow(new Date(casted.createdTime))}
             body={casted.body}
           />
         );

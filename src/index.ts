@@ -1,3 +1,5 @@
+import "./themes/default.css";
+
 import ChannelHeader from "./components/Channel/ChannelHeader";
 import ChannelList from "./components/Channel/ChannelList";
 import ChannelListItem from "./components/Channel/ChannelListItem";
