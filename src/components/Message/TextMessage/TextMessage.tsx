@@ -1,4 +1,6 @@
 import React from "react";
+import { css, cx } from "@emotion/css";
+import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface TextMessageProps {
   /**
@@ -28,16 +30,59 @@ const TextMessage = ({
   createdTime,
   body,
 }: TextMessageProps) => {
+  const { theme } = useChatContext();
+
   return (
-    <li className="ck-textMessage">
-      <img className="ck-textMessage-image" src={displayPictureUrl} />
-      <div className="ck-textMessage-body">
-        <h2 className="ck-textMessage-name">
+    <li
+      className={`${cx(
+        css`
+          ${theme.textMessage.container}
+        `
+      )} ck-textMessage`}
+    >
+      <img
+        className={`${cx(
+          css`
+            ${theme.textMessage.image}
+          `
+        )} ck-textMessage-image`}
+        src={displayPictureUrl}
+      />
+      <div
+        className={`${cx(
+          css`
+            ${theme.textMessage.body}
+          `
+        )} ck-textMessage-body`}
+      >
+        <h2
+          className={`${cx(
+            css`
+              ${theme.textMessage.name}
+            `
+          )} ck-textMessage-name`}
+        >
           {displayName}
-          <span className="ck-textMessage-time">{createdTime}</span>
+          <span
+            className={`${cx(
+              css`
+                ${theme.textMessage.time}
+              `
+            )} ck-textMessage-time`}
+          >
+            {createdTime}
+          </span>
         </h2>
         <div>
-          <div className="ck-textMessage-body">{body}</div>
+          <div
+            className={`${cx(
+              css`
+                ${theme.textMessage.message}
+              `
+            )} ck-textMessage-message`}
+          >
+            {body}
+          </div>
         </div>
       </div>
     </li>

@@ -7,8 +7,9 @@ import ChatKitty, {
 } from "chatkitty";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
-import { CKCommentChatProps } from "../components/CKCommentChat";
-import { ChatKittyProvider, CKCommentChat, Spinner } from "..";
+import { CKChatProps } from "../components/CKChat";
+import { ChatKittyProvider, CKChat, Spinner } from "..";
+import { defaultTheme } from "../themes/default";
 
 const client = new ChatKitty({
   host: "api.staging.chatkitty.com",
@@ -19,7 +20,7 @@ export default {
   title: "Demos/CommentChat",
 } as Meta;
 
-const Template: Story<CKCommentChatProps> = () => {
+const Template: Story<CKChatProps> = () => {
   const [channel, setChannel] = React.useState<Channel | undefined>();
 
   useEffect(() => {
@@ -47,10 +48,35 @@ const Template: Story<CKCommentChatProps> = () => {
     return <Spinner />;
   }
 
+  const theme = {
+    ...defaultTheme,
+    chat: {
+      ...defaultTheme.chat,
+      container: `
+        ${defaultTheme.chat.container}
+        flex-direction: column-reverse;
+      `,
+    },
+    channelHeader: {
+      ...defaultTheme.channelHeader,
+      container: `
+        ${defaultTheme.channelHeader.container}
+        display: none;
+      `,
+    },
+    messageList: {
+      ...defaultTheme.messageList,
+      container: `
+        ${defaultTheme.messageList.container}
+        flex-direction: column;
+      `,
+    },
+  };
+
   return (
     <div style={{ height: 600, width: 450 }}>
-      <ChatKittyProvider client={client} channel={channel}>
-        <CKCommentChat />
+      <ChatKittyProvider client={client} channel={channel} theme={theme}>
+        <CKChat />
       </ChatKittyProvider>
     </div>
   );

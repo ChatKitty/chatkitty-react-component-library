@@ -1,4 +1,5 @@
 import React from "react";
+import { css, cx } from "@emotion/css";
 import type { User } from "chatkitty";
 import TextArea from "react-autosize-textarea";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
@@ -8,26 +9,8 @@ export interface MessageInputProps {
   typingUsers: User[];
 }
 
-const TypingIndicator = ({ typingUsers }: { typingUsers: User[] }) => {
-  if (typingUsers.length === 1) {
-    return (
-      <p className="ck-typingIndicator">{`${typingUsers[0].displayName} is typing...`}</p>
-    );
-  }
-
-  if (typingUsers.length > 1) {
-    return (
-      <p className="ck-typingIndicator">{`${typingUsers
-        .map((u) => u.displayName)
-        .join(", ")} are typing...`}</p>
-    );
-  }
-
-  return null;
-};
-
 const MessageInput = ({ typingUsers }: MessageInputProps) => {
-  const { client, channel } = useChatContext();
+  const { client, channel, theme } = useChatContext();
 
   const { makeRequest: updateMessage } = useUpdateMessageDraft(client);
   const { makeRequest: sendMessage } = useSendMessageDraft(client);
@@ -42,10 +25,46 @@ const MessageInput = ({ typingUsers }: MessageInputProps) => {
     }
   };
 
+  const TypingIndicator = () => {
+    if (typingUsers.length === 1) {
+      return (
+        <p
+          className={`${cx(
+            css`
+              ${theme.typingIndicator.container}
+            `
+          )} ck-typingIndicator`}
+        >{`${typingUsers[0].displayName} is typing...`}</p>
+      );
+    }
+
+    if (typingUsers.length > 1) {
+      return (
+        <p
+          className={`${cx(
+            css`
+              ${theme.typingIndicator.container}
+            `
+          )} ck-typingIndicator`}
+        >{`${typingUsers
+          .map((u) => u.displayName)
+          .join(", ")} are typing...`}</p>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <>
-      <TypingIndicator typingUsers={typingUsers} />
-      <div className="ck-messageInput">
+      <TypingIndicator />
+      <div
+        className={`${cx(
+          css`
+            ${theme.messageInput.container}
+          `
+        )} ck-messageInput`}
+      >
         <TextArea
           value={input}
           onKeyPress={(evt) => {
@@ -67,11 +86,19 @@ const MessageInput = ({ typingUsers }: MessageInputProps) => {
             setInput(value);
           }}
           placeholder="Send a message..."
-          className="ck-messageInput-text"
+          className={`${cx(
+            css`
+              ${theme.messageInput.text}
+            `
+          )} ck-messageInput-text`}
         />
         <button
           onClick={() => submit(input)}
-          className="ck-messageInput-button"
+          className={`${cx(
+            css`
+              ${theme.messageInput.button}
+            `
+          )} ck-messageInput-button`}
         >
           +
         </button>

@@ -1,19 +1,26 @@
 import React from "react";
 import type { Channel } from "chatkitty";
 import type ChatKitty from "chatkitty";
+import { defaultTheme, ChatKittyTheme } from "../../../themes/default";
 
 export interface ChatKittyProviderProps {
   client: ChatKitty;
   channel: Channel;
+  theme?: ChatKittyTheme;
   children?: React.ReactNode;
 }
 
 export const ChatKittyContext = React.createContext<{
   client?: ChatKitty;
   channel?: Channel;
+  theme?: ChatKittyTheme;
 }>({});
 
-export const useChatContext = (): { client: ChatKitty; channel: Channel } => {
+export const useChatContext = (): {
+  client: ChatKitty;
+  channel: Channel;
+  theme: ChatKittyTheme;
+} => {
   const contextValue = React.useContext(ChatKittyContext);
 
   if (!contextValue) {
@@ -30,21 +37,27 @@ export const useChatContext = (): { client: ChatKitty; channel: Channel } => {
     throw new Error("missing channel");
   }
 
-  const { client, channel } = contextValue;
+  if (!contextValue.theme) {
+    throw new Error("missing theme");
+  }
+
+  const { client, channel, theme } = contextValue;
 
   return {
     client,
     channel,
+    theme,
   };
 };
 
 const ChatKittyProvider = ({
   client,
   channel,
+  theme = defaultTheme,
   children,
 }: ChatKittyProviderProps) => {
   return (
-    <ChatKittyContext.Provider value={{ client, channel }}>
+    <ChatKittyContext.Provider value={{ client, channel, theme }}>
       {children}
     </ChatKittyContext.Provider>
   );

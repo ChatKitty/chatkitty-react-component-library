@@ -2,13 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import type { Channel } from "chatkitty";
 import type ChatKitty from "chatkitty";
-import { ChatKittyProvider, ChatWindow } from ".";
-import "./themes/default.css";
+import { ChatKittyProvider, CKChat } from ".";
 
 const init = (id: string, client: ChatKitty, channel: Channel) => {
   ReactDOM.render(
     <ChatKittyProvider client={client} channel={channel}>
-      <ChatWindow />
+      <CKChat />
     </ChatKittyProvider>,
     document.getElementById(id)
   );
