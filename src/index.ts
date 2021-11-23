@@ -15,7 +15,6 @@ import ChatSession from "./components/Session/ChatSession";
 import UserList from "./components/User/UserList";
 import UserListItem from "./components/User/UserListItem";
 import CKChat from "./components/CKChat";
-import CKCommentChat from "./components/CKCommentChat";
 import Spinner from "./components/utility/Spinner";
 
 export {
@@ -35,7 +34,6 @@ export {
   UserList,
   UserListItem,
   CKChat,
-  CKCommentChat,
   Spinner,
 };
 
@@ -53,7 +51,6 @@ import { ChatSessionProps } from "./components/Session/ChatSession";
 import { UserListProps } from "./components/User/UserList";
 import { UserListItemProps } from "./components/User/UserListItem";
 import { CKChatProps } from "./components/CKChat";
-import { CKCommentChatProps } from "./components/CKCommentChat";
 
 export type {
   ChannelHeaderProps,
@@ -70,7 +67,6 @@ export type {
   UserListProps,
   UserListItemProps,
   CKChatProps,
-  CKCommentChatProps,
 };
 
 import useAddChannelModerator from "./hooks/channels/useAddChannelModerator";
