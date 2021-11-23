@@ -7,15 +7,18 @@ import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface MessageListProps {
   messages: Message[];
+  scrollToLatest?: boolean;
 }
 
-const MessageList = ({ messages }: MessageListProps) => {
+const MessageList = ({ messages, scrollToLatest = true }: MessageListProps) => {
   const { theme } = useChatContext();
 
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    scrollRef?.current?.scrollIntoView();
+    if (scrollToLatest) {
+      scrollRef?.current?.scrollIntoView();
+    }
   }, [messages]);
 
   return (
@@ -26,7 +29,7 @@ const MessageList = ({ messages }: MessageListProps) => {
         `
       )} ck-messageList`}
     >
-      <div ref={scrollRef} />
+      {scrollToLatest && <div ref={scrollRef} />}
       {messages.map((message) => {
         const casted = message as TextUserMessage;
         return (

@@ -7,9 +7,10 @@ import { useUpdateMessageDraft, useSendMessageDraft } from "../../../hooks";
 
 export interface MessageInputProps {
   typingUsers: User[];
+  pre?: React.ReactNode;
 }
 
-const MessageInput = ({ typingUsers }: MessageInputProps) => {
+const MessageInput = ({ typingUsers, pre = null }: MessageInputProps) => {
   const { client, channel, theme } = useChatContext();
 
   const { makeRequest: updateMessage } = useUpdateMessageDraft(client);
@@ -65,6 +66,7 @@ const MessageInput = ({ typingUsers }: MessageInputProps) => {
           `
         )} ck-messageInput`}
       >
+        {pre}
         <TextArea
           value={input}
           onKeyPress={(evt) => {
