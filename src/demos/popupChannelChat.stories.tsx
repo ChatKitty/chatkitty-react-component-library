@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ChatKitty, {
   succeeded,
-  GetChannelSucceededResult,
+  GetChannelsSucceededResult,
   Channel,
   StartSessionResult,
 } from "chatkitty";
@@ -21,7 +21,8 @@ export default {
 } as Meta;
 
 const Template: Story<CKChatProps> = () => {
-  const [channel, setChannel] = React.useState<Channel | undefined>();
+  const [loaded, setLoaded] = React.useState(false);
+  const [channels, setChannels] = React.useState<Channel[]>([]);
 
   useEffect(() => {
     const init = async () => {
@@ -33,18 +34,20 @@ const Template: Story<CKChatProps> = () => {
         console.log("I started a session!");
       }
 
-      const channelRes = await client.getChannel(55003);
+      const channelRes = await client.getChannels();
 
-      if (succeeded<GetChannelSucceededResult>(channelRes)) {
-        console.log("I fetched a channel!");
-        setChannel(channelRes.channel);
+      if (succeeded<GetChannelsSucceededResult>(channelRes)) {
+        console.log("I fetched a list of channels!");
+        setChannels(channelRes.paginator.items);
+
+        setLoaded(true);
       }
     };
 
     init();
   }, []);
 
-  if (!channel) {
+  if (!loaded) {
     return <Spinner />;
   }
 
@@ -60,7 +63,11 @@ const Template: Story<CKChatProps> = () => {
           backgroundColor: "white",
         }}
       >
-        <ChatKittyProvider client={client} theme={defaultTheme}>
+        <ChatKittyProvider
+          client={client}
+          channels={channels}
+          theme={defaultTheme}
+        >
           <CKChannelChat />
         </ChatKittyProvider>
       </div>

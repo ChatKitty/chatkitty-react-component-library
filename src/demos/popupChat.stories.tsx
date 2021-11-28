@@ -62,7 +62,7 @@ const Template: Story<CKChatProps> = () => {
       >
         <ChatKittyProvider
           client={client}
-          channel={channel}
+          channels={[channel]}
           theme={defaultTheme}
         >
           <CKChat />

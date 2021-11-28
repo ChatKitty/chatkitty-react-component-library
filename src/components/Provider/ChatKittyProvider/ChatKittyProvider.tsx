@@ -6,19 +6,22 @@ import Spinner from "../../utility/Spinner";
 
 export interface ChatKittyProviderProps {
   client: ChatKitty;
-  channel?: Channel;
+  channels: Channel[];
+  defaultSelectedChannel?: Channel;
   theme?: ChatKittyTheme;
   children?: React.ReactNode;
 }
 
 export const ChatKittyContext = React.createContext<{
   client?: ChatKitty;
+  channels?: Channel[];
   channel?: Channel;
   theme?: ChatKittyTheme;
 }>({});
 
 export const useChatContext = (): {
   client: ChatKitty;
+  channels: Channel[];
   channel: Channel;
   theme: ChatKittyTheme;
 } => {
@@ -31,21 +34,26 @@ export const useChatContext = (): {
   }
 
   if (!contextValue.client) {
-    throw new Error("missing client");
+    throw new Error("no chatkitty client in context");
+  }
+
+  if (!contextValue.channels || contextValue.channels.length === 0) {
+    throw new Error("must specify at least one channel");
   }
 
   if (!contextValue.channel) {
-    throw new Error("missing channel");
+    throw new Error("no channel selected");
   }
 
   if (!contextValue.theme) {
-    throw new Error("missing theme");
+    throw new Error("no theme provided");
   }
 
-  const { client, channel, theme } = contextValue;
+  const { client, channels, channel, theme } = contextValue;
 
   return {
     client,
+    channels,
     channel,
     theme,
   };
@@ -53,12 +61,24 @@ export const useChatContext = (): {
 
 const ChatKittyProvider = ({
   client,
-  channel,
+  channels,
+  defaultSelectedChannel,
   theme = defaultTheme,
   children,
 }: ChatKittyProviderProps) => {
-  if (!channel) {
-    // we're in channel list mode, grab those channels doe
+  let channel;
+
+  if (channels.length === 1) {
+    channel = channels[0];
+  }
+
+  if (channels.length > 1) {
+    if (defaultSelectedChannel) {
+      channel = defaultSelectedChannel;
+    } else {
+      // select the first channel by default
+      channel = channels[0];
+    }
   }
 
   if (!channel) {
@@ -66,7 +86,7 @@ const ChatKittyProvider = ({
   }
 
   return (
-    <ChatKittyContext.Provider value={{ client, channel, theme }}>
+    <ChatKittyContext.Provider value={{ client, channels, channel, theme }}>
       {children}
     </ChatKittyContext.Provider>
   );

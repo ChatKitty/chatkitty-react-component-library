@@ -75,7 +75,7 @@ const Template: Story<CKChatProps> = () => {
 
   return (
     <div style={{ height: 600, width: 450 }}>
-      <ChatKittyProvider client={client} channel={channel} theme={theme}>
+      <ChatKittyProvider client={client} channels={[channel]} theme={theme}>
         <CKChat />
       </ChatKittyProvider>
     </div>
