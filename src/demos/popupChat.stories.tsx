@@ -49,22 +49,26 @@ const Template: Story<CKChatProps> = () => {
   }
 
   return (
-    <ChatKittyProvider client={client} channel={channel} theme={defaultTheme}>
-      <Popup>
-        <div
-          style={{
-            height: 600,
-            width: 450,
-            marginRight: 20,
-            border: "1px solid #f2f2f2",
-            borderRadius: 10,
-            backgroundColor: "white",
-          }}
+    <Popup>
+      <div
+        style={{
+          height: 600,
+          width: 450,
+          marginRight: 20,
+          border: "1px solid #f2f2f2",
+          borderRadius: 10,
+          backgroundColor: "white",
+        }}
+      >
+        <ChatKittyProvider
+          client={client}
+          channel={channel}
+          theme={defaultTheme}
         >
           <CKChat />
-        </div>
-      </Popup>
-    </ChatKittyProvider>
+        </ChatKittyProvider>
+      </div>
+    </Popup>
   );
 };
 

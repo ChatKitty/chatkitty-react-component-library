@@ -2,10 +2,11 @@ import React from "react";
 import type { Channel } from "chatkitty";
 import type ChatKitty from "chatkitty";
 import { defaultTheme, ChatKittyTheme } from "../../../themes/default";
+import Spinner from "../../utility/Spinner";
 
 export interface ChatKittyProviderProps {
   client: ChatKitty;
-  channel: Channel;
+  channel?: Channel;
   theme?: ChatKittyTheme;
   children?: React.ReactNode;
 }
@@ -56,6 +57,14 @@ const ChatKittyProvider = ({
   theme = defaultTheme,
   children,
 }: ChatKittyProviderProps) => {
+  if (!channel) {
+    // we're in channel list mode, grab those channels doe
+  }
+
+  if (!channel) {
+    return <Spinner />;
+  }
+
   return (
     <ChatKittyContext.Provider value={{ client, channel, theme }}>
       {children}

@@ -1,6 +1,5 @@
 import React from "react";
 import { css, cx } from "@emotion/css";
-import { useChatContext } from "../Provider/ChatKittyProvider";
 import { MdChatBubble } from "react-icons/md";
 
 export interface PopupProps {
@@ -9,15 +8,18 @@ export interface PopupProps {
 }
 
 const Popup = ({ icon, children }: PopupProps) => {
-  const { theme } = useChatContext();
-
   const [popupOpen, setPopupOpen] = React.useState(false);
 
   return (
     <div
       className={`${cx(
         css`
-          ${theme.popup.container}
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
         `
       )} ck-popup`}
     >
@@ -28,7 +30,15 @@ const Popup = ({ icon, children }: PopupProps) => {
         <button
           className={`${cx(
             css`
-              ${theme.popup.button}
+              cursor: pointer;
+              border: none;
+              background-color: #f5ce11;
+              color: white;
+              padding: 10px;
+              border-radius: 50%;
+              margin: 20px;
+              width: 60px;
+              height: 60px;
             `
           )} ck-popup-button`}
           onClick={() => setPopupOpen(!popupOpen)}
