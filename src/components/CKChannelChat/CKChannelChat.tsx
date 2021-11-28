@@ -7,6 +7,7 @@ import { useChatContext } from "../Provider/ChatKittyProvider";
 import { useMessages, useCurrentUser } from "../../hooks";
 import ChatSession from "../Session/ChatSession";
 import Spinner from "../utility/Spinner";
+import UserDisplay from "../User/UserDisplay";
 
 export interface CKChannelChatProps {}
 
@@ -52,15 +53,18 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
   };
 
   return (
-    <ChatSession
-      onReceivedMessage={onReceivedMessage}
-      onTypingStarted={onTypingStarted}
-      onTypingStopped={onTypingStopped}
-    >
-      <ChannelHeader />
-      <MessageList messages={messages} />
-      <MessageInput typingUsers={typingUsers} />
-    </ChatSession>
+    <div>
+      <UserDisplay user={currentUser} online={true} />
+    </div>
+    // <ChatSession
+    //   onReceivedMessage={onReceivedMessage}
+    //   onTypingStarted={onTypingStarted}
+    //   onTypingStopped={onTypingStopped}
+    // >
+    //   <ChannelHeader />
+    //   <MessageList messages={messages} />
+    //   <MessageInput typingUsers={typingUsers} />
+    // </ChatSession>
   );
 };
 

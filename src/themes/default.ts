@@ -26,6 +26,13 @@ export type ChatKittyTheme = {
     body: string;
     message: string;
   };
+  userDisplay: {
+    container: string;
+    image: string;
+    displayName: string;
+    onlineIndicator: string;
+    offlineIndicator: string;
+  };
 };
 
 const utility = {
@@ -167,6 +174,43 @@ export const defaultTheme: ChatKittyTheme = {
     message: `
       margin-top: 12px;
       word-break: break-word;
+    `,
+  },
+
+  userDisplay: {
+    container: `
+      display: flex;
+      align-items: center;
+    `,
+    image: `
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 50%;
+      padding: 10px;
+    `,
+    displayName: `
+      display: flex;
+      align-items: center;
+      font-size: 1.4rem;
+      padding: 10px;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    `,
+    onlineIndicator: `
+      display: inline-block;
+      background-color: rgba(16,185,129,1);
+      border-radius: 50%;
+      width: 0.5rem;
+      height: 0.5rem;
+      margin-left: 0.5rem;
+    `,
+    offlineIndicator: `
+      display: inline-block;
+      background-color: lightgray;
+      border-radius: 50%;
+      width: 0.5rem;
+      height: 0.5rem;
+      margin-left: 0.5rem;
     `,
   },
 };
