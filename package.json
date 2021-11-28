@@ -39,7 +39,8 @@
   "dependencies": {
     "@emotion/css": "^11.5.0",
     "chatkitty": "1.51.2",
-    "react-autosize-textarea": "^7.1.0"
+    "react-autosize-textarea": "^7.1.0",
+    "react-icons": "^4.3.1"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",

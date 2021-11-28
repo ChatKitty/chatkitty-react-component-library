@@ -26,6 +26,10 @@ export type ChatKittyTheme = {
     body: string;
     message: string;
   };
+  popup: {
+    container: string;
+    button: string;
+  };
 };
 
 const utility = {
@@ -167,6 +171,28 @@ export const defaultTheme: ChatKittyTheme = {
     message: `
       margin-top: 12px;
       word-break: break-word;
+    `,
+  },
+
+  popup: {
+    container: `
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    `,
+    button: `
+      cursor: pointer;
+      border: none;
+      background-color: #F5CE11;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      margin: 20px;
+      width: 60px;
+      height: 60px;
     `,
   },
 };
