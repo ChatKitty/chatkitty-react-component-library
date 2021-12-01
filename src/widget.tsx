@@ -6,7 +6,7 @@ import { ChatKittyProvider, CKChat } from ".";
 
 const init = (id: string, client: ChatKitty, channel: Channel) => {
   ReactDOM.render(
-    <ChatKittyProvider client={client} channel={channel}>
+    <ChatKittyProvider client={client} channels={[channel]}>
       <CKChat />
     </ChatKittyProvider>,
     document.getElementById(id)

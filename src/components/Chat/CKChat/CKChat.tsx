@@ -1,13 +1,15 @@
 import React from "react";
-import type { Message, User } from "chatkitty";
+import type { Message, User, TextUserMessage } from "chatkitty";
 import ChannelHeader from "../../Channel/ChannelHeader";
 import MessageList from "../../Message/MessageList";
 import MessageInput from "../../Message/MessageInput";
+import TextMessage from "../../Message/TextMessage";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 import { useMessages, useCurrentUser } from "../../../hooks";
 import ChatSession from "../../Session/ChatSession";
 import Spinner from "../../utility/Spinner";
 import ChatContainer from "../ChatContainer";
+import TypingIndicator from "../../Message/TypingIndicator";
 
 export interface CKChatProps {}
 
@@ -60,8 +62,22 @@ const CKChat = ({}: CKChatProps) => {
         onTypingStopped={onTypingStopped}
       >
         <ChannelHeader />
-        <MessageList messages={messages} />
-        <MessageInput typingUsers={typingUsers} />
+        <MessageList>
+          {messages.map((message) => {
+            const casted = message as TextUserMessage;
+            return (
+              <TextMessage
+                key={casted.id}
+                displayPictureUrl={casted.user.displayPictureUrl}
+                displayName={casted.user.displayName}
+                createdTime={new Date(casted.createdTime)}
+                body={casted.body}
+              />
+            );
+          })}
+        </MessageList>
+        <TypingIndicator typingUsers={typingUsers} />
+        <MessageInput />
       </ChatSession>
     </ChatContainer>
   );
