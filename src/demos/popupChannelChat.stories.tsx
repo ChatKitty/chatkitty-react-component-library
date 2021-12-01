@@ -7,7 +7,7 @@ import ChatKitty, {
 } from "chatkitty";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
-import { CKChatProps } from "../components/CKChat";
+import { CKChatProps } from "../components/Chat/CKChat";
 import { ChatKittyProvider, CKChannelChat, Spinner, Popup } from "..";
 import { defaultTheme } from "../themes/default";
 

@@ -1,17 +1,17 @@
 import React from "react";
 import type { Message, User } from "chatkitty";
-import ChannelHeader from "../Channel/ChannelHeader";
-import MessageList from "../Message/MessageList";
-import MessageInput from "../Message/MessageInput";
-import { useChatContext } from "../Provider/ChatKittyProvider";
-import { useMessages, useCurrentUser } from "../../hooks";
-import ChatSession from "../Session/ChatSession";
-import Spinner from "../utility/Spinner";
-import UserDisplay from "../User/UserDisplay";
+import ChannelHeader from "../../Channel/ChannelHeader";
+import MessageList from "../../Message/MessageList";
+import MessageInput from "../../Message/MessageInput";
+import { useChatContext } from "../../Provider/ChatKittyProvider";
+import { useMessages, useCurrentUser } from "../../../hooks";
+import ChatSession from "../../Session/ChatSession";
+import Spinner from "../../utility/Spinner";
+import ChatContainer from "../ChatContainer";
 
-export interface CKChannelChatProps {}
+export interface CKChatProps {}
 
-const CKChannelChat = ({}: CKChannelChatProps) => {
+const CKChat = ({}: CKChatProps) => {
   const { client, channel } = useChatContext();
 
   // Current User
@@ -53,19 +53,18 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
   };
 
   return (
-    <div>
-      <UserDisplay user={currentUser} online={true} />
-    </div>
-    // <ChatSession
-    //   onReceivedMessage={onReceivedMessage}
-    //   onTypingStarted={onTypingStarted}
-    //   onTypingStopped={onTypingStopped}
-    // >
-    //   <ChannelHeader />
-    //   <MessageList messages={messages} />
-    //   <MessageInput typingUsers={typingUsers} />
-    // </ChatSession>
+    <ChatContainer>
+      <ChatSession
+        onReceivedMessage={onReceivedMessage}
+        onTypingStarted={onTypingStarted}
+        onTypingStopped={onTypingStopped}
+      >
+        <ChannelHeader />
+        <MessageList messages={messages} />
+        <MessageInput typingUsers={typingUsers} />
+      </ChatSession>
+    </ChatContainer>
   );
 };
 
-export default CKChannelChat;
+export default CKChat;

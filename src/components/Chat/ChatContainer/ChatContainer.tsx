@@ -1,0 +1,25 @@
+import React from "react";
+import { css, cx } from "@emotion/css";
+import { useChatContext } from "../../Provider/ChatKittyProvider";
+
+export interface ChatContainerProps {
+  children: React.ReactNode;
+}
+
+const ChatContainer = ({ children }: ChatContainerProps) => {
+  const { theme } = useChatContext();
+
+  return (
+    <div
+      className={`${cx(
+        css`
+          ${theme.chat.container}
+        `
+      )} ck-chat`}
+    >
+      {children}
+    </div>
+  );
+};
+
+export default ChatContainer;

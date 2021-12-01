@@ -1,5 +1,4 @@
 import React from "react";
-import { css, cx } from "@emotion/css";
 import type { Message, User } from "chatkitty";
 import { useChatSession } from "../../../hooks";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
@@ -44,17 +43,7 @@ const ChatSession = ({
     return session.end;
   }, [channel]);
 
-  return (
-    <div
-      className={`${cx(
-        css`
-          ${theme.chat.container}
-        `
-      )} ck-chat`}
-    >
-      {children}
-    </div>
-  );
+  return <>{children}</>;
 };
 
 export default ChatSession;

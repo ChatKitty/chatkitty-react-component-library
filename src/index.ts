@@ -14,11 +14,13 @@ import ChatKittySession from "./components/Session/ChatKittySession";
 import ChatSession from "./components/Session/ChatSession";
 import UserList from "./components/User/UserList";
 import UserListItem from "./components/User/UserListItem";
-import CKChat from "./components/CKChat";
-import CKChannelChat from "./components/CKChannelChat";
+import CKChat from "./components/Chat/CKChat";
+import CKChannelChat from "./components/Chat/CKChannelChat";
 import Spinner from "./components/utility/Spinner";
 import Popup from "./components/Popup";
 import UserDisplay from "./components/User/UserDisplay";
+import ChatContainer from "./components/Chat/ChatContainer";
+import ChatDrawer from "./components/Chat/ChatDrawer";
 
 export {
   ChannelHeader,
@@ -41,6 +43,8 @@ export {
   Spinner,
   Popup,
   UserDisplay,
+  ChatContainer,
+  ChatDrawer,
 };
 
 import { ChannelHeaderProps } from "./components/Channel/ChannelHeader";
@@ -56,10 +60,12 @@ import { ChatKittySessionProps } from "./components/Session/ChatKittySession";
 import { ChatSessionProps } from "./components/Session/ChatSession";
 import { UserListProps } from "./components/User/UserList";
 import { UserListItemProps } from "./components/User/UserListItem";
-import { CKChatProps } from "./components/CKChat";
-import { CKChannelChatProps } from "./components/CKChannelChat";
+import { CKChatProps } from "./components/Chat/CKChat";
+import { CKChannelChatProps } from "./components/Chat/CKChannelChat";
 import { PopupProps } from "./components/Popup";
 import { UserDisplayProps } from "./components/User/UserDisplay";
+import { ChatContainerProps } from "./components/Chat/ChatContainer";
+import { ChatDrawerProps } from "./components/Chat/ChatDrawer";
 
 export type {
   ChannelHeaderProps,
@@ -79,6 +85,8 @@ export type {
   CKChannelChatProps,
   PopupProps,
   UserDisplayProps,
+  ChatContainerProps,
+  ChatDrawerProps,
 };
 
 import useAddChannelModerator from "./hooks/channels/useAddChannelModerator";

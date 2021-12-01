@@ -2,10 +2,15 @@ export type ChatKittyTheme = {
   chat: {
     container: string;
   };
+  chatDrawer: {
+    container: string;
+    button: string;
+  };
   channelHeader: {
     container: string;
     title: string;
     description: string;
+    action: string;
   };
   messageList: {
     container: string;
@@ -65,8 +70,27 @@ export const defaultTheme: ChatKittyTheme = {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      overflow: hidden;
+      overflow: auto;
       box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    `,
+  },
+  chatDrawer: {
+    container: `
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      width: 100%;
+      height: 100%;
+    `,
+    button: `
+      cursor: pointer;
+      border: none;
+      background: none;
+      position: absolute;
+      top: 13px;
+      right: 25px;
+      color: lightgray;
+      font-size: 30px;
     `,
   },
   channelHeader: {
@@ -86,6 +110,16 @@ export const defaultTheme: ChatKittyTheme = {
       font-size: 1rem;
       margin: 0;
       padding: 0;
+    `,
+    action: `
+      cursor: pointer;
+      border: none;
+      background: none;
+      position: absolute;
+      top: 13px;
+      right: 25px;
+      color: lightgray;
+      font-size: 30px;
     `,
   },
 
@@ -181,6 +215,7 @@ export const defaultTheme: ChatKittyTheme = {
     container: `
       display: flex;
       align-items: center;
+      box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
     `,
     image: `
       height: 2.5rem;
