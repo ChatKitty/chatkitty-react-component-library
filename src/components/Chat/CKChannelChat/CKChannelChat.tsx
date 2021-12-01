@@ -1,6 +1,7 @@
 import React from "react";
 import type { Message, User } from "chatkitty";
 import ChannelHeader from "../../Channel/ChannelHeader";
+import ChannelList from "../../Channel/ChannelList";
 import MessageList from "../../Message/MessageList";
 import MessageInput from "../../Message/MessageInput";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
@@ -22,10 +23,11 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
   const { resource: currentUser } = useCurrentUser(client);
 
   // Message Handling
-  const { resource: messages, setResource: setMessages } = useMessages(
-    client,
-    channel
-  );
+  const {
+    resource: messages,
+    setResource: setMessages,
+    isLoading: messagesLoading,
+  } = useMessages(client, channel);
 
   const onReceivedMessage = (message: Message) => {
     setMessages((prev) => [message, ...(prev || [])]);
@@ -60,6 +62,7 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
       {drawerOpen ? (
         <ChatDrawer onClose={() => setDrawerOpen(false)}>
           <UserDisplay user={currentUser} online={true} />
+          <ChannelList title="Channels" onClick={() => setDrawerOpen(false)} />
         </ChatDrawer>
       ) : (
         <ChatSession
@@ -68,7 +71,7 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
           onTypingStopped={onTypingStopped}
         >
           <ChannelHeader action={() => setDrawerOpen(true)} />
-          <MessageList messages={messages} />
+          {messagesLoading ? <Spinner /> : <MessageList messages={messages} />}
           <MessageInput typingUsers={typingUsers} />
         </ChatSession>
       )}

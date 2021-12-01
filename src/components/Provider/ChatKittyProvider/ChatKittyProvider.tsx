@@ -17,6 +17,7 @@ export const ChatKittyContext = React.createContext<{
   channels?: Channel[];
   channel?: Channel;
   theme?: ChatKittyTheme;
+  setChannel?: (channel: Channel) => void;
 }>({});
 
 export const useChatContext = (): {
@@ -24,6 +25,7 @@ export const useChatContext = (): {
   channels: Channel[];
   channel: Channel;
   theme: ChatKittyTheme;
+  setChannel?: (channel: Channel) => void;
 } => {
   const contextValue = React.useContext(ChatKittyContext);
 
@@ -49,13 +51,14 @@ export const useChatContext = (): {
     throw new Error("no theme provided");
   }
 
-  const { client, channels, channel, theme } = contextValue;
+  const { client, channels, channel, theme, setChannel } = contextValue;
 
   return {
     client,
     channels,
     channel,
     theme,
+    setChannel,
   };
 };
 
@@ -66,27 +69,39 @@ const ChatKittyProvider = ({
   theme = defaultTheme,
   children,
 }: ChatKittyProviderProps) => {
-  let channel;
+  let defaultChannel;
 
   if (channels.length === 1) {
-    channel = channels[0];
+    defaultChannel = channels[0];
   }
 
   if (channels.length > 1) {
     if (defaultSelectedChannel) {
-      channel = defaultSelectedChannel;
+      defaultChannel = defaultSelectedChannel;
     } else {
       // select the first channel by default
-      channel = channels[0];
+      defaultChannel = channels[0];
     }
   }
+
+  const [channel, setChannel] = React.useState(defaultChannel);
 
   if (!channel) {
     return <Spinner />;
   }
 
   return (
-    <ChatKittyContext.Provider value={{ client, channels, channel, theme }}>
+    <ChatKittyContext.Provider
+      value={{
+        client,
+        channels,
+        channel,
+        theme,
+        setChannel: (channel: Channel) => {
+          setChannel(channel);
+        },
+      }}
+    >
       {children}
     </ChatKittyContext.Provider>
   );

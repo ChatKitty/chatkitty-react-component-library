@@ -6,6 +6,15 @@ export type ChatKittyTheme = {
     container: string;
     button: string;
   };
+  channelList: {
+    container: string;
+    heading: string;
+  };
+  channelListItem: {
+    container: string;
+    title: string;
+    description: string;
+  };
   channelHeader: {
     container: string;
     title: string;
@@ -74,6 +83,7 @@ export const defaultTheme: ChatKittyTheme = {
       box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
     `,
   },
+
   chatDrawer: {
     container: `
       display: flex;
@@ -93,6 +103,49 @@ export const defaultTheme: ChatKittyTheme = {
       font-size: 30px;
     `,
   },
+
+  channelList: {
+    container: `
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      padding: 20px;
+    `,
+    heading: `
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 20px;
+    `,
+  },
+
+  channelListItem: {
+    container: `
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      padding: 10px;
+      list-style-type: none;
+      border-bottom: 1px solid #f2f2f2;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f2f2f2;
+      }
+    `,
+    title: `
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+    `,
+    description: `
+      font-weight: 100;
+      margin: 0;
+      padding: 0;
+      margin-top: 3px;
+    `,
+  },
+
   channelHeader: {
     container: `
       font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -125,6 +178,7 @@ export const defaultTheme: ChatKittyTheme = {
 
   messageList: {
     container: `
+      flex: 1;
       display: flex;
       flex-direction: column-reverse;
       padding: 8px;
