@@ -3,6 +3,9 @@ import { css, cx } from "@emotion/css";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface ChatContainerProps {
+  /**
+   * chat content
+   */
   children: React.ReactNode;
 }
 

@@ -4,7 +4,14 @@ import { useChatContext } from "../../Provider/ChatKittyProvider";
 import { MdClose } from "react-icons/md";
 
 export interface ChatDrawerProps {
+  /**
+   * handle drawer close button click
+   */
   onClose: () => void;
+
+  /**
+   * drawer content
+   */
   children: React.ReactNode;
 }
 

@@ -1,9 +1,11 @@
 import React from "react";
-import type { Message, User } from "chatkitty";
+import type { Message, User, TextUserMessage } from "chatkitty";
 import ChannelHeader from "../../Channel/ChannelHeader";
 import ChannelList from "../../Channel/ChannelList";
+import ChannelListItem from "../../Channel/ChannelListItem";
 import MessageList from "../../Message/MessageList";
 import MessageInput from "../../Message/MessageInput";
+import TextMessage from "../../Message/TextMessage";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 import { useMessages, useCurrentUser } from "../../../hooks";
 import ChatSession from "../../Session/ChatSession";
@@ -11,15 +13,17 @@ import Spinner from "../../utility/Spinner";
 import UserDisplay from "../../User/UserDisplay";
 import ChatContainer from "../ChatContainer";
 import ChatDrawer from "../ChatDrawer";
+import TypingIndicator from "../../Message/TypingIndicator";
 
 export interface CKChannelChatProps {}
 
 const CKChannelChat = ({}: CKChannelChatProps) => {
+  const { client, channel, channels } = useChatContext();
+
+  // drawer state
   const [drawerOpen, setDrawerOpen] = React.useState(true);
 
-  const { client, channel } = useChatContext();
-
-  // Current User
+  // current user
   const { resource: currentUser } = useCurrentUser(client);
 
   // Message Handling
@@ -36,7 +40,6 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
   // Typing Indicator
   const [typingUsers, setTypingUsers] = React.useState<User[]>([]);
 
-  // Typing Handlers
   const onTypingStarted = (user: User) => {
     setTypingUsers((prev) => {
       // if (
@@ -62,7 +65,17 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
       {drawerOpen ? (
         <ChatDrawer onClose={() => setDrawerOpen(false)}>
           <UserDisplay user={currentUser} online={true} />
-          <ChannelList title="Channels" onClick={() => setDrawerOpen(false)} />
+          <ChannelList title="Channels">
+            {channels.length > 0 &&
+              channels.map((c) => (
+                <ChannelListItem
+                  key={c.id}
+                  channel={c}
+                  selected={c.id === channel.id}
+                  onClick={() => setDrawerOpen(false)}
+                />
+              ))}
+          </ChannelList>
         </ChatDrawer>
       ) : (
         <ChatSession
@@ -70,9 +83,27 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
           onTypingStarted={onTypingStarted}
           onTypingStopped={onTypingStopped}
         >
-          <ChannelHeader action={() => setDrawerOpen(true)} />
-          {messagesLoading ? <Spinner /> : <MessageList messages={messages} />}
-          <MessageInput typingUsers={typingUsers} />
+          <ChannelHeader onClick={() => setDrawerOpen(true)} />
+          {messagesLoading ? (
+            <Spinner />
+          ) : (
+            <MessageList>
+              {messages.map((message) => {
+                const casted = message as TextUserMessage;
+                return (
+                  <TextMessage
+                    key={casted.id}
+                    displayPictureUrl={casted.user.displayPictureUrl}
+                    displayName={casted.user.displayName}
+                    createdTime={new Date(casted.createdTime)}
+                    body={casted.body}
+                  />
+                );
+              })}
+            </MessageList>
+          )}
+          <TypingIndicator typingUsers={typingUsers} />
+          <MessageInput />
         </ChatSession>
       )}
     </ChatContainer>

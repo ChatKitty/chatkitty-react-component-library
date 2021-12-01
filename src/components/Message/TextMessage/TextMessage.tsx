@@ -1,6 +1,7 @@
 import React from "react";
 import { css, cx } from "@emotion/css";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
+import fromNow from "./fromNow";
 
 export interface TextMessageProps {
   /**
@@ -16,7 +17,7 @@ export interface TextMessageProps {
   /**
    * time display for message
    */
-  createdTime: string;
+  createdTime: Date;
 
   /**
    * main message content
@@ -70,7 +71,7 @@ const TextMessage = ({
               `
             )} ck-textMessage-time`}
           >
-            {createdTime}
+            {fromNow(createdTime)}
           </span>
         </h2>
         <div>

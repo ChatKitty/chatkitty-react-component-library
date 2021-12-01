@@ -1,16 +1,20 @@
 import React from "react";
-import type { Message, TextUserMessage } from "chatkitty";
 import { css, cx } from "@emotion/css";
-import TextMessage from "../TextMessage";
-import fromNow from "./fromNow";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface MessageListProps {
-  messages: Message[];
+  /**
+   * message list
+   */
+  children: React.ReactNode;
+
+  /**
+   * toggle scrolling to latest message on render, defaults to true
+   */
   scrollToLatest?: boolean;
 }
 
-const MessageList = ({ messages, scrollToLatest = true }: MessageListProps) => {
+const MessageList = ({ children, scrollToLatest = true }: MessageListProps) => {
   const { theme } = useChatContext();
 
   const scrollRef = React.useRef<HTMLDivElement>(null);
@@ -19,7 +23,7 @@ const MessageList = ({ messages, scrollToLatest = true }: MessageListProps) => {
     if (scrollToLatest) {
       scrollRef?.current?.scrollIntoView();
     }
-  }, [messages]);
+  }, [children]);
 
   return (
     <ul
@@ -30,18 +34,7 @@ const MessageList = ({ messages, scrollToLatest = true }: MessageListProps) => {
       )} ck-messageList`}
     >
       {scrollToLatest && <div ref={scrollRef} />}
-      {messages.map((message) => {
-        const casted = message as TextUserMessage;
-        return (
-          <TextMessage
-            key={casted.id}
-            displayPictureUrl={casted.user.displayPictureUrl}
-            displayName={casted.user.displayName}
-            createdTime={fromNow(new Date(casted.createdTime))}
-            body={casted.body}
-          />
-        );
-      })}
+      {children}
     </ul>
   );
 };

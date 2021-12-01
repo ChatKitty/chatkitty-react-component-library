@@ -4,10 +4,18 @@ import { MdArrowBack } from "react-icons/md";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface ChannelHeaderProps {
-  action?: () => void;
+  /**
+   * handle click action on back arrow
+   */
+  onClick?: () => void;
+
+  /**
+   * icon override
+   */
+  icon?: React.ReactNode;
 }
 
-const ChannelHeader = ({ action }: ChannelHeaderProps) => {
+const ChannelHeader = ({ onClick, icon }: ChannelHeaderProps) => {
   const { channel, theme } = useChatContext();
 
   return (
@@ -18,16 +26,16 @@ const ChannelHeader = ({ action }: ChannelHeaderProps) => {
         `
       )} ck-channelHeader`}
     >
-      {action && (
+      {onClick && (
         <button
           className={`${cx(
             css`
               ${theme.channelHeader.action}
             `
           )} ck-channelHeader-action`}
-          onClick={action}
+          onClick={onClick}
         >
-          <MdArrowBack />
+          {icon ? icon : <MdArrowBack />}
         </button>
       )}
       <h1

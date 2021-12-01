@@ -1,15 +1,21 @@
 import React from "react";
 import { css, cx } from "@emotion/css";
-import ChannelListItem from "../ChannelListItem";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface ChannelListProps {
+  /**
+   * title of channel list heading
+   */
   title: string;
-  onClick: () => void;
+
+  /**
+   * list items
+   */
+  children: React.ReactNode;
 }
 
-const ChannelList = ({ title, onClick }: ChannelListProps) => {
-  const { channels, channel, theme } = useChatContext();
+const ChannelList = ({ title, children }: ChannelListProps) => {
+  const { theme } = useChatContext();
 
   return (
     <div
@@ -28,15 +34,7 @@ const ChannelList = ({ title, onClick }: ChannelListProps) => {
       >
         {title}
       </h2>
-      {channels.length > 0 &&
-        channels.map((c) => (
-          <ChannelListItem
-            key={c.id}
-            channel={c}
-            selected={c.id === channel.id}
-            onClick={onClick}
-          />
-        ))}
+      {children}
     </div>
   );
 };

@@ -1,16 +1,22 @@
 import React from "react";
 import { css, cx } from "@emotion/css";
-import type { User } from "chatkitty";
 import TextArea from "react-autosize-textarea";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 import { useUpdateMessageDraft, useSendMessageDraft } from "../../../hooks";
 
 export interface MessageInputProps {
-  typingUsers: User[];
+  /**
+   * optional content before input field
+   */
   pre?: React.ReactNode;
+
+  /**
+   * optional override of input placeholder
+   */
+  placeholder?: string;
 }
 
-const MessageInput = ({ typingUsers, pre = null }: MessageInputProps) => {
+const MessageInput = ({ pre = null, placeholder }: MessageInputProps) => {
   const { client, channel, theme } = useChatContext();
 
   const { makeRequest: updateMessage } = useUpdateMessageDraft(client);
@@ -26,86 +32,50 @@ const MessageInput = ({ typingUsers, pre = null }: MessageInputProps) => {
     }
   };
 
-  const TypingIndicator = () => {
-    if (typingUsers.length === 1) {
-      return (
-        <p
-          className={`${cx(
-            css`
-              ${theme.typingIndicator.container}
-            `
-          )} ck-typingIndicator`}
-        >{`${typingUsers[0].displayName} is typing...`}</p>
-      );
-    }
-
-    if (typingUsers.length > 1) {
-      return (
-        <p
-          className={`${cx(
-            css`
-              ${theme.typingIndicator.container}
-            `
-          )} ck-typingIndicator`}
-        >{`${typingUsers
-          .map((u) => u.displayName)
-          .join(", ")} are typing...`}</p>
-      );
-    }
-
-    return null;
-  };
-
   return (
-    <>
-      <TypingIndicator />
-      <div
+    <div
+      className={`${cx(
+        css`
+          ${theme.messageInput.container}
+        `
+      )} ck-messageInput`}
+    >
+      {pre}
+      <TextArea
+        value={input}
+        onKeyPress={(evt) => {
+          if (evt.code === "Enter") {
+            if (
+              !(evt.shiftKey || window.matchMedia("(max-width: 640px)").matches)
+            ) {
+              submit(input);
+              evt.preventDefault();
+            }
+          }
+        }}
+        onChange={(evt) => {
+          const { value } = evt.currentTarget;
+          updateMessage(channel, value);
+          setInput(value);
+        }}
+        placeholder={placeholder || "Send a message..."}
         className={`${cx(
           css`
-            ${theme.messageInput.container}
+            ${theme.messageInput.text}
           `
-        )} ck-messageInput`}
+        )} ck-messageInput-text`}
+      />
+      <button
+        onClick={() => submit(input)}
+        className={`${cx(
+          css`
+            ${theme.messageInput.button}
+          `
+        )} ck-messageInput-button`}
       >
-        {pre}
-        <TextArea
-          value={input}
-          onKeyPress={(evt) => {
-            if (evt.code === "Enter") {
-              if (
-                !(
-                  evt.shiftKey ||
-                  window.matchMedia("(max-width: 640px)").matches
-                )
-              ) {
-                submit(input);
-                evt.preventDefault();
-              }
-            }
-          }}
-          onChange={(evt) => {
-            const { value } = evt.currentTarget;
-            updateMessage(channel, value);
-            setInput(value);
-          }}
-          placeholder="Send a message..."
-          className={`${cx(
-            css`
-              ${theme.messageInput.text}
-            `
-          )} ck-messageInput-text`}
-        />
-        <button
-          onClick={() => submit(input)}
-          className={`${cx(
-            css`
-              ${theme.messageInput.button}
-            `
-          )} ck-messageInput-button`}
-        >
-          +
-        </button>
-      </div>
-    </>
+        +
+      </button>
+    </div>
   );
 };
 

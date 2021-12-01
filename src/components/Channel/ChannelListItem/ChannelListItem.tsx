@@ -7,8 +7,19 @@ import {
 } from "../../Provider/ChatKittyProvider";
 
 export interface ChannelListItemProps {
+  /**
+   * ChatKitty Channel
+   */
   channel: Channel;
+
+  /**
+   * selected state
+   */
   selected: boolean;
+
+  /**
+   * handle click action on list item
+   */
   onClick: () => void;
 }
 

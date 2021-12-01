@@ -28,7 +28,7 @@ const ChatSession = ({
   onTypingStopped,
   children,
 }: ChatSessionProps) => {
-  const { client, channel, theme } = useChatContext();
+  const { client, channel } = useChatContext();
 
   const { makeRequest: startChatSession } = useChatSession(client);
 
