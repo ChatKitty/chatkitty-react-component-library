@@ -20,6 +20,7 @@ const Popup = ({ icon, children }: PopupProps) => {
           display: flex;
           flex-direction: column;
           align-items: flex-end;
+          z-index: 1000;
         `
       )} ck-popup`}
     >
