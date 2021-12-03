@@ -1,14 +1,29 @@
 import React from "react";
-import type { CurrentUser } from "chatkitty";
 import { css, cx } from "@emotion/css";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface UserDisplayProps {
-  user: CurrentUser;
+  /**
+   * display name
+   */
+  displayName: string;
+
+  /**
+   * display image url
+   */
+  displayPictureUrl: string;
+
+  /**
+   * user online status
+   */
   online?: boolean;
 }
 
-const UserDisplay = ({ user, online = undefined }: UserDisplayProps) => {
+const UserDisplay = ({
+  displayName,
+  displayPictureUrl,
+  online = undefined,
+}: UserDisplayProps) => {
   const { theme } = useChatContext();
 
   return (
@@ -25,7 +40,7 @@ const UserDisplay = ({ user, online = undefined }: UserDisplayProps) => {
             ${theme.userDisplay.image}
           `
         )} ck-userDisplay-image`}
-        src={user.displayPictureUrl}
+        src={displayPictureUrl}
       />
       <div
         className={`${cx(
@@ -34,7 +49,7 @@ const UserDisplay = ({ user, online = undefined }: UserDisplayProps) => {
           `
         )} ck-userDisplay-name`}
       >
-        {user.displayName}
+        {displayName}
         {online !== undefined && (
           <span
             className={`${cx(

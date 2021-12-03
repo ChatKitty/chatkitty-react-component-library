@@ -1,16 +1,17 @@
 import React from "react";
 import { css, cx } from "@emotion/css";
-import type { Channel } from "chatkitty";
-import {
-  useChatContext,
-  ChatKittyContext,
-} from "../../Provider/ChatKittyProvider";
+import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface ChannelListItemProps {
   /**
-   * ChatKitty Channel
+   * channel name
    */
-  channel: Channel;
+  name: string;
+
+  /**
+   * channel description
+   */
+  description: string;
 
   /**
    * selected state
@@ -24,49 +25,43 @@ export interface ChannelListItemProps {
 }
 
 const ChannelListItem = ({
-  channel,
+  name,
+  description,
   selected,
   onClick,
 }: ChannelListItemProps) => {
   const { theme } = useChatContext();
 
   return (
-    <ChatKittyContext.Consumer>
-      {({ setChannel = () => {} }) => (
-        <li
-          className={`${cx(
-            css`
-              ${theme.channelListItem.container}
-              ${selected ? "background-color: #f2f2f2;" : ""}
-            `
-          )} ck-channelListItem-container`}
-          onClick={() => {
-            setChannel(channel);
-            onClick();
-          }}
-        >
-          <h2
-            className={`${cx(
-              css`
-                ${theme.channelListItem.title}
-              `
-            )} ck-channelListItem-title`}
-          >
-            {channel.name}
-          </h2>
+    <li
+      className={`${cx(
+        css`
+          ${theme.channelListItem.container}
+          ${selected ? "background-color: #f2f2f2;" : ""}
+        `
+      )} ck-channelListItem-container`}
+      onClick={onClick}
+    >
+      <h2
+        className={`${cx(
+          css`
+            ${theme.channelListItem.title}
+          `
+        )} ck-channelListItem-title`}
+      >
+        {name}
+      </h2>
 
-          <p
-            className={`${cx(
-              css`
-                ${theme.channelListItem.description}
-              `
-            )} ck-channelListItem-description`}
-          >
-            {(channel.properties as { description: string }).description}
-          </p>
-        </li>
-      )}
-    </ChatKittyContext.Consumer>
+      <p
+        className={`${cx(
+          css`
+            ${theme.channelListItem.description}
+          `
+        )} ck-channelListItem-description`}
+      >
+        {description}
+      </p>
+    </li>
   );
 };
 

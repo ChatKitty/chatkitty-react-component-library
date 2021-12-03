@@ -6,7 +6,10 @@ import ChannelListItem from "../../Channel/ChannelListItem";
 import MessageList from "../../Message/MessageList";
 import MessageInput from "../../Message/MessageInput";
 import TextMessage from "../../Message/TextMessage";
-import { useChatContext } from "../../Provider/ChatKittyProvider";
+import {
+  useChatContext,
+  ChatKittyContext,
+} from "../../Provider/ChatKittyProvider";
 import { useMessages, useCurrentUser } from "../../../hooks";
 import ChatSession from "../../Session/ChatSession";
 import Spinner from "../../utility/Spinner";
@@ -61,52 +64,66 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
   }
 
   return (
-    <ChatContainer>
-      {drawerOpen ? (
-        <ChatDrawer onClose={() => setDrawerOpen(false)}>
-          <UserDisplay user={currentUser} online={true} />
-          <ChannelList title="Channels">
-            {channels.length > 0 &&
-              channels.map((c) => (
-                <ChannelListItem
-                  key={c.id}
-                  channel={c}
-                  selected={c.id === channel.id}
-                  onClick={() => setDrawerOpen(false)}
-                />
-              ))}
-          </ChannelList>
-        </ChatDrawer>
-      ) : (
-        <ChatSession
-          onReceivedMessage={onReceivedMessage}
-          onTypingStarted={onTypingStarted}
-          onTypingStopped={onTypingStopped}
-        >
-          <ChannelHeader onClick={() => setDrawerOpen(true)} />
-          {messagesLoading ? (
-            <Spinner />
+    <ChatKittyContext.Consumer>
+      {({ setChannel = () => {} }) => (
+        <ChatContainer>
+          {drawerOpen ? (
+            <ChatDrawer onClose={() => setDrawerOpen(false)}>
+              <UserDisplay
+                displayName={currentUser.displayName}
+                displayPictureUrl={currentUser.displayPictureUrl}
+                online={true}
+              />
+              <ChannelList title="Channels">
+                {channels.length > 0 &&
+                  channels.map((c) => (
+                    <ChannelListItem
+                      key={c.id}
+                      name={c.name}
+                      description={
+                        (c.properties as { description: string }).description
+                      }
+                      selected={c.id === channel.id}
+                      onClick={() => {
+                        setChannel(c);
+                        setDrawerOpen(false);
+                      }}
+                    />
+                  ))}
+              </ChannelList>
+            </ChatDrawer>
           ) : (
-            <MessageList>
-              {messages.map((message) => {
-                const casted = message as TextUserMessage;
-                return (
-                  <TextMessage
-                    key={casted.id}
-                    displayPictureUrl={casted.user.displayPictureUrl}
-                    displayName={casted.user.displayName}
-                    createdTime={new Date(casted.createdTime)}
-                    body={casted.body}
-                  />
-                );
-              })}
-            </MessageList>
+            <ChatSession
+              onReceivedMessage={onReceivedMessage}
+              onTypingStarted={onTypingStarted}
+              onTypingStopped={onTypingStopped}
+            >
+              <ChannelHeader onClick={() => setDrawerOpen(true)} />
+              {messagesLoading ? (
+                <Spinner />
+              ) : (
+                <MessageList>
+                  {messages.map((message) => {
+                    const casted = message as TextUserMessage;
+                    return (
+                      <TextMessage
+                        key={casted.id}
+                        displayPictureUrl={casted.user.displayPictureUrl}
+                        displayName={casted.user.displayName}
+                        createdTime={new Date(casted.createdTime)}
+                        body={casted.body}
+                      />
+                    );
+                  })}
+                </MessageList>
+              )}
+              <TypingIndicator typingUsers={typingUsers} />
+              <MessageInput />
+            </ChatSession>
           )}
-          <TypingIndicator typingUsers={typingUsers} />
-          <MessageInput />
-        </ChatSession>
+        </ChatContainer>
       )}
-    </ChatContainer>
+    </ChatKittyContext.Consumer>
   );
 };
 
