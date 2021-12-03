@@ -143,12 +143,11 @@ export const defaultTheme: ChatKittyTheme = {
     `,
     title: `
       font-size: 1.2rem;
-      font-weight: 400;
+      font-weight: 700;
       margin: 0;
       padding: 0;
     `,
     description: `
-      font-weight: 100;
       margin: 0;
       padding: 0;
       margin-top: 3px;
@@ -165,6 +164,7 @@ export const defaultTheme: ChatKittyTheme = {
       font-size: 1.2rem;
       margin: 0;
       padding: 0;
+      font-weight: 700;
     `,
     description: `
       font-size: 1rem;
@@ -254,7 +254,6 @@ export const defaultTheme: ChatKittyTheme = {
     time: `
       padding-left: 1rem;
       font-size: 0.8rem;
-      font-weight: 100;
     `,
     body: `
       flex: 1;
