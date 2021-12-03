@@ -245,7 +245,6 @@ export const defaultTheme: ChatKittyTheme = {
       width: 3rem;
       border-radius: 10px;
       margin-right: 20px;
-      margin-top: 14px;
     `,
     name: `
       font-size: 1.2rem;
