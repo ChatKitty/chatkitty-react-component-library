@@ -5,6 +5,16 @@ import { useChatContext } from "../../Provider/ChatKittyProvider";
 
 export interface ChannelHeaderProps {
   /**
+   * channel name
+   */
+  name: string;
+
+  /**
+   * channel description
+   */
+  description: string;
+
+  /**
    * handle click action on back arrow
    */
   onClick?: () => void;
@@ -15,8 +25,13 @@ export interface ChannelHeaderProps {
   icon?: React.ReactNode;
 }
 
-const ChannelHeader = ({ onClick, icon }: ChannelHeaderProps) => {
-  const { channel, theme } = useChatContext();
+const ChannelHeader = ({
+  name,
+  description,
+  onClick,
+  icon,
+}: ChannelHeaderProps) => {
+  const { theme } = useChatContext();
 
   return (
     <div
@@ -45,7 +60,7 @@ const ChannelHeader = ({ onClick, icon }: ChannelHeaderProps) => {
           `
         )} ck-channelHeader-title`}
       >
-        #{channel.name}
+        {name}
       </h1>
       <p
         className={`${cx(
@@ -54,7 +69,7 @@ const ChannelHeader = ({ onClick, icon }: ChannelHeaderProps) => {
           `
         )} ck-channelHeader-description`}
       >
-        {(channel.properties as { description: string }).description}
+        {description}
       </p>
     </div>
   );

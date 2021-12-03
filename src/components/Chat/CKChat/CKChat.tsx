@@ -61,7 +61,10 @@ const CKChat = ({}: CKChatProps) => {
         onTypingStarted={onTypingStarted}
         onTypingStopped={onTypingStopped}
       >
-        <ChannelHeader />
+        <ChannelHeader
+          name={channel.name}
+          description={(channel.properties as any).description}
+        />
         <MessageList>
           {messages.map((message) => {
             const casted = message as TextUserMessage;

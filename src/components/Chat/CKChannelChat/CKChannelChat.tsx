@@ -98,7 +98,11 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
               onTypingStarted={onTypingStarted}
               onTypingStopped={onTypingStopped}
             >
-              <ChannelHeader onClick={() => setDrawerOpen(true)} />
+              <ChannelHeader
+                name={channel.name}
+                description={(channel.properties as any).description}
+                onClick={() => setDrawerOpen(true)}
+              />
               {messagesLoading ? (
                 <Spinner />
               ) : (
