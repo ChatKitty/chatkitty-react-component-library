@@ -108,8 +108,6 @@ export const defaultTheme: ChatKittyTheme = {
 
   channelList: {
     container: `
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       padding: 20px;
     `,
     heading: `
@@ -123,8 +121,6 @@ export const defaultTheme: ChatKittyTheme = {
 
   channelListItem: {
     container: `
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       padding: 10px;
       list-style-type: none;
       border-bottom: 1px solid #f2f2f2;
@@ -161,8 +157,6 @@ export const defaultTheme: ChatKittyTheme = {
 
   channelHeader: {
     container: `
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       padding: 8px 20px;
       background-color: #f2f2f2;
       box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
@@ -208,8 +202,6 @@ export const defaultTheme: ChatKittyTheme = {
       margin: 0;
       padding: 8px 12px;
       box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     `,
   },
 
@@ -221,8 +213,6 @@ export const defaultTheme: ChatKittyTheme = {
     `,
     text: `
       flex: 1;
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       padding: 16px;
       padding-right: 40px;
       border: none;
@@ -247,8 +237,6 @@ export const defaultTheme: ChatKittyTheme = {
     container: `
       display: flex;
       align-items: flex-start;
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       padding: 8px;
       max-width: 100%;
     `,
@@ -295,8 +283,6 @@ export const defaultTheme: ChatKittyTheme = {
       align-items: center;
       font-size: 1.4rem;
       padding: 10px;
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     `,
     onlineIndicator: `
       display: inline-block;
