@@ -83,6 +83,7 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
                       description={
                         (c.properties as { description: string }).description
                       }
+                      channelImage="https://bit.ly/ryan-florence"
                       selected={c.id === channel.id}
                       onClick={() => {
                         setChannel(c);

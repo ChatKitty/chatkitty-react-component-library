@@ -14,6 +14,11 @@ export interface ChannelListItemProps {
   description: string;
 
   /**
+   * channel image url
+   */
+  channelImage?: string;
+
+  /**
    * selected state
    */
   selected: boolean;
@@ -27,6 +32,7 @@ export interface ChannelListItemProps {
 const ChannelListItem = ({
   name,
   description,
+  channelImage,
   selected,
   onClick,
 }: ChannelListItemProps) => {
@@ -42,25 +48,43 @@ const ChannelListItem = ({
       )} ck-channelListItem-container`}
       onClick={onClick}
     >
-      <h2
+      {channelImage && (
+        <img
+          className={`${cx(
+            css`
+              ${theme.channelListItem.image}
+            `
+          )} ck-textMessage-image`}
+          src={channelImage}
+        />
+      )}
+      <div
         className={`${cx(
           css`
-            ${theme.channelListItem.title}
+            ${theme.channelListItem.body}
           `
-        )} ck-channelListItem-title`}
+        )} ck-textMessage-body`}
       >
-        {name}
-      </h2>
+        <h2
+          className={`${cx(
+            css`
+              ${theme.channelListItem.title}
+            `
+          )} ck-channelListItem-title`}
+        >
+          {name}
+        </h2>
 
-      <p
-        className={`${cx(
-          css`
-            ${theme.channelListItem.description}
-          `
-        )} ck-channelListItem-description`}
-      >
-        {description}
-      </p>
+        <p
+          className={`${cx(
+            css`
+              ${theme.channelListItem.description}
+            `
+          )} ck-channelListItem-description`}
+        >
+          {description}
+        </p>
+      </div>
     </li>
   );
 };

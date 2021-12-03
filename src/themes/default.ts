@@ -11,6 +11,8 @@ export type ChatKittyTheme = {
     heading: string;
   };
   channelListItem: {
+    image: string;
+    body: string;
     container: string;
     title: string;
     description: string;
@@ -127,10 +129,21 @@ export const defaultTheme: ChatKittyTheme = {
       list-style-type: none;
       border-bottom: 1px solid #f2f2f2;
       cursor: pointer;
+      display: flex;
 
       &:hover {
         background-color: #f2f2f2;
       }
+    `,
+    image: `
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 50%;
+      padding: 10px;
+    `,
+    body: `
+      display: flex;
+      flex-direction: column;
     `,
     title: `
       font-size: 1.2rem;
