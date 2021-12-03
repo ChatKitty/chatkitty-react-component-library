@@ -4,6 +4,7 @@ import ChatKitty, {
   GetChannelsSucceededResult,
   Channel,
   StartSessionResult,
+  GetCountSucceedResult,
 } from "chatkitty";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
@@ -23,6 +24,7 @@ export default {
 const Template: Story<CKChatProps> = () => {
   const [loaded, setLoaded] = React.useState(false);
   const [channels, setChannels] = React.useState<Channel[]>([]);
+  const [unreadChannelsCount, setUnreadChannelsCount] = React.useState(0);
 
   useEffect(() => {
     const init = async () => {
@@ -39,7 +41,12 @@ const Template: Story<CKChatProps> = () => {
       if (succeeded<GetChannelsSucceededResult>(channelRes)) {
         console.log("I fetched a list of channels!");
         setChannels(channelRes.paginator.items);
+      }
 
+      const unreadChannelsCountRes = await client.getUnreadChannelsCount();
+
+      if (succeeded<GetCountSucceedResult>(unreadChannelsCountRes)) {
+        setUnreadChannelsCount(unreadChannelsCountRes.count);
         setLoaded(true);
       }
     };
@@ -52,7 +59,7 @@ const Template: Story<CKChatProps> = () => {
   }
 
   return (
-    <Popup>
+    <Popup hasUnread={unreadChannelsCount > 0}>
       <div
         style={{
           height: 600,

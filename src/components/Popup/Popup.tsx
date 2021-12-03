@@ -1,13 +1,22 @@
 import React from "react";
-import { css, cx } from "@emotion/css";
-import { MdChatBubble } from "react-icons/md";
+import { css, cx, keyframes } from "@emotion/css";
+import { MdChatBubble, MdMarkChatUnread } from "react-icons/md";
+
+const blink = keyframes`
+  0% { color: white; }
+  49% { color: white; }
+  60% { color: transparent; }
+  99% { color: transparent; }
+  100% { color: white; }
+`;
 
 export interface PopupProps {
+  hasUnread?: boolean;
   icon?: React.ReactNode;
   children?: React.ReactNode;
 }
 
-const Popup = ({ icon, children }: PopupProps) => {
+const Popup = ({ hasUnread, icon, children }: PopupProps) => {
   const [popupOpen, setPopupOpen] = React.useState(false);
 
   return (
@@ -44,9 +53,22 @@ const Popup = ({ icon, children }: PopupProps) => {
           )} ck-popup-button`}
           onClick={() => setPopupOpen(!popupOpen)}
         >
-          <MdChatBubble
-            style={{ fontSize: 40, transform: "translateY(3px)" }}
-          />
+          {hasUnread ? (
+            <MdMarkChatUnread
+              className={css`
+                font-size: 40px;
+                transform: translateY(3px);
+                animation: ${blink} 1.2s infinite;
+              `}
+            />
+          ) : (
+            <MdChatBubble
+              className={css`
+                font-size: 40px;
+                transform: translateY(3px);
+              `}
+            />
+          )}
         </button>
       )}
     </div>
