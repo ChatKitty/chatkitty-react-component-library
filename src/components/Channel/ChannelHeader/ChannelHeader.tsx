@@ -57,24 +57,32 @@ const ChannelHeader = ({
           {icon ? icon : <MdArrowBack />}
         </button>
       )}
-      <h1
+      <div
         className={`${cx(
           css`
-            ${theme.channelHeader.title}
+            ${theme.channelHeader.content}
           `
-        )} ck-channelHeader-title`}
+        )} ck-channelHeader-content`}
       >
-        {name}
-      </h1>
-      <p
-        className={`${cx(
-          css`
-            ${theme.channelHeader.description}
-          `
-        )} ck-channelHeader-description`}
-      >
-        {description}
-      </p>
+        <h1
+          className={`${cx(
+            css`
+              ${theme.channelHeader.title}
+            `
+          )} ck-channelHeader-title`}
+        >
+          {name}
+        </h1>
+        <p
+          className={`${cx(
+            css`
+              ${theme.channelHeader.description}
+            `
+          )} ck-channelHeader-description`}
+        >
+          {description}
+        </p>
+      </div>
     </div>
   );
 };

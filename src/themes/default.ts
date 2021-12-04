@@ -19,9 +19,10 @@ export type ChatKittyTheme = {
   };
   channelHeader: {
     container: string;
+    action: string;
+    content: string;
     title: string;
     description: string;
-    action: string;
   };
   messageList: {
     container: string;
@@ -156,9 +157,23 @@ export const defaultTheme: ChatKittyTheme = {
 
   channelHeader: {
     container: `
-      padding: 8px 20px;
+      display: flex;
+      padding: 8px;
       background-color: #f2f2f2;
       box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    `,
+    action: `
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: lightgray;
+      font-size: 30px;
+      padding: 0;
+    `,
+    content: `
+      padding: 0 10px;
+      display: flex;
+      flex-direction: column;
     `,
     title: `
       font-size: 1.2rem;
@@ -170,16 +185,6 @@ export const defaultTheme: ChatKittyTheme = {
       font-size: 1rem;
       margin: 0;
       padding: 0;
-    `,
-    action: `
-      cursor: pointer;
-      border: none;
-      background: none;
-      position: absolute;
-      top: 13px;
-      right: 25px;
-      color: lightgray;
-      font-size: 30px;
     `,
   },
 
