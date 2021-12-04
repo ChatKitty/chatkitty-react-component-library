@@ -112,11 +112,12 @@ export const defaultTheme: ChatKittyTheme = {
       padding: 20px;
     `,
     heading: `
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-size: 1.3rem;
+      font-weight: 500;
       margin: 0;
-      padding: 0;
-      margin-bottom: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-bottom: 10px;
     `,
   },
 
@@ -136,7 +137,7 @@ export const defaultTheme: ChatKittyTheme = {
       height: 2.5rem;
       width: 2.5rem;
       border-radius: 50%;
-      padding: 10px;
+      margin-right: 10px;
     `,
     body: `
       display: flex;
@@ -144,7 +145,7 @@ export const defaultTheme: ChatKittyTheme = {
     `,
     title: `
       font-size: 1.2rem;
-      font-weight: 700;
+      font-weight: 500;
       margin: 0;
       padding: 0;
     `,
@@ -152,6 +153,7 @@ export const defaultTheme: ChatKittyTheme = {
       margin: 0;
       padding: 0;
       margin-top: 3px;
+      font-weight: 300;
     `,
   },
 
@@ -179,12 +181,13 @@ export const defaultTheme: ChatKittyTheme = {
       font-size: 1.2rem;
       margin: 0;
       padding: 0;
-      font-weight: 700;
+      font-weight: 500;
     `,
     description: `
       font-size: 1rem;
       margin: 0;
       padding: 0;
+      font-weight: 300;
     `,
   },
 

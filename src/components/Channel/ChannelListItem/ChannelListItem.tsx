@@ -16,25 +16,25 @@ export interface ChannelListItemProps {
   /**
    * channel image url
    */
-  channelImage?: string;
+  imageSrc?: string;
 
   /**
    * selected state
    */
-  selected: boolean;
+  selected?: boolean;
 
   /**
-   * handle click action on list item
+   * click callback
    */
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const ChannelListItem = ({
   name,
   description,
-  channelImage,
+  imageSrc,
   selected,
-  onClick,
+  onClick = () => {},
 }: ChannelListItemProps) => {
   const { theme } = useChatContext();
 
@@ -52,14 +52,14 @@ const ChannelListItem = ({
       )} ck-channelListItem-container`}
       onClick={onClick}
     >
-      {channelImage && (
+      {imageSrc && (
         <img
           className={`${cx(
             css`
               ${theme.channelListItem.image}
             `
           )} ck-textMessage-image`}
-          src={channelImage}
+          src={imageSrc}
         />
       )}
       <div

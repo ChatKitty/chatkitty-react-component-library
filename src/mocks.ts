@@ -21,3 +21,18 @@ export const MockMessages = [
     body: "Don't leave me hanging!",
   },
 ];
+
+export const MockChannels = [
+  {
+    name: "Toronto",
+    description: "Toronto has a population of 3 million",
+  },
+  {
+    name: "San Francisco",
+    description: "San Francisco has a population of less than 1 million",
+  },
+  {
+    name: "England",
+    description: "England has a population of over 50 million",
+  },
+];

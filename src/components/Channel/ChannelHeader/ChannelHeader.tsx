@@ -15,12 +15,12 @@ export interface ChannelHeaderProps {
   description: string;
 
   /**
-   * handle click action on back arrow
+   * back icon click callback
    */
   onClick?: () => void;
 
   /**
-   * icon override
+   * override default back icon
    */
   icon?: React.ReactNode;
 }

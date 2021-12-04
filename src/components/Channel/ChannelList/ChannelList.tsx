@@ -6,7 +6,7 @@ export interface ChannelListProps {
   /**
    * title of channel list heading
    */
-  title: string;
+  title?: string;
 
   /**
    * list items
@@ -29,15 +29,17 @@ const ChannelList = ({ title, children }: ChannelListProps) => {
         `
       )} ck-channelList-container`}
     >
-      <h2
-        className={`${cx(
-          css`
-            ${theme.channelList.heading}
-          `
-        )} ck-channelList-heading`}
-      >
-        {title}
-      </h2>
+      {title && (
+        <h2
+          className={`${cx(
+            css`
+              ${theme.channelList.heading}
+            `
+          )} ck-channelList-heading`}
+        >
+          {title}
+        </h2>
+      )}
       {children}
     </div>
   );
