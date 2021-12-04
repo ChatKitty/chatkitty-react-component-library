@@ -16,6 +16,10 @@ export interface CKChatProps {}
 const CKChat = ({}: CKChatProps) => {
   const { client, channel } = useChatContext();
 
+  if (!client || !channel) {
+    throw new Error(`Invalid component context`);
+  }
+
   // Current User
   const { resource: currentUser } = useCurrentUser(client);
 

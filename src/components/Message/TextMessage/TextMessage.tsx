@@ -33,6 +33,10 @@ const TextMessage = ({
 }: TextMessageProps) => {
   const { theme } = useChatContext();
 
+  if (!theme) {
+    throw new Error(`Invalid component context`);
+  }
+
   return (
     <li
       className={`${cx(

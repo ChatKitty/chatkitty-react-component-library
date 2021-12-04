@@ -17,6 +17,10 @@ export interface MessageListProps {
 const MessageList = ({ children, scrollToLatest = true }: MessageListProps) => {
   const { theme } = useChatContext();
 
+  if (!theme) {
+    throw new Error(`Invalid component context`);
+  }
+
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {

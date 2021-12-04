@@ -19,6 +19,10 @@ export interface MessageInputProps {
 const MessageInput = ({ pre = null, placeholder }: MessageInputProps) => {
   const { client, channel, theme } = useChatContext();
 
+  if (!client || !channel || !theme) {
+    throw new Error(`Invalid component context`);
+  }
+
   const { makeRequest: updateMessage } = useUpdateMessageDraft(client);
   const { makeRequest: sendMessage } = useSendMessageDraft(client);
 

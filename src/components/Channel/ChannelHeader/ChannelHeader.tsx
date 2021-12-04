@@ -33,6 +33,10 @@ const ChannelHeader = ({
 }: ChannelHeaderProps) => {
   const { theme } = useChatContext();
 
+  if (!theme) {
+    throw new Error(`Invalid component context`);
+  }
+
   return (
     <div
       className={`${cx(

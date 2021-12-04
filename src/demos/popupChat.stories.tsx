@@ -3,13 +3,13 @@ import ChatKitty, {
   succeeded,
   GetChannelSucceededResult,
   Channel,
-  StartSessionResult,
 } from "chatkitty";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
 import { CKChatProps } from "../components/Chat/CKChat";
 import { ChatKittyProvider, CKChat, Spinner, Popup } from "..";
 import { defaultTheme } from "../themes/default";
+import { getDemoClient } from "./client";
 
 const client = new ChatKitty({
   host: "api.staging.chatkitty.com",
@@ -21,22 +21,18 @@ export default {
 } as Meta;
 
 const Template: Story<CKChatProps> = () => {
+  const [client, setClient] = React.useState<ChatKitty | undefined>();
   const [channel, setChannel] = React.useState<Channel | undefined>();
 
   useEffect(() => {
     const init = async () => {
-      const session = await client.startSession({
-        username: "b2a6da08-88bf-4778-b993-7234e6d8a3ff",
-      });
+      const client = await getDemoClient();
 
-      if (succeeded<StartSessionResult>(session)) {
-        console.log("I started a session!");
-      }
+      setClient(client);
 
       const channelRes = await client.getChannel(55003);
 
       if (succeeded<GetChannelSucceededResult>(channelRes)) {
-        console.log("I fetched a channel!");
         setChannel(channelRes.channel);
       }
     };

@@ -3,7 +3,6 @@ import ChatKitty, {
   succeeded,
   GetChannelsSucceededResult,
   Channel,
-  StartSessionResult,
   GetCountSucceedResult,
 } from "chatkitty";
 import { Meta } from "@storybook/react/types-6-0";
@@ -11,35 +10,27 @@ import { Story } from "@storybook/react";
 import { CKChatProps } from "../components/Chat/CKChat";
 import { ChatKittyProvider, CKChannelChat, Spinner, Popup } from "..";
 import { defaultTheme } from "../themes/default";
-
-const client = new ChatKitty({
-  host: "api.staging.chatkitty.com",
-  apiKey: "afaac908-1db3-4b5c-a7ae-c040b9684403",
-});
+import { getDemoClient } from "./client";
 
 export default {
   title: "Demos/PopupChannelChat",
 } as Meta;
 
 const Template: Story<CKChatProps> = () => {
+  const [client, setClient] = React.useState<ChatKitty | undefined>();
   const [loaded, setLoaded] = React.useState(false);
   const [channels, setChannels] = React.useState<Channel[]>([]);
   const [unreadChannelsCount, setUnreadChannelsCount] = React.useState(0);
 
   useEffect(() => {
     const init = async () => {
-      const session = await client.startSession({
-        username: "b2a6da08-88bf-4778-b993-7234e6d8a3ff",
-      });
+      const client = await getDemoClient();
 
-      if (succeeded<StartSessionResult>(session)) {
-        console.log("I started a session!");
-      }
+      setClient(client);
 
       const channelRes = await client.getChannels();
 
       if (succeeded<GetChannelsSucceededResult>(channelRes)) {
-        console.log("I fetched a list of channels!");
         setChannels(channelRes.paginator.items);
       }
 

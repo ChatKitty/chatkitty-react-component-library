@@ -13,6 +13,10 @@ export interface TypingIndicatorProps {
 const TypingIndicator = ({ typingUsers }: TypingIndicatorProps) => {
   const { theme } = useChatContext();
 
+  if (!theme) {
+    throw new Error(`Invalid component context`);
+  }
+
   if (typingUsers.length === 1) {
     return (
       <p

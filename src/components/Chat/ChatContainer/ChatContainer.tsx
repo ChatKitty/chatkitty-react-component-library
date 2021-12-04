@@ -12,6 +12,10 @@ export interface ChatContainerProps {
 const ChatContainer = ({ children }: ChatContainerProps) => {
   const { theme } = useChatContext();
 
+  if (!theme) {
+    throw new Error(`Invalid component context`);
+  }
+
   return (
     <div
       className={`${cx(

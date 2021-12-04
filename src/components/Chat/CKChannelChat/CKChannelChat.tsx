@@ -23,6 +23,10 @@ export interface CKChannelChatProps {}
 const CKChannelChat = ({}: CKChannelChatProps) => {
   const { client, channel, channels } = useChatContext();
 
+  if (!client || !channel || !channels) {
+    throw new Error(`Invalid component context`);
+  }
+
   // drawer state
   const [drawerOpen, setDrawerOpen] = React.useState(true);
 
