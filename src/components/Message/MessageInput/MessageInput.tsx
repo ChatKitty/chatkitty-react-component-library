@@ -11,7 +11,7 @@ export interface MessageInputProps {
   pre?: React.ReactNode;
 
   /**
-   * optional override of input placeholder
+   * input placeholder override
    */
   placeholder?: string;
 }
@@ -20,7 +20,7 @@ const MessageInput = ({ pre = null, placeholder }: MessageInputProps) => {
   const { client, channel, theme } = useChatContext();
 
   if (!client || !channel || !theme) {
-    throw new Error(`Invalid component context`);
+    throw new Error("Invalid component context");
   }
 
   const { makeRequest: updateMessage } = useUpdateMessageDraft(client);

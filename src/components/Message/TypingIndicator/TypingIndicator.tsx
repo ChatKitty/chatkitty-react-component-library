@@ -14,7 +14,7 @@ const TypingIndicator = ({ typingUsers }: TypingIndicatorProps) => {
   const { theme } = useChatContext();
 
   if (!theme) {
-    throw new Error(`Invalid component context`);
+    throw new Error("Invalid component context");
   }
 
   if (typingUsers.length === 1) {

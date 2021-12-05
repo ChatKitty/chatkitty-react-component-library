@@ -21,4 +21,4 @@ const Template: Story<ChatContainerProps> = (args) => (
   </ChatKittyProvider>
 );
 
-export const Default = Template.bind({});
+export const Basic = Template.bind({});

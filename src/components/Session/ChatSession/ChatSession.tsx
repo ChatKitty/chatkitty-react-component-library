@@ -31,7 +31,7 @@ const ChatSession = ({
   const { client, channel } = useChatContext();
 
   if (!client || !channel) {
-    throw new Error(`Invalid component context`);
+    throw new Error("Invalid component context");
   }
 
   const { makeRequest: startChatSession } = useChatSession(client);

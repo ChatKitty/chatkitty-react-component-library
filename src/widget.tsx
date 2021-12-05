@@ -26,7 +26,7 @@ const Chat = () => {
   const { client, channel, channels } = useChatContext();
 
   if (!client || !channel || !channels) {
-    throw new Error(`Invalid component context`);
+    throw new Error("Invalid component context");
   }
 
   const [drawerOpen, setDrawerOpen] = React.useState(true);

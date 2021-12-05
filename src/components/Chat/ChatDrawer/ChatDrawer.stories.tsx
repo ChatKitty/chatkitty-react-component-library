@@ -37,4 +37,4 @@ const Template: Story = () => {
   );
 };
 
-export const Default = Template.bind({});
+export const Basic = Template.bind({});

@@ -18,7 +18,7 @@ const ChannelList = ({ title, children }: ChannelListProps) => {
   const { theme } = useChatContext();
 
   if (!theme) {
-    throw new Error(`Invalid component context`);
+    throw new Error("Invalid component context");
   }
 
   return (
