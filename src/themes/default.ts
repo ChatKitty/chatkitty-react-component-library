@@ -81,7 +81,7 @@ export const defaultTheme: ChatKittyTheme = {
       width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: flex-start;
       overflow: auto;
       box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
     `,
