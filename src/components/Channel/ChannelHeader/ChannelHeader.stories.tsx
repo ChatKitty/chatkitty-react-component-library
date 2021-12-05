@@ -19,14 +19,14 @@ const Template: Story<ChannelHeaderProps> = (args) => (
 export const Basic = Template.bind({});
 
 Basic.args = {
-  name: "ChatKitty Office",
+  name: "ChatKitty",
   description: "Helping you build a great chat experience.",
 };
 
 export const WithBackIcon = Template.bind({});
 
 WithBackIcon.args = {
-  name: "ChatKitty Office",
+  name: "ChatKitty",
   description: "Helping you build a great chat experience.",
   onClick: () => {},
 };
@@ -34,7 +34,7 @@ WithBackIcon.args = {
 export const WithCustomBackIcon = Template.bind({});
 
 WithCustomBackIcon.args = {
-  name: "ChatKitty Office",
+  name: "ChatKitty",
   description: "Helping you build a great chat experience.",
   onClick: () => {},
   icon: <GiReturnArrow />,

@@ -89,6 +89,7 @@ export const defaultTheme: ChatKittyTheme = {
 
   chatDrawer: {
     container: `
+      position: relative;
       display: flex;
       flex-direction: column;
       overflow: auto;
@@ -101,7 +102,7 @@ export const defaultTheme: ChatKittyTheme = {
       background: none;
       position: absolute;
       top: 13px;
-      right: 25px;
+      right: 13px;
       color: lightgray;
       font-size: 30px;
     `,

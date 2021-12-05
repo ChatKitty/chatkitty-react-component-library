@@ -3,11 +3,26 @@ import ChatKitty, {
   succeeded,
   GetChannelSucceededResult,
   Channel,
+  Message,
+  User,
+  TextUserMessage,
 } from "chatkitty";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
-import { CKChatProps } from "../components/Chat/CKChat";
-import { ChatKittyProvider, CKChat, Spinner } from "..";
+import {
+  useChatContext,
+  useCurrentUser,
+  useMessages,
+  ChatKittyProvider,
+  Spinner,
+  ChatContainer,
+  ChatSession,
+  ChannelHeader,
+  MessageList,
+  TextMessage,
+  TypingIndicator,
+  MessageInput,
+} from "..";
 import { defaultTheme } from "../themes/default";
 import { getDemoClient } from "./client";
 
@@ -15,7 +30,71 @@ export default {
   title: "Demos/CommentChat",
 } as Meta;
 
-const Template: Story<CKChatProps> = () => {
+const Chat = () => {
+  const { client, channel } = useChatContext();
+
+  if (!client || !channel) {
+    throw new Error(`Invalid component context`);
+  }
+
+  const { resource: currentUser } = useCurrentUser(client);
+
+  const { resource: messages, setResource: setMessages } = useMessages(
+    client,
+    channel
+  );
+
+  const [typingUsers, setTypingUsers] = React.useState<User[]>([]);
+
+  if (!messages || !currentUser) {
+    return <Spinner />;
+  }
+
+  const onTypingStarted = (user: User) => {
+    setTypingUsers((prev) => [...prev, user]);
+  };
+
+  const onTypingStopped = (user: User) => {
+    setTypingUsers((prev) => prev.filter((u) => u.id !== user.id));
+  };
+
+  const onReceivedMessage = (message: Message) => {
+    setMessages((prev) => [message, ...(prev || [])]);
+  };
+
+  return (
+    <ChatContainer>
+      <ChatSession
+        onReceivedMessage={onReceivedMessage}
+        onTypingStarted={onTypingStarted}
+        onTypingStopped={onTypingStopped}
+      >
+        <ChannelHeader
+          name={channel.name}
+          description={(channel.properties as any).description}
+        />
+        <MessageList>
+          {messages.map((message) => {
+            const casted = message as TextUserMessage;
+            return (
+              <TextMessage
+                key={casted.id}
+                displayPictureUrl={casted.user.displayPictureUrl}
+                displayName={casted.user.displayName}
+                createdTime={new Date(casted.createdTime)}
+                body={casted.body}
+              />
+            );
+          })}
+        </MessageList>
+        <TypingIndicator typingUsers={typingUsers} />
+        <MessageInput />
+      </ChatSession>
+    </ChatContainer>
+  );
+};
+
+const Template: Story = () => {
   const [client, setClient] = React.useState<ChatKitty | undefined>();
   const [channel, setChannel] = React.useState<Channel | undefined>();
 
@@ -67,11 +146,11 @@ const Template: Story<CKChatProps> = () => {
   return (
     <div style={{ height: 600, width: 450 }}>
       <ChatKittyProvider client={client} channels={[channel]} theme={theme}>
-        <CKChat />
+        <Chat />
       </ChatKittyProvider>
     </div>
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Demo = Template.bind({});
+Demo.args = {};

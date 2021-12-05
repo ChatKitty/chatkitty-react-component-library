@@ -14,8 +14,6 @@ import ChatKittySession from "./components/Session/ChatKittySession";
 import ChatSession from "./components/Session/ChatSession";
 import UserList from "./components/User/UserList";
 import UserListItem from "./components/User/UserListItem";
-import CKChat from "./components/Chat/CKChat";
-import CKChannelChat from "./components/Chat/CKChannelChat";
 import Spinner from "./components/utility/Spinner";
 import Popup from "./components/Popup";
 import UserDisplay from "./components/User/UserDisplay";
@@ -38,8 +36,6 @@ export {
   ChatSession,
   UserList,
   UserListItem,
-  CKChat,
-  CKChannelChat,
   Spinner,
   Popup,
   UserDisplay,
@@ -60,8 +56,6 @@ import { ChatKittySessionProps } from "./components/Session/ChatKittySession";
 import { ChatSessionProps } from "./components/Session/ChatSession";
 import { UserListProps } from "./components/User/UserList";
 import { UserListItemProps } from "./components/User/UserListItem";
-import { CKChatProps } from "./components/Chat/CKChat";
-import { CKChannelChatProps } from "./components/Chat/CKChannelChat";
 import { PopupProps } from "./components/Popup";
 import { UserDisplayProps } from "./components/User/UserDisplay";
 import { ChatContainerProps } from "./components/Chat/ChatContainer";
@@ -81,8 +75,6 @@ export type {
   ChatSessionProps,
   UserListProps,
   UserListItemProps,
-  CKChatProps,
-  CKChannelChatProps,
   PopupProps,
   UserDisplayProps,
   ChatContainerProps,

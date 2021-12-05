@@ -1,39 +1,50 @@
-import React from "react";
-import type { Message, User, TextUserMessage } from "chatkitty";
-import ChannelHeader from "../../Channel/ChannelHeader";
-import ChannelList from "../../Channel/ChannelList";
-import ChannelListItem from "../../Channel/ChannelListItem";
-import MessageList from "../../Message/MessageList";
-import MessageInput from "../../Message/MessageInput";
-import TextMessage from "../../Message/TextMessage";
+import React, { useEffect } from "react";
+import ChatKitty, {
+  succeeded,
+  GetChannelsSucceededResult,
+  Channel,
+  Message,
+  User,
+  TextUserMessage,
+} from "chatkitty";
+import { Meta } from "@storybook/react/types-6-0";
+import { Story } from "@storybook/react";
 import {
   useChatContext,
+  useCurrentUser,
+  useMessages,
+  ChatKittyProvider,
+  Spinner,
+  ChatContainer,
+  ChatSession,
+  ChannelHeader,
+  MessageList,
+  TextMessage,
+  TypingIndicator,
+  MessageInput,
+  ChatDrawer,
+  ChannelList,
+  ChannelListItem,
   ChatKittyContext,
-} from "../../Provider/ChatKittyProvider";
-import { useMessages, useCurrentUser } from "../../../hooks";
-import ChatSession from "../../Session/ChatSession";
-import Spinner from "../../utility/Spinner";
-import UserDisplay from "../../User/UserDisplay";
-import ChatContainer from "../ChatContainer";
-import ChatDrawer from "../ChatDrawer";
-import TypingIndicator from "../../Message/TypingIndicator";
+  UserDisplay,
+} from "..";
+import { getDemoClient } from "./client";
 
-export interface CKChannelChatProps {}
+export default {
+  title: "Demos/ChannelChat",
+} as Meta;
 
-const CKChannelChat = ({}: CKChannelChatProps) => {
+const Chat = () => {
   const { client, channel, channels } = useChatContext();
 
   if (!client || !channel || !channels) {
     throw new Error(`Invalid component context`);
   }
 
-  // drawer state
   const [drawerOpen, setDrawerOpen] = React.useState(true);
 
-  // current user
   const { resource: currentUser } = useCurrentUser(client);
 
-  // Message Handling
   const {
     resource: messages,
     setResource: setMessages,
@@ -44,19 +55,10 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
     setMessages((prev) => [message, ...(prev || [])]);
   };
 
-  // Typing Indicator
   const [typingUsers, setTypingUsers] = React.useState<User[]>([]);
 
   const onTypingStarted = (user: User) => {
-    setTypingUsers((prev) => {
-      // if (
-      //   prev.filter((u) => u.id === user.id).length > 0 ||
-      //   user.id === currentUser.id
-      // ) {
-      //   return prev;
-      // }
-      return [...prev, user];
-    });
+    setTypingUsers((prev) => [...prev, user]);
   };
 
   const onTypingStopped = (user: User) => {
@@ -87,7 +89,7 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
                       description={
                         (c.properties as { description: string }).description
                       }
-                      channelImage="https://bit.ly/ryan-florence"
+                      imageSrc="https://bit.ly/ryan-florence"
                       selected={c.id === channel.id}
                       onClick={() => {
                         setChannel(c);
@@ -136,4 +138,40 @@ const CKChannelChat = ({}: CKChannelChatProps) => {
   );
 };
 
-export default CKChannelChat;
+const Template: Story = () => {
+  const [client, setClient] = React.useState<ChatKitty | undefined>();
+  const [loaded, setLoaded] = React.useState(false);
+  const [channels, setChannels] = React.useState<Channel[]>([]);
+
+  useEffect(() => {
+    const init = async () => {
+      const client = await getDemoClient();
+
+      setClient(client);
+
+      const channelRes = await client.getChannels();
+
+      if (succeeded<GetChannelsSucceededResult>(channelRes)) {
+        setChannels(channelRes.paginator.items);
+        setLoaded(true);
+      }
+    };
+
+    init();
+  }, []);
+
+  if (!loaded) {
+    return <Spinner />;
+  }
+
+  return (
+    <div style={{ height: 600, width: 450 }}>
+      <ChatKittyProvider client={client} channels={channels}>
+        <Chat />
+      </ChatKittyProvider>
+    </div>
+  );
+};
+
+export const Demo = Template.bind({});
+Demo.args = {};

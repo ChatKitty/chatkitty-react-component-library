@@ -62,7 +62,7 @@ const UserDisplay = ({
                   ? theme.userDisplay.onlineIndicator
                   : theme.userDisplay.offlineIndicator}
               `
-            )} ck-typingIndicator`}
+            )} ck-userDisplay: indicator`}
           />
         )}
       </div>
