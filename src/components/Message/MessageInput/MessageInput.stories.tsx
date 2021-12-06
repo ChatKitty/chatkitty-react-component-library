@@ -13,7 +13,7 @@ import Spinner from "../../utility/Spinner";
 import { getDemoClient } from "../../../demos/client";
 
 export default {
-  title: "Components/Message/MessageInput",
+  title: "Components/MessageInput",
   component: MessageInput,
 } as Meta;
 

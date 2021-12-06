@@ -7,7 +7,7 @@ import ChatContainer from "../ChatContainer";
 import ChannelHeader from "../../Channel/ChannelHeader";
 
 export default {
-  title: "Components/Chat/ChatDrawer",
+  title: "Components/ChatDrawer",
   component: ChatDrawer,
 } as Meta;
 

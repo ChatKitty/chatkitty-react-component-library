@@ -7,7 +7,7 @@ import ChannelListItem from "../ChannelListItem";
 import { MockChannels } from "../../../mocks";
 
 export default {
-  title: "Components/Channel/ChannelList",
+  title: "Components/ChannelList",
   component: ChannelList,
 } as Meta;
 

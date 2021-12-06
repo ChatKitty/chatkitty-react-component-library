@@ -5,7 +5,7 @@ import ChatKittyProvider from "../../Provider/ChatKittyProvider";
 import UserDisplay, { UserDisplayProps } from "./UserDisplay";
 
 export default {
-  title: "Components/User/UserDisplay",
+  title: "Components/UserDisplay",
   component: UserDisplay,
 } as Meta;
 

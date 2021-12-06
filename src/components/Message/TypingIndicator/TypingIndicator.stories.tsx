@@ -15,7 +15,7 @@ import ChatSession from "../../Session/ChatSession";
 import { getDemoClient } from "../../../demos/client";
 
 export default {
-  title: "Components/Message/TypingIndicator",
+  title: "Components/TypingIndicator",
   component: TypingIndicator,
 } as Meta;
 

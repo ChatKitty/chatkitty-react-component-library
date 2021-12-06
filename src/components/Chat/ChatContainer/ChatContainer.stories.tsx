@@ -5,7 +5,7 @@ import ChatKittyProvider from "../../Provider/ChatKittyProvider";
 import ChatContainer, { ChatContainerProps } from "./ChatContainer";
 
 export default {
-  title: "Components/Chat/ChatContainer",
+  title: "Components/ChatContainer",
   component: ChatContainer,
 } as Meta;
 

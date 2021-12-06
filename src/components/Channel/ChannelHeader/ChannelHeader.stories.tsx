@@ -6,7 +6,7 @@ import { GiReturnArrow } from "react-icons/gi";
 import ChannelHeader, { ChannelHeaderProps } from "./ChannelHeader";
 
 export default {
-  title: "Components/Channel/ChannelHeader",
+  title: "Components/ChannelHeader",
   component: ChannelHeader,
 } as Meta;
 

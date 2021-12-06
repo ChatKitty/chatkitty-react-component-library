@@ -6,7 +6,7 @@ import ChatKittyProvider from "../../Provider/ChatKittyProvider";
 import { MockMessages } from "../../../mocks";
 
 export default {
-  title: "Components/Message/TextMessage",
+  title: "Components/TextMessage",
   component: TextMessage,
 } as Meta;
 

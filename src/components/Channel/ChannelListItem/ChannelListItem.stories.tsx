@@ -5,7 +5,7 @@ import ChatKittyProvider from "../../Provider/ChatKittyProvider";
 import ChannelListItem, { ChannelListItemProps } from "./ChannelListItem";
 
 export default {
-  title: "Components/Channel/ChannelListItem",
+  title: "Components/ChannelListItem",
   component: ChannelListItem,
 } as Meta;
 
