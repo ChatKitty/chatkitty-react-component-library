@@ -16,7 +16,7 @@ const Template: Story<TextMessageProps> = (args) => (
   </ChatKittyProvider>
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Basic = Template.bind({});
+Basic.args = {
   ...MockMessages[0],
 };

@@ -8,7 +8,7 @@ import { Meta } from "@storybook/react/types-6-0";
 import { Story } from "@storybook/react";
 import { BiBookContent } from "react-icons/bi";
 import ChatKittyProvider from "../../Provider/ChatKittyProvider";
-import MessageInput, { MessageInputProps } from "./MessageInput";
+import MessageInput from "./MessageInput";
 import Spinner from "../../utility/Spinner";
 import { getDemoClient } from "../../../demos/client";
 
