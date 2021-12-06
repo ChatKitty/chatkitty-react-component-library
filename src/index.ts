@@ -1,7 +1,6 @@
 import ChannelHeader from "./components/Channel/ChannelHeader";
 import ChannelList from "./components/Channel/ChannelList";
 import ChannelListItem from "./components/Channel/ChannelListItem";
-import FileMessage from "./components/Message/FileMessage";
 import MessageList from "./components/Message/MessageList";
 import TextMessage from "./components/Message/TextMessage";
 import TypingIndicator from "./components/Message/TypingIndicator";
@@ -10,10 +9,7 @@ import ChatKittyProvider, {
   ChatKittyContext,
   useChatContext,
 } from "./components/Provider/ChatKittyProvider";
-import ChatKittySession from "./components/Session/ChatKittySession";
 import ChatSession from "./components/Session/ChatSession";
-import UserList from "./components/User/UserList";
-import UserListItem from "./components/User/UserListItem";
 import Spinner from "./components/utility/Spinner";
 import Popup from "./components/Popup";
 import UserDisplay from "./components/User/UserDisplay";
@@ -24,7 +20,6 @@ export {
   ChannelHeader,
   ChannelList,
   ChannelListItem,
-  FileMessage,
   MessageList,
   TextMessage,
   TypingIndicator,
@@ -32,10 +27,7 @@ export {
   ChatKittyProvider,
   ChatKittyContext,
   useChatContext,
-  ChatKittySession,
   ChatSession,
-  UserList,
-  UserListItem,
   Spinner,
   Popup,
   UserDisplay,
@@ -46,16 +38,13 @@ export {
 import { ChannelHeaderProps } from "./components/Channel/ChannelHeader";
 import { ChannelListProps } from "./components/Channel/ChannelList";
 import { ChannelListItemProps } from "./components/Channel/ChannelListItem";
-import { FileMessageProps } from "./components/Message/FileMessage";
 import { MessageListProps } from "./components/Message/MessageList";
 import { TextMessageProps } from "./components/Message/TextMessage";
 import { TypingIndicatorProps } from "./components/Message/TypingIndicator";
 import { MessageInputProps } from "./components/Message/MessageInput";
 import { ChatKittyProviderProps } from "./components/Provider/ChatKittyProvider";
-import { ChatKittySessionProps } from "./components/Session/ChatKittySession";
 import { ChatSessionProps } from "./components/Session/ChatSession";
-import { UserListProps } from "./components/User/UserList";
-import { UserListItemProps } from "./components/User/UserListItem";
+
 import { PopupProps } from "./components/Popup";
 import { UserDisplayProps } from "./components/User/UserDisplay";
 import { ChatContainerProps } from "./components/Chat/ChatContainer";
@@ -65,16 +54,12 @@ export type {
   ChannelHeaderProps,
   ChannelListProps,
   ChannelListItemProps,
-  FileMessageProps,
   MessageListProps,
   TextMessageProps,
   TypingIndicatorProps,
   MessageInputProps,
   ChatKittyProviderProps,
-  ChatKittySessionProps,
   ChatSessionProps,
-  UserListProps,
-  UserListItemProps,
   PopupProps,
   UserDisplayProps,
   ChatContainerProps,
