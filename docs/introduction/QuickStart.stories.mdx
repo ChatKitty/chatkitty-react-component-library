@@ -1,0 +1,178 @@
+import { Meta } from "@storybook/addon-docs";
+import application from "../assets/application.png";
+import chat from "../assets/chat.png";
+
+<Meta title="Introduction/Quick Start" />
+
+## Quick Start
+
+Hey there, let's build a fully-functional chat app together!
+
+## Create a ChatKitty account and get your API key.
+
+We're going to need a ChatKitty API key as soon as we start coding, so let's get that out of the way!
+
+- [Create an account](https://dashboard.chatkitty.com/authorization/register) and sign in!
+
+Choose the **free** plan and create an application for your project.
+
+<img src={application} />
+
+I've named my application _chatKitty-library-demo_. Click **Create** and note down your API key.
+
+## Set Up a Repository With React 16.8+
+
+Prerequisites:
+
+- React v16.8+ and ReactDOM v16.8+
+- [ChatKitty JS SDK](https://github.com/ChatKitty/chatkitty-js)
+
+If you already have a codebase that satisfies these prerequisites, great! If not, feel free to git clone this [empty repo](https://github.com/ChatKitty/chat-library-demo/tree/empty) or start your own project with [CRA](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app).
+
+If you cloned our example repo, you'll notice that it's quite empty.
+
+```
+const App = () => {
+  return null;
+}
+
+export default App;
+```
+
+## Install ChatKitty Library and SDK
+
+Install the component library and SDK using yarn.
+
+```
+yarn add chatkitty@1.51.2 chatkitty-react-component-library@0.0.16
+```
+
+Import SDK and components into `App.js`.
+
+```
+import chatkitty from "chatkitty";
+import {
+  useChatContext,
+  useCurrentUser,
+  useMessages,
+  ChatKittyProvider,
+  Spinner,
+  ChatContainer,
+  ChatSession,
+  ChannelHeader,
+  MessageList,
+  TextMessage,
+  MessageInput,
+} from "chatkitty-react-component-library";
+```
+
+## Initialize the ChatKitty SDK and Create a Guest User Session
+
+```
+const client = ChatKitty.getInstance(process.env.API_KEY);
+const username = "guest";
+
+const App = () => {
+  const { isLoading } = useGuestSession(client, username);
+
+  return (
+    <div style={{ height: 600, width: 450 }}>
+      {isLoading ? <Spinner /> : <ChatResources />}
+    </div>
+  );
+};
+```
+
+## Get or Fetch a ChatKitty Channel
+
+```
+const ChatResources = () => {
+  const {
+    isLoading: channelsLoading,
+    resource: channels,
+    makeRequest: fetchChannels,
+  } = useChannels(client);
+  const { makeRequest: createChannel } = useCreateChannel(client);
+
+  React.useEffect(() => {
+    const getOrCreateChannel = async () => {
+      await createChannel({
+        type: "PUBLIC",
+        name: "Demo Channel",
+        members: [{ username }],
+      });
+      await fetchChannels();
+    };
+    if (!channelsLoading && channels?.length === 0) {
+      getOrCreateChannel();
+    }
+  }, [channels]);
+
+  if (!channels || channels.length === 0) {
+    return <Spinner />;
+  }
+
+  return (
+    <ChatKittyProvider client={client} channels={channels}>
+      <Chat />
+    </ChatKittyProvider>
+  );
+};
+```
+
+## Implement Chat components
+
+```
+const Chat = () => {
+  const { client, channel } = useChatContext();
+
+  if (!client || !channel) {
+    throw new Error("Invalid component context");
+  }
+
+  const { resource: currentUser } = useCurrentUser(client);
+
+  const { resource: messages, setResource: setMessages } = useMessages(
+    client,
+    channel
+  );
+
+  if (!messages || !currentUser) {
+    return <Spinner />;
+  }
+
+  const onReceivedMessage = (message: Message) => {
+    setMessages((prev) => [message, ...(prev || [])]);
+  };
+
+  return (
+    <ChatContainer>
+      <ChatSession onReceivedMessage={onReceivedMessage}>
+        <ChannelHeader
+          name={channel.name}
+          description={(channel.properties as any).description}
+        />
+        <MessageList>
+          {messages.map((message) => {
+            const casted = message as TextUserMessage;
+            return (
+              <TextMessage
+                key={casted.id}
+                displayPictureUrl={casted.user.displayPictureUrl}
+                displayName={casted.user.displayName}
+                createdTime={new Date(casted.createdTime)}
+                body={casted.body}
+              />
+            );
+          })}
+        </MessageList>
+        <MessageInput />
+      </ChatSession>
+    </ChatContainer>
+  );
+};
+```
+
+## That's it!
+
+<img src={chat} />

@@ -1,9 +1,48 @@
 # chatkitty-react-component-library
 
-ChatKitty's React Component Library
+<img src="docs/assets/chat.png" />
 
-https://reactjs.org/
-https://emotion.sh/docs/introduction
-https://react-icons.github.io/react-icons/
-https://www.chatkitty.com/
-https://rollupjs.org/guide/en/
+## Introduction
+
+ChatKitty's React component library is the fastest way to build chat. This library offers:
+
+- Hooks that interact directly with ChatKitty's chat backend.
+- Presentational chat components (channels, message lists, typing indicators).
+- UI Customization through themes and CSS classes.
+
+The library is designed with a few core principles in mind:
+
+- **Fast time-to-value**. Components and hooks can be composed to build full-feature, full-stack chat solutions in record time.
+- **Simple and extensible**. Components solve core use-cases and are easily extendable. Try building your own!
+- **Readily customizable**. Themes and CSS classes can be readily configured and customized.
+- **Strong typing**. We're bullish on typescript.
+
+## ChatKitty Chat Features
+
+- Public Chat
+- Private Chat
+- Group Chat
+- Message Threads
+- Push Notifications
+- File Attachments
+- Typing Indicators
+- Reactions
+- Presence Indicators
+- Delivery and Read Receipts
+- Link Preview Generation
+- Chatbot Integration
+- Chat Functions
+- User Access Rules
+- Auto Moderation
+- Event Webhooks
+
+\*_Note: although this library is still evolving towards feature parity, all features can be readily implemented using the [ChatKitty JS SDK](https://github.com/ChatKitty/chatkitty-js)._
+
+## Requirements
+
+- React v16.8+ and ReactDOM v16.8+
+- [ChatKitty JS SDK](https://github.com/ChatKitty/chatkitty-js)
+
+## Other Documentation
+
+- [ChatKitty](https://www.chatkitty.com/)

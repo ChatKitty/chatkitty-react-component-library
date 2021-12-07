@@ -257,7 +257,7 @@ export const defaultTheme: ChatKittyTheme = {
     `,
     name: `
       font-size: 1.2rem;
-      font-weight: 600;
+      font-weight: 400;
       margin: 0;
     `,
     time: `
@@ -270,6 +270,7 @@ export const defaultTheme: ChatKittyTheme = {
     message: `
       margin-top: 12px;
       word-break: break-word;
+      font-weight: 300;
     `,
   },
 
