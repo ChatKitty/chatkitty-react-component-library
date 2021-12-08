@@ -15,27 +15,28 @@ const useChannel = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Channel;
+  makeRequest: () => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Channel>();
 
+  const makeRequest = async () => {
+    setIsLoading(true);
+
+    const result = await client.getChannel(id);
+
+    if (result.succeeded) {
+      setResource((result as GetChannelSucceededResult).channel);
+    }
+
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    const makeRequest = async () => {
-      setIsLoading(true);
-
-      const result = await client.getChannel(id);
-
-      if (result.succeeded) {
-        setResource((result as GetChannelSucceededResult).channel);
-      }
-
-      if (result.failed) {
-        setError((result as ChatKittyFailedResult).error);
-      }
-
-      setIsLoading(false);
-    };
-
     makeRequest();
   }, []);
 
@@ -43,6 +44,7 @@ const useChannel = (
     isLoading,
     error,
     resource,
+    makeRequest,
   };
 };
 

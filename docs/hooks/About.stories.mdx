@@ -1,0 +1,88 @@
+import { Meta } from "@storybook/addon-docs";
+import chatkitty from "../assets/chatkitty.png";
+
+<Meta title="Hooks/Explainer" />
+
+# <u>Hooks</u>
+
+Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class.
+
+The [motivation](https://reactjs.org/docs/hooks-intro.html) behind hooks was to make it easier to [1] reuse stateful logic between components, [2] make complex components easier to understand, and [3] avoid class components.
+
+## ChatKitty Custom Hooks
+
+ChatKitty's custom hooks exist to provide a helpful React-friendly abstraction over ChatKitty's JS SDK.
+
+These hooks are able to:
+
+- Call the correct SDK methods given a ChatKitty client instance and return the associated `resource`.
+- Provide request loading states through the `isLoading` property.
+- Provide request errors through the `error` property.
+- Fetch or refetch data through the `makeRequest` property.
+
+```typescript
+const App = () => {
+  // Let's use a hook to start a ChatKitty guest session!
+  const { isLoading } = useGuestSession(client, username);
+
+  return isLoading ? <Spinner /> : <Chat />;
+};
+```
+
+## Available Hooks
+
+**Channels**
+
+- [`useAddChannelModerator`](/story/hooks-channels-useaddchannelmoderator--page)
+- [`useChannel`](/story/hooks-channels-usechannel--page)
+- [`useChannelMembers`](/story/hooks-channels-usechannelmembers--page)
+- [`useChannels`](/story/hooks-channels-usechannels--page)
+- [`useChannelUnread`](/story/hooks-channels-usechannelunread--page)
+- [`useChannelUnreadMessageCount`](/story/hooks-channels-usechannelunreadmessagecount--page)
+- [`useClearChannelHistory`](/story/hooks-channels-useclearchannelhistory--page)
+- [`useCreateChannel`](/story/hooks-channels-usecreatechannel--page)
+- [`useHideChannel`](/story/hooks-channels-usehidechannel--page)
+- [`useJoinableChannels`](/story/hooks-channels-usejoinablechannels--page)
+- [`useJoinChannel`](/story/hooks-channels-usejoinchannel--page)
+- [`useJoinedChannel`](/story/hooks-channels-usejoinedchannel--page)
+- [`useLeaveChannel`](/story/hooks-channels-useleavechannel--page)
+- [`useMuteChannel`](/story/hooks-channels-usemutechannel--page)
+- [`useReadChannel`](/story/hooks-channels-usereadchannel--page)
+- [`useUnmuteChannel`](/story/hooks-channels-useunmutechannel--page)
+- [`useUnreadChannelsCount`](/story/hooks-channels-useunreadchannelscount--page)
+- [`useUpdateChannel`](/story/hooks-channels-useupdatechannel--page)
+
+**Messages**
+
+- [`useDeleteMessageForMe`](/story/hooks-messages-usedeletemessageforme--page)
+- [`useLastReadMessage`](/story/hooks-messages-uselastreadmessage--page)
+- [`useMessageChannel`](/story/hooks-messages-usemessagechannel--page)
+- [`useMessageParent`](/story/hooks-messages-usemessageparent--page)
+- [`useMessageRepliesCount`](/story/hooks-messages-usemessagerepliescount--page)
+- [`useMessages`](/story/hooks-messages-usemessages--page)
+- [`useReactionsForMessage`](/story/hooks-messages-usereactionsformessage--page)
+- [`useReactToMessage`](/story/hooks-messages-usereacttomessage--page)
+- [`useReadMessage`](/story/hooks-messages-usereadmessage--page)
+- [`useRemoveReaction`](/story/hooks-messages-useremovereaction--page)
+- [`useSendMessageDraft`](/story/hooks-messages-usesendmessagedraft--page)
+- [`useUpdateMessageDraft`](/story/hooks-messages-useupdatemessagedraft--page)
+
+**Sessions**
+
+- [`useChatSession`](/story/hooks-sessions-usechatsession--page)
+- [`useEndSession`](/story/hooks-sessions-useendsession--page)
+- [`useGuestSession`](/story/hooks-sessions-useguestsession--page)
+
+**Users**
+
+- [`useBlockUser`](/story/hooks-users-useblockuser--page)
+- [`useCurrentUser`](/story/hooks-users-usecurrentuser--page)
+- [`useCurrentUserBlockList`](/story/hooks-users-usecurrentuserblocklist--page)
+- [`useDeleteUserBlockListItem`](/story/hooks-users-usedeleteuserblocklistitem--page)
+- [`useInviteUser`](/story/hooks-users-useinviteuser--page)
+- [`useUpdateCurrentUser`](/story/hooks-users-useupdatecurrentuser--page)
+- [`useUpdateCurrentUserDisplayPicture`](/story/hooks-users-useupdatecurrentuserdisplaypicture--page)
+- [`useUser`](/story/hooks-users-useuser--page)
+- [`useUserIsChannelMember`](/story/hooks-users-useuserischannelmember--page)
+- [`useUsers`](/story/hooks-users-useusers--page)
+- [`useUsersCount`](/story/hooks-users-useuserscount--page)
