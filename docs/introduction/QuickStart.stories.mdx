@@ -31,10 +31,10 @@ If you already have a codebase that satisfies these prerequisites, great! If not
 
 If you cloned our example repo, you'll notice that it's quite empty.
 
-```
+```typescript
 const App = () => {
   return null;
-}
+};
 
 export default App;
 ```
@@ -49,11 +49,15 @@ yarn add chatkitty@1.51.2 chatkitty-react-component-library@0.0.16
 
 Import SDK and components into `App.js`.
 
-```
-import chatkitty from "chatkitty";
+```typescript
+import React from "react";
+import ChatKitty, { Message, TextUserMessage } from "chatkitty";
 import {
+  useChannels,
+  useGuestSession,
   useChatContext,
   useCurrentUser,
+  useCreateChannel,
   useMessages,
   ChatKittyProvider,
   Spinner,
@@ -66,13 +70,20 @@ import {
 } from "chatkitty-react-component-library";
 ```
 
+We're going to need the ChatKitty client, a few types, some hooks, and a set of useful components.
+
 ## Initialize the ChatKitty SDK and Create a Guest User Session
 
-```
+Here's where we'll use your API key from earlier.
+
+```typescript
+// instantiate the ChatKitty client.
 const client = ChatKitty.getInstance(process.env.API_KEY);
+
 const username = "guest";
 
 const App = () => {
+  // start a ChatKitty guest session
   const { isLoading } = useGuestSession(client, username);
 
   return (
@@ -85,16 +96,19 @@ const App = () => {
 
 ## Get or Fetch a ChatKitty Channel
 
-```
+```typescript
 const ChatResources = () => {
+  // we can use custom hooks to fetch and create channels
   const {
     isLoading: channelsLoading,
     resource: channels,
     makeRequest: fetchChannels,
   } = useChannels(client);
+
   const { makeRequest: createChannel } = useCreateChannel(client);
 
   React.useEffect(() => {
+    // create a channel if we don't already have one
     const getOrCreateChannel = async () => {
       await createChannel({
         type: "PUBLIC",
@@ -112,6 +126,7 @@ const ChatResources = () => {
     return <Spinner />;
   }
 
+  // Always wrap your components with ChatKittyProvider!
   return (
     <ChatKittyProvider client={client} channels={channels}>
       <Chat />
@@ -122,14 +137,15 @@ const ChatResources = () => {
 
 ## Implement Chat components
 
-```
+```typescript
 const Chat = () => {
   const { client, channel } = useChatContext();
 
   if (!client || !channel) {
-    throw new Error("Invalid component context");
+    throw new Error("both client and channel are required!");
   }
 
+  // more custom hooks!
   const { resource: currentUser } = useCurrentUser(client);
 
   const { resource: messages, setResource: setMessages } = useMessages(
@@ -176,3 +192,5 @@ const Chat = () => {
 ## That's it!
 
 <img src={chat} />
+
+Check out the final application [code](https://github.com/ChatKitty/chat-library-demo/tree/master).
