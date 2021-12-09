@@ -23,27 +23,28 @@ const useChannelMembers = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: User[];
+  makeRequest: () => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<User[]>();
 
+  const makeRequest = async () => {
+    setIsLoading(true);
+
+    const result = await client.getChannelMembers({ channel, filter });
+
+    if (result.succeeded) {
+      setResource((result as GetUsersSucceededResult).paginator.items);
+    }
+
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    const makeRequest = async () => {
-      setIsLoading(true);
-
-      const result = await client.getChannelMembers({ channel, filter });
-
-      if (result.succeeded) {
-        setResource((result as GetUsersSucceededResult).paginator.items);
-      }
-
-      if (result.failed) {
-        setError((result as ChatKittyFailedResult).error);
-      }
-
-      setIsLoading(false);
-    };
-
     makeRequest();
   }, []);
 
@@ -51,6 +52,7 @@ const useChannelMembers = (
     isLoading,
     error,
     resource,
+    makeRequest,
   };
 };
 

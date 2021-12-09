@@ -15,29 +15,30 @@ const useChannelUnreadMessageCount = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: number;
+  makeRequest: () => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<number>();
 
+  const makeRequest = async () => {
+    setIsLoading(true);
+
+    const result = await client.getUnreadMessagesCount({
+      channel,
+    });
+
+    if (result.succeeded) {
+      setResource((result as GetCountSucceedResult).count);
+    }
+
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    const makeRequest = async () => {
-      setIsLoading(true);
-
-      const result = await client.getUnreadMessagesCount({
-        channel,
-      });
-
-      if (result.succeeded) {
-        setResource((result as GetCountSucceedResult).count);
-      }
-
-      if (result.failed) {
-        setError((result as ChatKittyFailedResult).error);
-      }
-
-      setIsLoading(false);
-    };
-
     makeRequest();
   }, []);
 
@@ -45,6 +46,7 @@ const useChannelUnreadMessageCount = (
     isLoading,
     error,
     resource,
+    makeRequest,
   };
 };
 

@@ -11,9 +11,9 @@ import useResourceState from "../useResourceState";
 const useAddChannelModerator = (
   client: ChatKitty
 ): {
-  resource?: Channel;
   isLoading: boolean;
   error?: ChatKittyError;
+  resource?: Channel;
   makeRequest: (channel: Channel, user: User) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
@@ -36,9 +36,9 @@ const useAddChannelModerator = (
   };
 
   return {
-    resource,
     isLoading,
     error,
+    resource,
     makeRequest,
   };
 };

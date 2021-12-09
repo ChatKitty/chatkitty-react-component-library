@@ -1,27 +1,27 @@
 import { Canvas, Meta, ArgsTable } from "@storybook/addon-docs";
 
-<Meta title="Hooks/Channels/useChannel" />
+<Meta title="Hooks/Channels/useChannelMembers" />
 
-# <u>useChannel</u>
+# <u>useChannelMembers</u>
 
 Note: This hook makes its initial request on mount.
 
 ```typescript
-const { resource, isLoading, error, makeRequest } = useChannel();
+const { resource, isLoading, error, makeRequest } = useChannelMembers();
 ```
 
 ## Input
 
-| Parameter | Type      | Required | Defaults | Description               |
-| :-------- | :-------- | :------- | :------- | :------------------------ |
-| `client`  | ChatKitty | Yes      | n/a      | ChatKitty client instance |
-| `id`      | number    | Yes      | n/a      | Channel ID                |
+| Parameter | Type                     | Required | Defaults | Description                 |
+| :-------- | :----------------------- | :------- | :------- | :-------------------------- |
+| `client`  | ChatKitty                | Yes      | n/a      | ChatKitty client instance   |
+| `params`  | GetChannelMembersRequest | Yes      | n/a      | Channel and optional filter |
 
 ## Output
 
 | Parameter     | Type                  | Description                                    |
 | :------------ | :-------------------- | :--------------------------------------------- |
-| `resource`    | Channel               | Channel that was fetched                       |
+| `resource`    | User[]                | List of channel members                        |
 | `isLoading `  | boolean               | Request loading state                          |
 | `error`       | ChatKittyError        | If there's an error, it will be available here |
 | `makeRequest` | `() => Promise<void>` | Callback to request or re-request              |

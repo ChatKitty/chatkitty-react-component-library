@@ -18,9 +18,9 @@ const { resource, isLoading, error, makeRequest } = useAddChannelModerator();
 
 ## Output
 
-| Parameter     | Type                                              | Description                                                       |
-| :------------ | :------------------------------------------------ | :---------------------------------------------------------------- |
-| `resource`    | Channel                                           | List of returned channels.                                        |
-| `isLoading `  | boolean                                           | Function that can be called to fetch another page of channels.    |
-| `error`       | ChatKittyError                                    | Total number of stored channels.                                  |
-| `makeRequest` | `(channel: Channel, user: User) => Promise<void>` | If there's an error fetching channels, it will be available here. |
+| Parameter     | Type                                              | Description                                    |
+| :------------ | :------------------------------------------------ | :--------------------------------------------- |
+| `resource`    | Channel                                           | Channel that was updated                       |
+| `isLoading `  | boolean                                           | Request loading state                          |
+| `error`       | ChatKittyError                                    | If there's an error, it will be available here |
+| `makeRequest` | `(channel: Channel, user: User) => Promise<void>` | Callback to request or re-request              |
