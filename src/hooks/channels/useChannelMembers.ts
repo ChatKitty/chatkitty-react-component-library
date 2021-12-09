@@ -1,8 +1,7 @@
 import type {
-  Channel,
   ChatKittyError,
   ChatKittyFailedResult,
-  GetChannelMembersFilter,
+  GetChannelMembersRequest,
   GetUsersSucceededResult,
   User,
 } from "chatkitty";
@@ -12,13 +11,7 @@ import useResourceState from "../useResourceState";
 
 const useChannelMembers = (
   client: ChatKitty,
-  {
-    channel,
-    filter,
-  }: {
-    channel: Channel;
-    filter?: GetChannelMembersFilter;
-  }
+  params: GetChannelMembersRequest
 ): {
   isLoading: boolean;
   error?: ChatKittyError;
@@ -31,7 +24,7 @@ const useChannelMembers = (
   const makeRequest = async () => {
     setIsLoading(true);
 
-    const result = await client.getChannelMembers({ channel, filter });
+    const result = await client.getChannelMembers(params);
 
     if (result.succeeded) {
       setResource((result as GetUsersSucceededResult).paginator.items);

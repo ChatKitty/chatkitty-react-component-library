@@ -4,6 +4,7 @@ import type {
   ChatKittyFailedResult,
   ChatKittyUserReference,
   CreatedChannelResult,
+  CreateChannelRequest,
 } from "chatkitty";
 import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
@@ -14,15 +15,7 @@ const useCreateChannel = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Channel;
-  makeRequest: ({
-    type,
-    members,
-    name,
-  }: {
-    type: string;
-    members?: ChatKittyUserReference[];
-    name?: string;
-  }) => Promise<Channel | undefined>;
+  makeRequest: (params: CreateChannelRequest) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Channel>();
@@ -44,7 +37,6 @@ const useCreateChannel = (
 
     if (result.succeeded) {
       setResource((result as CreatedChannelResult).channel);
-      return (result as CreatedChannelResult).channel;
     }
 
     if (result.failed) {

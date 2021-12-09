@@ -13,7 +13,7 @@ const useLeaveChannel = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Channel;
-  makeRequest: (channel: Channel) => void;
+  makeRequest: (channel: Channel) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Channel>();

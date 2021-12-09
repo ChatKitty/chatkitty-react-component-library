@@ -1,14 +1,13 @@
 import { Canvas, Meta, ArgsTable } from "@storybook/addon-docs";
 
-<Meta title="Hooks/Channels/useChannelUnreadMessageCount" />
+<Meta title="Hooks/Channels/useJoinableChannels" />
 
-# <u>useChannelUnreadMessageCount</u>
+# <u>useJoinableChannels</u>
 
 Note: This hook makes its initial request on mount.
 
 ```typescript
-const { resource, isLoading, error, makeRequest } =
-  useChannelUnreadMessageCount();
+const { resource, isLoading, error, makeRequest } = useJoinableChannels();
 ```
 
 ## Input
@@ -16,13 +15,12 @@ const { resource, isLoading, error, makeRequest } =
 | Parameter | Type      | Required | Defaults | Description               |
 | :-------- | :-------- | :------- | :------- | :------------------------ |
 | `client`  | ChatKitty | Yes      | n/a      | ChatKitty client instance |
-| `channel` | Channel   | Yes      | n/a      | Channel                   |
 
 ## Output
 
 | Parameter     | Type                  | Description                                    |
 | :------------ | :-------------------- | :--------------------------------------------- |
-| `resource`    | number                | Number of unread messages in the channel       |
+| `resource`    | Channel[]             | List of joinable channels                      |
 | `isLoading `  | boolean               | Request loading state                          |
 | `error`       | ChatKittyError        | If there's an error, it will be available here |
 | `makeRequest` | `() => Promise<void>` | Callback to request or re-request              |

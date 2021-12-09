@@ -14,7 +14,7 @@ const useHideChannel = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Channel;
-  makeRequest: (channel: DirectChannel) => void;
+  makeRequest: (channel: DirectChannel) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Channel>();

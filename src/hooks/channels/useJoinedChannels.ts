@@ -14,8 +14,7 @@ const useJoinedChannels = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Channel[];
-  setResource: React.Dispatch<React.SetStateAction<Channel[] | undefined>>;
-  makeRequest: () => void;
+  makeRequest: () => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Channel[]>();
@@ -48,7 +47,6 @@ const useJoinedChannels = (
     isLoading,
     error,
     resource,
-    setResource,
     makeRequest,
   };
 };

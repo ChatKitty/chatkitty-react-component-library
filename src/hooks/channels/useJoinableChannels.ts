@@ -14,29 +14,30 @@ const useJoinableChannels = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Channel[];
+  makeRequest: () => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Channel[]>();
 
+  const makeRequest = async () => {
+    setIsLoading(true);
+
+    const result = await client.getChannels({
+      filter: { joined: false },
+    });
+
+    if (result.succeeded) {
+      setResource((result as GetChannelsSucceededResult).paginator.items);
+    }
+
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    const makeRequest = async () => {
-      setIsLoading(true);
-
-      const result = await client.getChannels({
-        filter: { joined: false },
-      });
-
-      if (result.succeeded) {
-        setResource((result as GetChannelsSucceededResult).paginator.items);
-      }
-
-      if (result.failed) {
-        setError((result as ChatKittyFailedResult).error);
-      }
-
-      setIsLoading(false);
-    };
-
     makeRequest();
   }, []);
 
@@ -44,6 +45,7 @@ const useJoinableChannels = (
     isLoading,
     error,
     resource,
+    makeRequest,
   };
 };
 
