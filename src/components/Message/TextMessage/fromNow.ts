@@ -61,7 +61,8 @@ const fromNow = (date: Date): string => {
     return "a few seconds ago";
   }
 
-  return "invalid date";
+  // todo handle dates in the past
+  return "a few seconds ago";
 };
 
 export default fromNow;
