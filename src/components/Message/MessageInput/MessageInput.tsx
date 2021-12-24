@@ -91,7 +91,7 @@ const MessageInput = ({
             bottom={"50px"}
             right={"0"}
             renderEmojiPicker={renderEmojiPicker}
-            onEmojiSelection={(emoji: string) => {
+            onEmojiSelection={(emoji) => {
               setInput((input) => {
                 const nextValue = input + emoji;
                 updateMessage(channel, nextValue);
