@@ -1,11 +1,9 @@
 import type {
-  Channel,
   ChatKittyError,
   ChatKittyFailedResult,
   ChatSession,
-  Message,
+  StartChatSessionRequest,
   StartedChatSessionResult,
-  User,
 } from "chatkitty";
 import type ChatKitty from "chatkitty";
 import useResourceState from "../useResourceState";
@@ -16,22 +14,17 @@ const useChatSession = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: ChatSession;
-  makeRequest: (
-    channel: Channel,
-    onReceivedMessage?: (message: Message) => void,
-    onTypingStarted?: (user: User) => void,
-    onTypingStopped?: (user: User) => void
-  ) => ChatSession;
+  makeRequest: (params: StartChatSessionRequest) => ChatSession;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<ChatSession>();
 
-  const makeRequest = (
-    channel: Channel,
-    onReceivedMessage?: (message: Message) => void,
-    onTypingStarted?: (user: User) => void,
-    onTypingStopped?: (user: User) => void
-  ) => {
+  const makeRequest = ({
+    channel,
+    onReceivedMessage,
+    onTypingStarted,
+    onTypingStopped,
+  }: StartChatSessionRequest) => {
     setIsLoading(true);
 
     const result = client.startChatSession({

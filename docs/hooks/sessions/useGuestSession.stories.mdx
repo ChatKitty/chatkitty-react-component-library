@@ -1,0 +1,25 @@
+import { Canvas, Meta, ArgsTable } from "@storybook/addon-docs";
+
+<Meta title="Hooks/Sessions/useGuestSession" />
+
+# <u>useGuestSession</u>
+
+Note: This hook makes its initial request on mount.
+
+```typescript
+const { isLoading, error } = useGuestSession();
+```
+
+## Input
+
+| Parameter  | Type      | Required | Defaults | Description                          |
+| :--------- | :-------- | :------- | :------- | :----------------------------------- |
+| `client`   | ChatKitty | Yes      | n/a      | ChatKitty client instance            |
+| `username` | string    | No       | n/a      | username to start guest session with |
+
+## Output
+
+| Parameter    | Type           | Description                                    |
+| :----------- | :------------- | :--------------------------------------------- |
+| `isLoading ` | boolean        | Request loading state                          |
+| `error`      | ChatKittyError | If there's an error, it will be available here |

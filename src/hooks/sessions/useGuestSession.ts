@@ -18,25 +18,25 @@ const useGuestSession = (
     defaultIsLoading: true,
   });
 
+  const makeRequest = async () => {
+    setIsLoading(true);
+
+    const result: StartSessionResult = await client.startSession({
+      username,
+    });
+
+    if (result.succeeded) {
+      // succeeded
+    }
+
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    const makeRequest = async () => {
-      setIsLoading(true);
-
-      const result: StartSessionResult = await client.startSession({
-        username,
-      });
-
-      if (result.succeeded) {
-        // succeeded
-      }
-
-      if (result.failed) {
-        setError((result as ChatKittyFailedResult).error);
-      }
-
-      setIsLoading(false);
-    };
-
     makeRequest();
   }, []);
 

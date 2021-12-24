@@ -5,7 +5,7 @@ const useEndSession = (
   client: ChatKitty
 ): {
   isLoading: boolean;
-  makeRequest: () => void;
+  makeRequest: () => Promise<void>;
 } => {
   const { isLoading, setIsLoading } = useResourceState();
 
