@@ -14,7 +14,7 @@ const useReactionsForMessage = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Reaction[];
-  makeRequest: (message: Message) => void;
+  makeRequest: (message: Message) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Reaction[]>();

@@ -1,0 +1,24 @@
+import { Canvas, Meta, ArgsTable } from "@storybook/addon-docs";
+
+<Meta title="Hooks/Messages/useUpdateMessageDraft" />
+
+# <u>useUpdateMessageDraft</u>
+
+Note: This hook does not make an initial request on mount.
+
+```typescript
+const { resource, isLoading, error, makeRequest } = useUpdateMessageDraft();
+```
+
+## Input
+
+| Parameter | Type      | Required | Defaults | Description               |
+| :-------- | :-------- | :------- | :------- | :------------------------ |
+| `client`  | ChatKitty | Yes      | n/a      | ChatKitty client instance |
+
+## Output
+
+| Parameter     | Type                                                 | Description                       |
+| :------------ | :--------------------------------------------------- | :-------------------------------- |
+| `isLoading `  | boolean                                              | Request loading state             |
+| `makeRequest` | `(channel: Channel, draft: string) => Promise<void>` | Callback to request or re-request |

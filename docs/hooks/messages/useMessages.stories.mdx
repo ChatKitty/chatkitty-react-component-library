@@ -1,0 +1,28 @@
+import { Canvas, Meta, ArgsTable } from "@storybook/addon-docs";
+
+<Meta title="Hooks/Messages/useMessages" />
+
+# <u>useMessages</u>
+
+Note: This hook makes its initial request on mount.
+
+```typescript
+const { resource, isLoading, error, makeRequest, setResource } = useMessages();
+```
+
+## Input
+
+| Parameter | Type      | Required | Defaults | Description                   |
+| :-------- | :-------- | :------- | :------- | :---------------------------- |
+| `client`  | ChatKitty | Yes      | n/a      | ChatKitty client instance     |
+| `channel` | Channel   | No       | n/a      | Channel to fetch messages for |
+
+## Output
+
+| Parameter     | Type                                  | Description                                                                |
+| :------------ | :------------------------------------ | :------------------------------------------------------------------------- |
+| `resource`    | Message[]                             | Paginated list of messages for the provided channel                        |
+| `isLoading `  | boolean                               | Request loading state                                                      |
+| `error`       | ChatKittyError                        | If there's an error, it will be available here                             |
+| `makeRequest` | `() => Promise<void>`                 | Callback to request or re-request                                          |
+| `setResource` | `Dispatch<SetStateAction<Message[]>>` | Resource setter for client-side updates (appending messages superficially) |

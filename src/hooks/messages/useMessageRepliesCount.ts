@@ -13,7 +13,7 @@ const useMessageRepliesCount = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: number;
-  makeRequest: (message: Message) => void;
+  makeRequest: (message: Message) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<number>();

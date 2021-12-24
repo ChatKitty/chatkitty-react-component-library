@@ -14,7 +14,7 @@ const useLastReadMessage = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Message;
-  makeRequest: (channel: Channel, username: string) => void;
+  makeRequest: (channel: Channel, username: string) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Message>();

@@ -17,7 +17,7 @@ const useMessages = (
   error?: ChatKittyError;
   resource?: Message[];
   setResource: Dispatch<SetStateAction<Message[] | undefined>>;
-  makeRequest: (channel: Channel) => void;
+  makeRequest: () => void;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Message[]>();

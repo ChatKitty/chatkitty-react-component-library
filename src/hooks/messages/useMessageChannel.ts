@@ -14,7 +14,7 @@ const useMessageChannel = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Channel;
-  makeRequest: (message: Message) => void;
+  makeRequest: (message: Message) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Channel>();

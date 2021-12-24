@@ -13,7 +13,7 @@ const useReadMessage = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Message;
-  makeRequest: (message: Message) => void;
+  makeRequest: (message: Message) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Message>();

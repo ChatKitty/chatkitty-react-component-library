@@ -1,0 +1,26 @@
+import { Canvas, Meta, ArgsTable } from "@storybook/addon-docs";
+
+<Meta title="Hooks/Messages/useLastReadMessage" />
+
+# <u>useLastReadMessage</u>
+
+Note: This hook does not make an initial request on mount.
+
+```typescript
+const { resource, isLoading, error, makeRequest } = useLastReadMessage();
+```
+
+## Input
+
+| Parameter | Type      | Required | Defaults | Description               |
+| :-------- | :-------- | :------- | :------- | :------------------------ |
+| `client`  | ChatKitty | Yes      | n/a      | ChatKitty client instance |
+
+## Output
+
+| Parameter     | Type                                                    | Description                                    |
+| :------------ | :------------------------------------------------------ | :--------------------------------------------- |
+| `resource`    | Message                                                 | Message that was last read                     |
+| `isLoading `  | boolean                                                 | Request loading state                          |
+| `error`       | ChatKittyError                                          | If there's an error, it will be available here |
+| `makeRequest` | `(channel: Channel, username: string) => Promise<void>` | Callback to request or re-request              |

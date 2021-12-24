@@ -6,7 +6,7 @@ const useUpdateMessageDraft = (
   client: ChatKitty
 ): {
   isLoading: boolean;
-  makeRequest: (channel: Channel, draft: string) => void;
+  makeRequest: (channel: Channel, draft: string) => Promise<void>;
 } => {
   const { isLoading, setIsLoading } = useResourceState();
 
