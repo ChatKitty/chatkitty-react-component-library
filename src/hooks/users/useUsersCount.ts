@@ -4,7 +4,6 @@ import type {
   GetCountSucceedResult,
 } from "chatkitty";
 import type ChatKitty from "chatkitty";
-import { useEffect } from "react";
 import useResourceState from "../useResourceState";
 
 const useUsersCount = (
@@ -13,34 +12,32 @@ const useUsersCount = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: number;
+  makeRequest: () => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<number>();
 
-  useEffect(() => {
-    const makeRequest = async () => {
-      setIsLoading(true);
+  const makeRequest = async () => {
+    setIsLoading(true);
 
-      const result = await client.getUsersCount();
+    const result = await client.getUsersCount();
 
-      if (result.succeeded) {
-        setResource((result as GetCountSucceedResult).count);
-      }
+    if (result.succeeded) {
+      setResource((result as GetCountSucceedResult).count);
+    }
 
-      if (result.failed) {
-        setError((result as ChatKittyFailedResult).error);
-      }
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
+    }
 
-      setIsLoading(false);
-    };
-
-    makeRequest();
-  }, []);
+    setIsLoading(false);
+  };
 
   return {
     isLoading,
     error,
     resource,
+    makeRequest,
   };
 };
 

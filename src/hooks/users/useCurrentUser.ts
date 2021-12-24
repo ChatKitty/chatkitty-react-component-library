@@ -15,7 +15,7 @@ const useCurrentUser = (
   error?: ChatKittyError;
   resource?: CurrentUser;
   setResource: Dispatch<SetStateAction<CurrentUser | undefined>>;
-  makeRequest: () => void;
+  makeRequest: () => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<CurrentUser>();

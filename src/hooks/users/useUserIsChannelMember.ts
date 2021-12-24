@@ -14,7 +14,7 @@ const useUserIsChannelMember = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: boolean;
-  makeRequest: (channel: Channel, user: User) => void;
+  makeRequest: (channel: Channel, user: User) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<boolean>();

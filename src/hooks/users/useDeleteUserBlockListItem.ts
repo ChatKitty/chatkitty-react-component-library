@@ -14,7 +14,7 @@ const useDeleteUserBlockListItem = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: User;
-  makeRequest: (item: UserBlockListItem) => void;
+  makeRequest: (item: UserBlockListItem) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<User>();

@@ -5,7 +5,6 @@ import type {
   UserBlockListItem,
 } from "chatkitty";
 import type ChatKitty from "chatkitty";
-import { useEffect } from "react";
 import useResourceState from "../useResourceState";
 
 const useCurrentUserBlockList = (
@@ -14,36 +13,32 @@ const useCurrentUserBlockList = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: UserBlockListItem[];
+  makeRequest: () => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<UserBlockListItem[]>();
 
-  useEffect(() => {
-    const makeRequest = async () => {
-      setIsLoading(true);
+  const makeRequest = async () => {
+    setIsLoading(true);
 
-      const result = await client.getUserBlockList();
+    const result = await client.getUserBlockList();
 
-      if (result.succeeded) {
-        setResource(
-          (result as GetUserBlockListSucceededResult).paginator.items
-        );
-      }
+    if (result.succeeded) {
+      setResource((result as GetUserBlockListSucceededResult).paginator.items);
+    }
 
-      if (result.failed) {
-        setError((result as ChatKittyFailedResult).error);
-      }
+    if (result.failed) {
+      setError((result as ChatKittyFailedResult).error);
+    }
 
-      setIsLoading(false);
-    };
-
-    makeRequest();
-  }, []);
+    setIsLoading(false);
+  };
 
   return {
     isLoading,
     error,
     resource,
+    makeRequest,
   };
 };
 

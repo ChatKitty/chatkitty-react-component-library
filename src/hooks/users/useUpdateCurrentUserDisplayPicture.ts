@@ -1,9 +1,8 @@
 import type {
   ChatKittyError,
   ChatKittyFailedResult,
-  ChatKittyUploadProgressListener,
-  CreateChatKittyFileProperties,
   CurrentUser,
+  UpdateCurrentUserDisplayPictureRequest,
   UpdatedCurrentUserResult,
 } from "chatkitty";
 import type ChatKitty from "chatkitty";
@@ -16,17 +15,16 @@ const useUpdateCurrentUserDisplayPicture = (
   error?: ChatKittyError;
   resource?: CurrentUser;
   makeRequest: (
-    file: CreateChatKittyFileProperties,
-    progressListener: ChatKittyUploadProgressListener
-  ) => void;
+    params: UpdateCurrentUserDisplayPictureRequest
+  ) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<CurrentUser>();
 
-  const makeRequest = async (
-    file: CreateChatKittyFileProperties,
-    progressListener: ChatKittyUploadProgressListener
-  ) => {
+  const makeRequest = async ({
+    file,
+    progressListener,
+  }: UpdateCurrentUserDisplayPictureRequest) => {
     setIsLoading(true);
 
     const result = await client.updateCurrentUserDisplayPicture({

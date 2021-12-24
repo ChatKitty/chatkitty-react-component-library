@@ -1,0 +1,28 @@
+import { Canvas, Meta, ArgsTable } from "@storybook/addon-docs";
+
+<Meta title="Hooks/Users/useCurrentUser" />
+
+# <u>useCurrentUser</u>
+
+Note: This hook makes its initial request on mount.
+
+```typescript
+const { resource, isLoading, error, makeRequest, setResource } =
+  useCurrentUser();
+```
+
+## Input
+
+| Parameter | Type      | Required | Defaults | Description               |
+| :-------- | :-------- | :------- | :------- | :------------------------ |
+| `client`  | ChatKitty | Yes      | n/a      | ChatKitty client instance |
+
+## Output
+
+| Parameter     | Type                                    | Description                                                                    |
+| :------------ | :-------------------------------------- | :----------------------------------------------------------------------------- |
+| `resource`    | CurrentUser                             | CurrentUser that initiated the existing session                                |
+| `isLoading `  | boolean                                 | Request loading state                                                          |
+| `error`       | ChatKittyError                          | If there's an error, it will be available here                                 |
+| `makeRequest` | `() => Promise<void>`                   | Callback to request or re-request                                              |
+| `setResource` | `Dispatch<SetStateAction<CurrentUser>>` | Resource setter for client-side updates (appending current user superficially) |

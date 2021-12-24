@@ -13,7 +13,7 @@ const useInviteUser = (
 ): {
   isLoading: boolean;
   error?: ChatKittyError;
-  makeRequest: (channel: Channel, user: User) => void;
+  makeRequest: (channel: Channel, user: User) => Promise<void>;
 } => {
   const { isLoading, error, setIsLoading, setError } = useResourceState();
 

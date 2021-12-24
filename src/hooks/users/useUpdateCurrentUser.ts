@@ -12,7 +12,7 @@ const useUpdateCurrentUser = (
 ): {
   isLoading: boolean;
   error?: ChatKittyError;
-  makeRequest: (update: (user: CurrentUser) => CurrentUser) => void;
+  makeRequest: (update: (user: CurrentUser) => CurrentUser) => Promise<void>;
 } => {
   const { isLoading, error, setIsLoading, setError } = useResourceState();
 

@@ -1,0 +1,26 @@
+import { Canvas, Meta, ArgsTable } from "@storybook/addon-docs";
+
+<Meta title="Hooks/Users/useUsers" />
+
+# <u>useUsers</u>
+
+Note: This hook makes its initial request on mount.
+
+```typescript
+const { resource, isLoading, error, makeRequest, setResource } = useUsers();
+```
+
+## Input
+
+| Parameter | Type      | Required | Defaults | Description               |
+| :-------- | :-------- | :------- | :------- | :------------------------ |
+| `client`  | ChatKitty | Yes      | n/a      | ChatKitty client instance |
+
+## Output
+
+| Parameter     | Type                  | Description                                    |
+| :------------ | :-------------------- | :--------------------------------------------- |
+| `resource`    | User[]                | Paginated list of users                        |
+| `isLoading `  | boolean               | Request loading state                          |
+| `error`       | ChatKittyError        | If there's an error, it will be available here |
+| `makeRequest` | `() => Promise<void>` | Callback to request or re-request              |

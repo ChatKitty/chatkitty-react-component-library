@@ -13,7 +13,7 @@ const useBlockUser = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: User;
-  makeRequest: (user: User) => void;
+  makeRequest: (user: User) => Promise<void>;
 } => {
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<User>();
