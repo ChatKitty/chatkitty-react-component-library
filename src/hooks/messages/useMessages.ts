@@ -2,11 +2,12 @@ import type {
   Channel,
   ChatKittyError,
   ChatKittyFailedResult,
+  ChatKittyPaginator,
   GetMessagesSucceededResult,
   Message,
 } from "chatkitty";
 import type ChatKitty from "chatkitty";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useResourceState from "../useResourceState";
 
 const useMessages = (
@@ -16,9 +17,11 @@ const useMessages = (
   isLoading: boolean;
   error?: ChatKittyError;
   resource?: Message[];
+  paginator?: ChatKittyPaginator<Message>;
   setResource: Dispatch<SetStateAction<Message[] | undefined>>;
   makeRequest: () => void;
 } => {
+  const [paginator, setPaginator] = useState<ChatKittyPaginator<Message>>();
   const { isLoading, error, resource, setIsLoading, setError, setResource } =
     useResourceState<Message[]>();
 
@@ -30,7 +33,9 @@ const useMessages = (
     });
 
     if (result.succeeded) {
-      setResource((result as GetMessagesSucceededResult).paginator.items);
+      const casted = result as GetMessagesSucceededResult;
+      setPaginator(casted.paginator);
+      setResource(casted.paginator.items);
     }
 
     if (result.failed) {
@@ -49,6 +54,7 @@ const useMessages = (
     error,
     resource,
     setResource,
+    paginator,
     makeRequest,
   };
 };
