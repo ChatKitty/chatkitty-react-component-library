@@ -146,15 +146,15 @@ export const defaultTheme: ChatKittyTheme = {
     `,
     title: `
       font-size: 1.2rem;
-      font-weight: 500;
+      font-weight: 400;
       margin: 0;
       padding: 0;
     `,
     description: `
       margin: 0;
       padding: 0;
-      margin-top: 3px;
-      font-weight: 300;
+      margin-top: 12px;
+      color: #404040;
     `,
   },
 
@@ -179,7 +179,7 @@ export const defaultTheme: ChatKittyTheme = {
       flex-direction: column;
     `,
     title: `
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin: 0;
       padding: 0;
       font-weight: 500;
@@ -188,7 +188,8 @@ export const defaultTheme: ChatKittyTheme = {
       font-size: 1rem;
       margin: 0;
       padding: 0;
-      font-weight: 300;
+      font-weight: 400;
+      color: #404040;
     `,
   },
 
@@ -270,7 +271,8 @@ export const defaultTheme: ChatKittyTheme = {
     message: `
       margin-top: 12px;
       word-break: break-word;
-      font-weight: 300;
+      font-weight: 400;
+      color: #404040;
     `,
   },
 

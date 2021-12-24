@@ -177,8 +177,8 @@ const Template: Story = () => {
     <Popup hasUnread={unreadChannelsCount > 0}>
       <div
         style={{
-          height: 600,
-          width: 450,
+          height: 500,
+          width: 400,
           marginRight: 20,
           border: "1px solid #f2f2f2",
           borderRadius: 10,
@@ -340,7 +340,7 @@ const Template: Story = () => {
     <Popup hasUnread={unreadChannelsCount > 0}>
       <div
         style={{
-          height: 600,
+          height: 500,
           width: 450,
           marginRight: 20,
           border: "1px solid #f2f2f2",

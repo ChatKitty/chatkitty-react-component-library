@@ -115,8 +115,10 @@ const ChatResources = () => {
         name: "Demo Channel",
         members: [{ username }],
       });
+
       await fetchChannels();
     };
+
     if (!channelsLoading && channels?.length === 0) {
       getOrCreateChannel();
     }
@@ -140,10 +142,6 @@ const ChatResources = () => {
 ```typescript
 const Chat = () => {
   const { client, channel } = useChatContext();
-
-  if (!client || !channel) {
-    throw new Error("both client and channel are required!");
-  }
 
   // more custom hooks!
   const { resource: currentUser } = useCurrentUser(client);

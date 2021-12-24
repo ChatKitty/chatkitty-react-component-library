@@ -122,7 +122,7 @@ const Template: Story = () => {
     <Popup>
       <div
         style={{
-          height: 600,
+          height: 500,
           width: 450,
           marginRight: 20,
           border: "1px solid #f2f2f2",
@@ -236,7 +236,7 @@ const Template: Story = () => {
     <Popup>
       <div
         style={{
-          height: 600,
+          height: 500,
           width: 450,
           marginRight: 20,
           border: "1px solid #f2f2f2",
