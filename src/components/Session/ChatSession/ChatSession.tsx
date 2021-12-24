@@ -37,12 +37,12 @@ const ChatSession = ({
   const { makeRequest: startChatSession } = useChatSession(client);
 
   React.useEffect(() => {
-    const session = startChatSession(
+    const session = startChatSession({
       channel,
       onReceivedMessage,
       onTypingStarted,
-      onTypingStopped
-    );
+      onTypingStopped,
+    });
 
     return session.end;
   }, [channel]);
