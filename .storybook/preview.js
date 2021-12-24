@@ -11,7 +11,7 @@ export const parameters = {
   layout: "centered",
   options: {
     storySort: {
-      order: ["Introduction", "Hooks", "Components", "Demos", "Theming"],
+      order: ["Introduction", "Hooks", "Components", "Demos", "Styling"],
     },
   },
 };

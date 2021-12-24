@@ -1,0 +1,19 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Styling/Classes" />
+
+# <u>Classes</u>
+
+ChatKitty React Components all have classnames prefixed with `ck-` for global stylesheet overrides.
+
+For example, the `ChannelHeader` components can be styled directly via the following class names:
+
+- ck-channelHeader
+- ck-channelHeader-action
+- ck-channelHeader-content
+- ck-channelHeader-title
+- ck-channelHeader-description
+
+However, note that overriding base theme properties will require `!important`.
+
+Given the drawbacks of global styling, [`themes`](/story/styling-themes--page) are the recommended way to style ChatKitty components.

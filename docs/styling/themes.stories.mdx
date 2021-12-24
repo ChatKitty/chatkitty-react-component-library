@@ -1,0 +1,29 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Styling/Themes" />
+
+# <u>Themes</u>
+
+ChatKitty React Components provide a default theme for all chat components at `src/themes/default.ts`.
+
+This can be directly overridden by providing a `ChatKittyTheme` to the `ChatKittyProvider`.
+
+```typescript
+const customTheme = {
+  ...defaultTheme,
+  typingIndicator: {
+    container: `
+      ${...defaultTheme.typingIndicator.container}
+      background-color: green;
+    `,
+  },
+};
+
+return (
+  <ChatKittyProvider client={client} channels={[channel]} theme={customTheme}>
+    // ChatKitty React components
+  </ChatKittyProvider>
+);
+```
+
+This library uses [@emotion/css](https://emotion.sh/docs/introduction) under the hood, so themes readily accept string templates with a near-full range of css properties.

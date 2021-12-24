@@ -2,7 +2,6 @@ import React from "react";
 import type { Channel } from "chatkitty";
 import type ChatKitty from "chatkitty";
 import { defaultTheme, ChatKittyTheme } from "../../../themes/default";
-import Spinner from "../../utility/Spinner";
 
 export interface ChatKittyProviderProps {
   client?: ChatKitty;
