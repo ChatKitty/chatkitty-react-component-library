@@ -5,7 +5,7 @@ let client: ChatKitty;
 const getDemoClient = async () => {
   if (!client) {
     client = new ChatKitty({
-      host: "api.staging.chatkitty.com",
+      // host: "api.staging.chatkitty.com",
       apiKey: "afaac908-1db3-4b5c-a7ae-c040b9684403",
     });
 

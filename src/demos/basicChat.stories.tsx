@@ -24,6 +24,8 @@ import {
   MessageInput,
 } from "..";
 import { getDemoClient } from "./client";
+import { EmojiData, Picker as EmojiPicker } from "emoji-mart";
+import "emoji-mart/css/emoji-mart.css";
 
 export default {
   title: "Demos/BasicChat",
@@ -87,7 +89,18 @@ const Chat = () => {
           })}
         </MessageList>
         <TypingIndicator typingUsers={typingUsers} />
-        <MessageInput />
+        <MessageInput
+          renderEmojiPicker={(callback) => (
+            <EmojiPicker
+              native
+              onSelect={(emoji: EmojiData) => {
+                if ("native" in emoji) {
+                  callback(emoji.native);
+                }
+              }}
+            />
+          )}
+        />
       </ChatSession>
     </ChatContainer>
   );

@@ -34,6 +34,7 @@ export type ChatKittyTheme = {
     container: string;
     text: string;
     button: string;
+    emojiPicker: string;
   };
   textMessage: {
     container: string;
@@ -49,6 +50,11 @@ export type ChatKittyTheme = {
     displayName: string;
     onlineIndicator: string;
     offlineIndicator: string;
+  };
+  emojiInput: {
+    container: string;
+    iconButton: string;
+    popover: string;
   };
 };
 
@@ -220,6 +226,8 @@ export const defaultTheme: ChatKittyTheme = {
       position: relative;
       display: flex;
       width: 100%;
+      align-items: center;
+      justify-content: center;
     `,
     text: `
       flex: 1;
@@ -240,6 +248,16 @@ export const defaultTheme: ChatKittyTheme = {
       font-size: 2rem;
       color: lightgray;
       border: none;
+    `,
+    emojiPicker: `
+      cursor: pointer;
+      position: absolute;
+      height: calc(100% - 10px);
+      right: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 10px;
     `,
   },
 
@@ -309,6 +327,23 @@ export const defaultTheme: ChatKittyTheme = {
       width: 0.5rem;
       height: 0.5rem;
       margin-left: 0.5rem;
+    `,
+  },
+
+  emojiInput: {
+    container: `
+      position: relative;
+    `,
+    iconButton: `
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 1.5rem;
+      color: lightgray;
+    `,
+    popover: `
+      position: absolute;
+      z-index: 1000;
     `,
   },
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { css, cx } from "@emotion/css";
 import TextArea from "react-autosize-textarea";
 import { useChatContext } from "../../Provider/ChatKittyProvider";
+import EmojiInput from "../EmojiInput";
 import { useUpdateMessageDraft, useSendMessageDraft } from "../../../hooks";
 
 export interface MessageInputProps {
@@ -14,9 +15,18 @@ export interface MessageInputProps {
    * input placeholder override
    */
   placeholder?: string;
+
+  /**
+   * render function for emoji picker
+   */
+  renderEmojiPicker?: (callback: (emoji: string) => void) => React.ReactNode;
 }
 
-const MessageInput = ({ pre = null, placeholder }: MessageInputProps) => {
+const MessageInput = ({
+  pre = null,
+  placeholder,
+  renderEmojiPicker,
+}: MessageInputProps) => {
   const { client, channel, theme } = useChatContext();
 
   if (!client || !channel || !theme) {
@@ -69,6 +79,28 @@ const MessageInput = ({ pre = null, placeholder }: MessageInputProps) => {
           `
         )} ck-messageInput-text`}
       />
+      {renderEmojiPicker && (
+        <div
+          className={`${cx(
+            css`
+              ${theme.messageInput.emojiPicker}
+            `
+          )} ck-messageInput-emojiPicker`}
+        >
+          <EmojiInput
+            bottom={"50px"}
+            right={"0"}
+            renderEmojiPicker={renderEmojiPicker}
+            onEmojiSelection={(emoji: string) => {
+              setInput((input) => {
+                const nextValue = input + emoji;
+                updateMessage(channel, nextValue);
+                return nextValue;
+              });
+            }}
+          />
+        </div>
+      )}
       <button
         onClick={() => submit(input)}
         className={`${cx(

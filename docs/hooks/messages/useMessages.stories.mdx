@@ -24,6 +24,6 @@ const { resource, isLoading, error, makeRequest, setResource } = useMessages();
 | `resource`    | Message[]                             | Paginated list of messages for the provided channel                        |
 | `isLoading `  | boolean                               | Request loading state                                                      |
 | `error`       | ChatKittyError                        | If there's an error, it will be available here                             |
-| `paginator`   | ChatKittyPaginator<Message>           | Paginator for handling pagination                                          |
+| `paginator`   | `ChatKittyPaginator<Message>`         | Paginator for handling pagination                                          |
 | `makeRequest` | `() => Promise<void>`                 | Callback to request or re-request                                          |
 | `setResource` | `Dispatch<SetStateAction<Message[]>>` | Resource setter for client-side updates (appending messages superficially) |
