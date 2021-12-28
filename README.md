@@ -38,6 +38,8 @@ The library is designed with a few core principles in mind:
 
 \*_Note: although this library is still evolving towards feature parity, all features can be readily implemented using the [ChatKitty JS SDK](https://github.com/ChatKitty/chatkitty-js)._
 
+\*_If you find that certain functionality is missing, feel free to **create an issue** or **contribute a PR!**_
+
 ## Requirements
 
 - React v16.8+ and ReactDOM v16.8+
