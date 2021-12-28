@@ -1,6 +1,7 @@
 # chatkitty-react-component-library
 
 [Storybook](https://chatkitty.github.io/chatkitty-react-component-library/?path=/story/introduction-about--page)
+
 [Quick Start](https://chatkitty.github.io/chatkitty-react-component-library/?path=/story/introduction-quick-start--page)
 
 <img src="docs/assets/chat.png" />
