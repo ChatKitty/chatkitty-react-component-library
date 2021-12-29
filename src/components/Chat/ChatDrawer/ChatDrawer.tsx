@@ -7,7 +7,7 @@ export interface ChatDrawerProps {
   /**
    * handle drawer close button click
    */
-  onClose: () => void;
+  onClose?: () => void;
 
   /**
    * drawer content
@@ -30,16 +30,18 @@ const ChatDrawer = ({ onClose, children }: ChatDrawerProps) => {
         `
       )} ck-drawer`}
     >
-      <button
-        className={`${cx(
-          css`
-            ${theme.chatDrawer.button}
-          `
-        )} ck-drawer-button`}
-        onClick={onClose}
-      >
-        <MdClose />
-      </button>
+      {onClose && (
+        <button
+          className={`${cx(
+            css`
+              ${theme.chatDrawer.button}
+            `
+          )} ck-drawer-button`}
+          onClick={onClose}
+        >
+          <MdClose />
+        </button>
+      )}
       {children}
     </div>
   );
