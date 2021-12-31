@@ -40,3 +40,13 @@ Selected.args = {
   imageSrc:
     "https://media-exp1.licdn.com/dms/image/C4E03AQFEICiaNOZJ1w/profile-displayphoto-shrink_400_400/0/1632326497576?e=1642636800&v=beta&t=zCj6uU8mtR6K4Xv87FXJ4rGP4UmGB1YDiZl1iowKW68",
 };
+
+export const WithOptionalElement = Template.bind({});
+
+WithOptionalElement.args = {
+  name: "ChatKitty",
+  opt: <p style={{ color: "green" }}>Great!</p>,
+  description: "Helping you build a great chat experience.",
+  imageSrc:
+    "https://media-exp1.licdn.com/dms/image/C4E03AQFEICiaNOZJ1w/profile-displayphoto-shrink_400_400/0/1632326497576?e=1642636800&v=beta&t=zCj6uU8mtR6K4Xv87FXJ4rGP4UmGB1YDiZl1iowKW68",
+};

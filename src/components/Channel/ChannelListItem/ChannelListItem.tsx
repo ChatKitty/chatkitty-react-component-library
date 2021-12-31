@@ -27,6 +27,11 @@ export interface ChannelListItemProps {
    * click callback
    */
   onClick?: () => void;
+
+  /**
+   * append an optional element to the end of the list item
+   */
+  opt?: React.ReactNode;
 }
 
 const ChannelListItem = ({
@@ -35,6 +40,7 @@ const ChannelListItem = ({
   imageSrc,
   selected,
   onClick = () => {},
+  opt,
 }: ChannelListItemProps) => {
   const { theme } = useChatContext();
 
@@ -89,6 +95,7 @@ const ChannelListItem = ({
           {description}
         </p>
       </div>
+      {opt && opt}
     </li>
   );
 };
